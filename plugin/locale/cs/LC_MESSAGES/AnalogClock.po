@@ -1,0 +1,212 @@
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: ims\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2014-03-31 17:30+0200\n"
+"PO-Revision-Date: \n"
+"Last-Translator: ims <ims21@users.sourceforge.net>\n"
+"Language-Team:  <ims21@users.sourceforge.net>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-Language: Czech\n"
+"X-Poedit-Country: CZECH REPUBLIC\n"
+"Plural-Forms: nplurals=3; plural=n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
+
+#: plugin.py:26
+msgid "plugins"
+msgstr "pluginech"
+
+#: plugin.py:26
+msgid "menu-system"
+msgstr "menu-systém"
+
+#: plugin.py:31
+#: ui.py:109
+msgid "Setup AnalogClock"
+msgstr "Nastavení AnalogClock"
+
+#: plugin.py:44
+msgid "Displays analog clock permanently on the screen"
+msgstr "Zobrazuje analogové hodiny na obrazovce"
+
+#: ui.py:35
+#: ui.py:49
+msgid "None"
+msgstr "žádné"
+
+#: ui.py:35
+msgid "Full"
+msgstr "plná"
+
+#: ui.py:49
+msgid "Half"
+msgstr "poloviční"
+
+#: ui.py:49
+msgid "Mid"
+msgstr "střední"
+
+#: ui.py:49
+msgid "Max"
+msgstr "maximální"
+
+#: ui.py:118
+msgid "Ok"
+msgstr "Ok"
+
+#: ui.py:119
+msgid "Cancel"
+msgstr "Zavřít"
+
+#: ui.py:124
+msgid "Size"
+msgstr "Velikost"
+
+#: ui.py:125
+msgid "X Position"
+msgstr "X pozice"
+
+#: ui.py:126
+msgid "Y Position"
+msgstr "Y pozice"
+
+#: ui.py:128
+msgid "Enable AnalogClock"
+msgstr "Povolit AnalogClock"
+
+#: ui.py:132
+msgid "Transparency"
+msgstr "Průhlednost"
+
+#: ui.py:133
+msgid "Hand's width"
+msgstr "Šířka ručiček"
+
+#: ui.py:134
+msgid "Filed hands"
+msgstr "Vyplněné ručičky"
+
+#: ui.py:135
+msgid "Hand's parts ratio"
+msgstr "Poměr úseků ručiček"
+
+#: ui.py:136
+msgid "Center point size"
+msgstr "Středový bod"
+
+#: ui.py:137
+msgid "Dim"
+msgstr "Snížení jasu"
+
+#: ui.py:138
+msgid "Seconds hand"
+msgstr "Vteřinová ručička"
+
+#: ui.py:139
+msgid "Thin face"
+msgstr "Tenký ciferník"
+
+#: ui.py:140
+msgid "Display setup in"
+msgstr "Zobrazovat nastavení v"
+
+#: ui.py:148
+#, python-format
+msgid "Analog Clock %s"
+msgstr "Analog Clock %s"
+
+#~ msgid "%d second"
+
+#~ msgid_plural "%d seconds"
+#~ msgstr[0] "%d sekunda"
+#~ msgstr[1] "%d sekundy"
+#~ msgstr[2] "%d sekund"
+
+#~ msgid "%d minute"
+
+#~ msgid_plural "%d minutes"
+#~ msgstr[0] "%d minuta"
+#~ msgstr[1] "%d minuty"
+#~ msgstr[2] "%d minut"
+
+#~ msgid "%d hour"
+
+#~ msgid_plural "%d hours"
+#~ msgstr[0] "%d hodina"
+#~ msgstr[1] "%d hodiny"
+#~ msgstr[2] "%d hodin"
+
+#~ msgid "Automatic cache flushing"
+#~ msgstr "Automatické uvolňování mezipaměti"
+
+#~ msgid "Setup ClearMem"
+#~ msgstr "Nastavení ClearMem"
+
+#~ msgid "Save"
+#~ msgstr "Uložit"
+
+#~ msgid "Enable ClearMem"
+#~ msgstr "Povolit ClearMem"
+
+#~ msgid "Auto timeout:"
+#~ msgstr "Automatické spouštění:"
+
+#~ msgid "Show info on screen:"
+#~ msgstr "Zobrazovat info na obrazovce:"
+
+#~ msgid "Time of info message:"
+#~ msgstr "Délka zobrazení info:"
+
+#~ msgid "Starting"
+#~ msgstr "Spouší se"
+
+#~ msgid "Started"
+#~ msgstr "Spuštěno"
+
+#~ msgid "Stopped"
+#~ msgstr "Zastaveno"
+
+#~ msgid "Mem cleared"
+#~ msgstr "Paměť uvolněna"
+
+#~ msgid "Memory:"
+#~ msgstr "Paměť:"
+
+#~ msgid "Used:"
+#~ msgstr "Použitá:"
+
+#~ msgid "Free:"
+#~ msgstr "Volná:"
+
+#~ msgid "Clear Now"
+#~ msgstr "Uvolnit"
+
+#~ msgid "MB"
+#~ msgstr "MB"
+
+#~ msgid "ClearMem Status"
+#~ msgstr "Stav ClearMem"
+
+#~ msgid "ClearMem Info"
+#~ msgstr "ClearMem Info"
+
+#~ msgid "Info"
+#~ msgstr "Info"
+
+#~ msgid "Auto timeout (5-150min):"
+#~ msgstr "Automatické spouštění (5-150min):"
+
+#~ msgid "Time of info message (1-10sec):"
+#~ msgstr "Délka zobrazení info (1-10sec):"
+
+#~ msgid "extensions"
+#~ msgstr "nabídce rozšíření"
+
+#~ msgid "event info"
+#~ msgstr "event info"
+
+#~ msgid "Refresh"
+#~ msgstr "Obnovit"
