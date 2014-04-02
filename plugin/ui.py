@@ -3,7 +3,7 @@ from . import _
 
 from Screens.Screen import Screen
 from Components.ConfigList import ConfigListScreen
-from Components.config import ConfigYesNo, config, getConfigListEntry, ConfigSelection
+from Components.config import ConfigYesNo, config, getConfigListEntry, ConfigSelection, ConfigIP
 from Components.ActionMap import ActionMap
 from Components.Label import Label
 from enigma import eTimer, getDesktop
@@ -49,6 +49,11 @@ config.plugins.AnalogClock.centerpoint = ConfigSelection(default = "2", choices 
 config.plugins.AnalogClock.dim = ConfigSelection(default = "0", choices = [("0", _("None")),("1", _("Half")),("2", _("Mid")),("3", _("Max")) ])
 config.plugins.AnalogClock.secs = ConfigYesNo(default = True)
 config.plugins.AnalogClock.thin = ConfigYesNo(default = True)
+config.plugins.AnalogClock.hands_color = ConfigIP(default=[000,255,255, 80])
+config.plugins.AnalogClock.shand_color = ConfigIP(default=[000,255,064,064])
+config.plugins.AnalogClock.faces_color = ConfigIP(default=[000,255,255,255])
+config.plugins.AnalogClock.background = ConfigIP(default=[int(config.plugins.AnalogClock.transparency.value),0,0,0])
+
 cfg = config.plugins.AnalogClock
 
 def aRGB(a,r,g,b):
@@ -87,18 +92,89 @@ def sizes():
 		cfg.ypos.value = str(720 - size)
 		Y_POS = int(cfg.ypos.value)
 
+
+class AnalogClockColorsSetup(Screen, ConfigListScreen):
+	skin = """
+	<screen name="AnalogClockColorSetup" position="80,center" size="410,148" title="Setup Analog Clock" backgroundColor="#31000000" flags="wfNoBorder">
+		<widget name="config" position="10,10" size="390,100" zPosition="1" backgroundColor="#31000000" scrollbarMode="showOnDemand" />
+		<ePixmap pixmap="skin_default/div-h.png" position="5,113" zPosition="2" size="400,2" />
+		<widget name="key_red"   position="005,117" zPosition="2" size="200,28" valign="center" halign="center" font="Regular;22" foregroundColor="red" transparent="1" />
+		<widget name="key_green" position="205,117" zPosition="2" size="200,28" valign="center" halign="center" font="Regular;22" foregroundColor="green" transparent="1" />
+	</screen>"""
+
+	def __init__(self, session):
+		Screen.__init__(self, session)
+
+		self.list = [ ]
+		self.onChangedEntry = [ ]
+		ConfigListScreen.__init__(self, self.list, session = session, on_change = self.changedEntry)
+
+		self.setup_title = _("Setup AnalogClock Colors")
+		self["actions"] = ActionMap(["SetupActions", "ColorActions"],
+			{
+				"cancel": self.keyCancel,
+				"red": self.keyCancel,
+				"green": self.keySave,
+				"ok": self.keySave,
+			}, -2)
+
+		self["key_green"] = Label(_("Ok"))
+		self["key_red"] = Label(_("Cancel"))
+
+		cfg.background.value[0] = int(cfg.transparency.value)
+		self.background = _("Background (a,r,g,b)")
+		self.list.append(getConfigListEntry(_("Hand's color (a,r,g,b)"), cfg.hands_color))
+		self.list.append(getConfigListEntry(_("Seconds color (a,r,g,b)"), cfg.shand_color))
+		self.list.append(getConfigListEntry(_("Face's color (a,r,g,b)"), cfg.faces_color))
+		self.list.append(getConfigListEntry( self.background, cfg.background))
+
+		self["config"].list = self.list
+		self["config"].setList(self.list)
+
+		self.onLayoutFinish.append(self.layoutFinished)
+
+	def layoutFinished(self):
+		self.setTitle(_("Analog Clock %s") % VERSION)
+		self.storeValues()
+
+	def changedEntry(self):
+		if self["config"].getCurrent()[0] is self.background:
+			cfg.transparency.value = str(cfg.background.value[0])
+
+	def storeValues(self):
+		a = cfg.hands_color.value
+		self.hc = [a[0],a[1],a[2],a[3]]
+		a = cfg.shand_color.value
+		self.sc = [a[0],a[1],a[2],a[3]]
+		a = cfg.faces_color.value
+		self.fc = [a[0],a[1],a[2],a[3]]
+		a = cfg.background.value
+		self.bc = [a[0],a[1],a[2],a[3]]
+
+	def restoreValues(self):
+		cfg.hands_color.value = self.hc
+		cfg.shand_color.value = self.sc
+		cfg.faces_color.value = self.fc
+		cfg.background.value = self.bc
+		cfg.transparency.value =  str(cfg.background.value[0])
+
+	def keySave(self):
+		self.close()
+
+	def keyCancel(self):
+		self.restoreValues()
+		self.close()
+
 class AnalogClockSetup(Screen, ConfigListScreen):
 	sizes()
 	skin = """
-	<screen name="AnalogClockSetup" position="80,center" size="410,370" title="Setup Analog Clock" backgroundColor="#31000000" flags="wfNoBorder">
+	<screen name="AnalogClockSetup" position="80,center" size="410,373" title="Setup Analog Clock" backgroundColor="#31000000" flags="wfNoBorder">
 		<widget name="config" position="10,10" size="390,325" zPosition="1" backgroundColor="#31000000" scrollbarMode="showOnDemand" />
-		<ePixmap pixmap="skin_default/div-h.png" position="0,338" zPosition="2" size="400,2" />
-		<ePixmap name="red"      position="005,340" zPosition="1" size="100,30" pixmap="skin_default/buttons/red.png" alphatest="on" />
-		<ePixmap name="green"    position="105,340" zPosition="1" size="100,30" pixmap="skin_default/buttons/green.png" alphatest="on" />
-		<widget name="key_red"   position="005,342" zPosition="2" size="100,30" valign="center" halign="center" font="Regular;22" transparent="1" />
-		<widget name="key_green" position="105,342" zPosition="2" size="100,30" valign="center" halign="center" font="Regular;22" transparent="1" />
+		<ePixmap pixmap="skin_default/div-h.png" position="5,338" zPosition="2" size="400,2" />
+		<widget name="key_red"   position="005,342" zPosition="2" size="200,28" valign="center" halign="center" font="Regular;22" foregroundColor="red" transparent="1" />
+		<widget name="key_green" position="205,342" zPosition="2" size="200,28" valign="center" halign="center" font="Regular;22" foregroundColor="green" transparent="1" />
 	</screen>"""
-	
+
 	def __init__(self, session):
 		Screen.__init__(self, session)
 
@@ -113,6 +189,7 @@ class AnalogClockSetup(Screen, ConfigListScreen):
 				"red": self.keyCancel,
 				"green": self.keySave,
 				"ok": self.keySave,
+				"blue": self.keyBlue,
 			}, -2)
 
 		self["key_green"] = Label(_("Ok"))
@@ -130,13 +207,13 @@ class AnalogClockSetup(Screen, ConfigListScreen):
 		self.list.append(getConfigListEntry( self.itemXpos, cfg.xpos))
 		self.list.append(getConfigListEntry( self.itemYpos, cfg.ypos))
 		self.list.append(getConfigListEntry(_("Transparency"), cfg.transparency))
+		self.list.append(getConfigListEntry(_("Thin face"), cfg.thin))
 		self.list.append(getConfigListEntry(_("Hand's width"), cfg.handwidth))
 		self.list.append(getConfigListEntry(_("Filed hands"), cfg.filedhands))
+		self.list.append(getConfigListEntry(_("Seconds hand"), cfg.secs))
 		self.list.append(getConfigListEntry(_("Hand's parts ratio"), cfg.handratio))
 		self.list.append(getConfigListEntry(_("Center point size"), cfg.centerpoint))
 		self.list.append(getConfigListEntry(_("Dim"), cfg.dim))
-		self.list.append(getConfigListEntry(_("Seconds hand"), cfg.secs))
-		self.list.append(getConfigListEntry(_("Thin face"), cfg.thin))
 		self.list.append(getConfigListEntry(_("Display setup in"), cfg.where))
 
 		self["config"].list = self.list
@@ -150,6 +227,10 @@ class AnalogClockSetup(Screen, ConfigListScreen):
 	def keySave(self):
 		for x in self["config"].list:
 			x[1].save()
+		cfg.hands_color.save()
+		cfg.shand_color.save()
+		cfg.faces_color.save()
+		cfg.background.save()
 		AnalogClock.cancelClock()
 		self.close(True)
 
@@ -173,6 +254,13 @@ class AnalogClockSetup(Screen, ConfigListScreen):
 		for i, x in enumerate(self["config"].list):
 			if x[0] in (self.itemXpos, self.itemYpos):
 				self["config"].invalidate(self["config"].list[i])
+
+	def keyBlue(self):
+		self.session.openWithCallback(self.callBack, AnalogClockColorsSetup)
+
+	def callBack(self, answer=False):
+		pass
+
 
 class AnalogClockMain():
 	def __init__(self):
@@ -216,12 +304,14 @@ class AnalogClockMain():
 
 AnalogClock = AnalogClockMain()
 
+
 def AnalogClockSkin():
 	skin = """
 	<screen name="AnalogClockScreen" position="%d,%d" size="%d,%d" zPosition="-1" backgroundColor="#50802020" flags="wfNoBorder">
 		<widget source="Canvas" render="Canvas" position="0,0" size="%d,%d"/>
 	</screen>""" % (X_POS, Y_POS, size, size, size, size)
 	return skin
+
 
 class AnalogClockScreen(Screen):
 	def __init__(self, session):
@@ -238,7 +328,8 @@ class AnalogClockScreen(Screen):
 
 	def initCanvas(self):
 		self.buildFace()
-		self["Canvas"].fill(0, 0, 0, 0, aRGB(self.transp(),0,0,0))
+		c = cfg.background.value
+		self["Canvas"].fill(0, 0, 0, 0, aRGB(self.transp(),c[1],c[2],c[3]))
 		self["Canvas"].flush()
 		self.checkState()
 		self.AnalogClockTimer.start(1000)
@@ -256,9 +347,12 @@ class AnalogClockScreen(Screen):
 					self.rotate( 1, begin, a), self.rotate( 1, end, a)))
 
 	def initColors(self):
-		self.colorH = self.colorM = RGB(255,255,80)
-		self.colorS = RGB(255,64,64)
-		self.colorD = RGB(255,255,255)
+		c = cfg.hands_color.value
+		self.colorH = self.colorM = aRGB(c[0],c[1],c[2],c[3])
+		c = cfg.shand_color.value
+		self.colorS = aRGB(c[0],c[1],c[2],c[3])
+		c = cfg.faces_color.value
+		self.colorF = aRGB(c[0],c[1],c[2],c[3])
 
 	def checkState(self):
 		if AnalogClock.dialogAnalogClock:
@@ -278,7 +372,8 @@ class AnalogClockScreen(Screen):
 
 	def drawClock(self):
 		self.initColors()
-		self["Canvas"].fill(0, 0, size, size, aRGB(self.transp(),0,0,0))
+		c = cfg.background.value
+		self["Canvas"].fill(0, 0, size, size, aRGB(self.transp(),c[1],c[2],c[3]))
 		self.drawFace()
 		(h, m, s) = self.getTime()
 		self.drawHandH(h, m, s)
@@ -302,17 +397,17 @@ class AnalogClockScreen(Screen):
 
 	def rotate(self, x, y, a):
 		a = radians(a)
-		xr = int(origin - round(x*cos(a)-y*sin(a)))
-		yr = int(origin - round(x*sin(a)+y*cos(a)))
+		xr = int(origin - round(x*cos(a)-y*sin(a),1))
+		yr = int(origin - round(x*sin(a)+y*cos(a),1))
 		return (xr, yr)
 
 	def drawFace(self):
 		for a in range(0,12,1):
 			if not cfg.thin.value:
-				self.line(self.pf[a][0], self.pf[a][1], self.colorD)
-			self.line(self.pf[a][2], self.pf[a][3], self.colorD)
+				self.line(self.pf[a][0], self.pf[a][1], self.colorF)
+			self.line(self.pf[a][2], self.pf[a][3], self.colorF)
 			if not cfg.thin.value:
-				self.line(self.pf[a][4], self.pf[a][5], self.colorD)
+				self.line(self.pf[a][4], self.pf[a][5], self.colorF)
 
 	def alfaHour(self, hours, mins, secs):
 		return 30*hours + mins/2. + secs/120.
