@@ -35,7 +35,7 @@ msgstr "Zobrazuje analogové hodiny na obrazovce"
 #: ui.py:35
 #: ui.py:49
 msgid "None"
-msgstr "žádné"
+msgstr "žádná"
 
 #: ui.py:35
 msgid "Full"
