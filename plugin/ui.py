@@ -173,6 +173,7 @@ class AnalogClockSetup(Screen, ConfigListScreen):
 		<ePixmap pixmap="skin_default/div-h.png" position="5,338" zPosition="2" size="400,2" />
 		<widget name="key_red"   position="005,342" zPosition="2" size="200,28" valign="center" halign="center" font="Regular;22" foregroundColor="red" transparent="1" />
 		<widget name="key_green" position="205,342" zPosition="2" size="200,28" valign="center" halign="center" font="Regular;22" foregroundColor="green" transparent="1" />
+		<widget name="version" position="360,345" size="35,22" font="Regular;12" valign="bottom" halign="right" transparent="1" />
 	</screen>"""
 
 	def __init__(self, session):
@@ -194,6 +195,7 @@ class AnalogClockSetup(Screen, ConfigListScreen):
 
 		self["key_green"] = Label(_("Ok"))
 		self["key_red"] = Label(_("Cancel"))
+		self["version"] = Label("v%s" % VERSION)
 
 		self.changeItemsTimer = eTimer()
 		self.changeItemsTimer.timeout.get().append(self.changeItems)
