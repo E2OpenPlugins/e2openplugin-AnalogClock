@@ -135,13 +135,13 @@ class AnalogClockColorsSetup(Screen, ConfigListScreen):
 
 	def layoutFinished(self):
 		self.setTitle(_("Analog Clock %s") % VERSION)
-		self.storeValues()
+		self.backupValues()
 
 	def changedEntry(self):
 		if self["config"].getCurrent()[0] is self.background:
 			cfg.transparency.value = str(cfg.background.value[0])
 
-	def storeValues(self):
+	def backupValues(self):
 		a = cfg.hands_color.value
 		self.hc = [a[0],a[1],a[2],a[3]]
 		a = cfg.shand_color.value
@@ -222,6 +222,7 @@ class AnalogClockSetup(Screen, ConfigListScreen):
 		self.onLayoutFinish.append(self.layoutFinished)
 
 	def layoutFinished(self):
+		AnalogClock.setup = True
 		self.setTitle(_("Analog Clock %s") % VERSION)
 
 	def keySave(self):
@@ -267,6 +268,7 @@ class AnalogClockMain():
 		self.dialogAnalogClock = None
 		self.session = None
 		self.isShow = False
+		self.setup = False
 
 		self.AnalogClockReload = eTimer()
 		self.AnalogClockReload.timeout.get().append(self.reloadClock)
@@ -286,6 +288,7 @@ class AnalogClockMain():
 				self.isShow = False
 
 	def cancelClock(self):
+		self.setup = False
 		if self.dialogAnalogClock:
 			self.dialogAnalogClock.hide()
 			self.deleteDialog()
@@ -324,15 +327,34 @@ class AnalogClockScreen(Screen):
 		self.skin = AnalogClockSkin()
 		self["Canvas"] = CanvasSource()
 
-		self.onLayoutFinish.append(self.initCanvas)
+		self.onLayoutFinish.append(self.start)
 
-	def initCanvas(self):
+	def start(self):
+		self.initValues()
 		self.buildFace()
-		c = cfg.background.value
-		self["Canvas"].fill(0, 0, 0, 0, aRGB(self.transp(),c[1],c[2],c[3]))
+		self["Canvas"].fill(0, 0, 0, 0, self.background)
 		self["Canvas"].flush()
 		self.checkState()
 		self.AnalogClockTimer.start(1000)
+
+	def initValues(self):
+		c = cfg.hands_color.value
+		self.colorH = self.colorM = aRGB(c[0],c[1],c[2],c[3])
+		c = cfg.shand_color.value
+		self.colorS = aRGB(c[0],c[1],c[2],c[3])
+		c = cfg.faces_color.value
+		self.colorF = aRGB(c[0],c[1],c[2],c[3])
+		c = cfg.background.value
+		self.background = aRGB(int(cfg.transparency.value),c[1],c[2],c[3])
+		self.cpb = origin - int(cfg.centerpoint.value)
+		self.cpw = 2 * int(cfg.centerpoint.value)
+		if cfg.secs.value:
+			self.colorCP = self.colorS
+		else:
+			self.colorCP = self.colorH
+		self.dimensionH = self.handDimensions(hHand)
+		self.dimensionM = self.handDimensions(mHand)
+		self.dimensionS = self.handDimensions(sHand)
 
 	def buildFace(self):
 		self.pf = []  # points face
@@ -345,14 +367,6 @@ class AnalogClockScreen(Screen):
 			self.pf.append((self.rotate(-1, begin, a), self.rotate(-1, end, a),
 					self.rotate( 0, begin, a), self.rotate( 0, end, a),
 					self.rotate( 1, begin, a), self.rotate( 1, end, a)))
-
-	def initColors(self):
-		c = cfg.hands_color.value
-		self.colorH = self.colorM = aRGB(c[0],c[1],c[2],c[3])
-		c = cfg.shand_color.value
-		self.colorS = aRGB(c[0],c[1],c[2],c[3])
-		c = cfg.faces_color.value
-		self.colorF = aRGB(c[0],c[1],c[2],c[3])
 
 	def checkState(self):
 		if AnalogClock.dialogAnalogClock:
@@ -371,29 +385,26 @@ class AnalogClockScreen(Screen):
 			self.drawClock()
 
 	def drawClock(self):
-		self.initColors()
-		c = cfg.background.value
-		self["Canvas"].fill(0, 0, size, size, aRGB(self.transp(),c[1],c[2],c[3]))
+		if AnalogClock.setup:
+			self.initValues()
+		self["Canvas"].fill(0, 0, size, size, self.background )
 		self.drawFace()
 		(h, m, s) = self.getTime()
 		self.drawHandH(h, m, s)
 		self.drawHandM(m, s)
 		if cfg.secs.value:
 			self.drawHandS(s)
-		self.drawCenterPoint(int(cfg.centerpoint.value))
+		self.drawCenterPoint()
 		self["Canvas"].flush()
-		self["Canvas"].clear()
+		if s == 0:
+			self["Canvas"].clear()
 
 	def getTime(self):
 		t = localtime(time())
 		return (t.tm_hour%12, t.tm_min, t.tm_sec)
 
-	def drawCenterPoint(self, pix):
-		if cfg.secs.value:
-			color = self.colorS
-		else:
-			color = self.colorH
-		self["Canvas"].fill(origin-pix, origin-pix, 2*pix, 2*pix, color)
+	def drawCenterPoint(self):
+		self["Canvas"].fill(self.cpb, self.cpb, self.cpw, self.cpw, self.colorCP)
 
 	def rotate(self, x, y, a):
 		a = radians(a)
@@ -404,10 +415,9 @@ class AnalogClockScreen(Screen):
 	def drawFace(self):
 		for a in range(0,12,1):
 			if not cfg.thin.value:
-				self.line(self.pf[a][0], self.pf[a][1], self.colorF)
-			self.line(self.pf[a][2], self.pf[a][3], self.colorF)
-			if not cfg.thin.value:
-				self.line(self.pf[a][4], self.pf[a][5], self.colorF)
+				self.line(self.pf[a][0], self.pf[a][1], self.colorF) 	# left part
+				self.line(self.pf[a][4], self.pf[a][5], self.colorF) 	# right part
+			self.line(self.pf[a][2], self.pf[a][3], self.colorF)		# center part
 
 	def alfaHour(self, hours, mins, secs):
 		return 30*hours + mins/2. + secs/120.
@@ -426,13 +436,13 @@ class AnalogClockScreen(Screen):
 		return (w, l, L)
 
 	def drawHandH(self, h, m, s):
-		self.drawHand(self.handDimensions(hHand), self.alfaHour(h, m, s//20*20), self.colorH)
+		self.drawHand(self.dimensionH, self.alfaHour(h, m, s//20*20), self.colorH)
 
 	def drawHandM(self, m, s):
-		self.drawHand(self.handDimensions(mHand), self.alfaMin(m, s//20*20), self.colorM)
+		self.drawHand(self.dimensionM, self.alfaMin(m, s//20*20), self.colorM)
 
 	def drawHandS(self, s):
-		self.drawHand(self.handDimensions(sHand), self.alfaSec(s), self.colorS, True)
+		self.drawHand(self.dimensionS, self.alfaSec(s), self.colorS, True)
 
 	def drawHand(self, dimensions, alfa, color, hand_secs = False):
 		(w, l, L) = dimensions
@@ -440,13 +450,16 @@ class AnalogClockScreen(Screen):
 			w -= 1
 			if w < 0:
 				w = 0
-		lbs = -1.2*l # back-length for secs hand
+		lbs = -1.2*l	# back-length for secs hand
+		lb = -0.6*l	# back-length for non sec hand
+		Ll = L + l	# long hand's part
+
 		if w > 0:
 			while w > 0:
 				if hand_secs:
-					p = [self.rotate(0,lbs,alfa), self.rotate(w,lbs,alfa), self.rotate(w,L,alfa), self.rotate(0,L+l,alfa), self.rotate(-w,L,alfa), self.rotate(-w,lbs,alfa)]
+					p = [self.rotate(0,lbs,alfa), self.rotate(w,lbs,alfa), self.rotate(w,L,alfa), self.rotate(0,Ll,alfa), self.rotate(-w,L,alfa), self.rotate(-w,lbs,alfa)]
 				else:
-					p = [(origin,origin), self.rotate(w,l,alfa), self.rotate(w,L,alfa), self.rotate(0,L+l,alfa), self.rotate(-w,L,alfa), self.rotate(-w,l,alfa)]
+					p = [(origin,origin), self.rotate(w,l,alfa), self.rotate(w,L,alfa), self.rotate(0,Ll,alfa), self.rotate(-w,L,alfa), self.rotate(-w,l,alfa)]
 				n = len(p)
 				for i in range(n):
 					self.line(p[i],p[(i+1)%n], color)
@@ -456,13 +469,10 @@ class AnalogClockScreen(Screen):
 			self.line(p[0],p[3], color) # center line
 		else:
 			if hand_secs:
-				self.line(self.rotate(0,lbs,alfa),self.rotate(0,L+l,alfa), color) # center line ... p[0],p[3]
+				self.line(self.rotate(0,lbs,alfa),self.rotate(0,Ll,alfa), color) # center line ... p[0],p[3]
 			else:
-				self.line(self.rotate(0,-0.6*l,alfa),self.rotate(0,L+l,alfa), color) # center line ... p[0],p[3]
+				self.line(self.rotate(0,lb,alfa),self.rotate(0,Ll,alfa), color) # center line ... p[0],p[3]
 
 	def line(self, p0, p1, color):
 		(x0, y0), (x1, y1) = p0, p1
 		self["Canvas"].line( x0, y0, x1, y1, color)
-
-	def transp(self):
-		return int(cfg.transparency.value)
