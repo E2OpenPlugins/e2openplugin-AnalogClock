@@ -35,7 +35,7 @@ msgstr "Zobrazuje analogové hodiny na obrazovce"
 #: ui.py:35
 #: ui.py:49
 msgid "None"
-msgstr "žádná"
+msgstr "ne"
 
 #: ui.py:35
 msgid "Full"
@@ -118,95 +118,3 @@ msgstr "Zobrazovat nastavení v"
 msgid "Analog Clock %s"
 msgstr "Analog Clock %s"
 
-#~ msgid "%d second"
-
-#~ msgid_plural "%d seconds"
-#~ msgstr[0] "%d sekunda"
-#~ msgstr[1] "%d sekundy"
-#~ msgstr[2] "%d sekund"
-
-#~ msgid "%d minute"
-
-#~ msgid_plural "%d minutes"
-#~ msgstr[0] "%d minuta"
-#~ msgstr[1] "%d minuty"
-#~ msgstr[2] "%d minut"
-
-#~ msgid "%d hour"
-
-#~ msgid_plural "%d hours"
-#~ msgstr[0] "%d hodina"
-#~ msgstr[1] "%d hodiny"
-#~ msgstr[2] "%d hodin"
-
-#~ msgid "Automatic cache flushing"
-#~ msgstr "Automatické uvolňování mezipaměti"
-
-#~ msgid "Setup ClearMem"
-#~ msgstr "Nastavení ClearMem"
-
-#~ msgid "Save"
-#~ msgstr "Uložit"
-
-#~ msgid "Enable ClearMem"
-#~ msgstr "Povolit ClearMem"
-
-#~ msgid "Auto timeout:"
-#~ msgstr "Automatické spouštění:"
-
-#~ msgid "Show info on screen:"
-#~ msgstr "Zobrazovat info na obrazovce:"
-
-#~ msgid "Time of info message:"
-#~ msgstr "Délka zobrazení info:"
-
-#~ msgid "Starting"
-#~ msgstr "Spouší se"
-
-#~ msgid "Started"
-#~ msgstr "Spuštěno"
-
-#~ msgid "Stopped"
-#~ msgstr "Zastaveno"
-
-#~ msgid "Mem cleared"
-#~ msgstr "Paměť uvolněna"
-
-#~ msgid "Memory:"
-#~ msgstr "Paměť:"
-
-#~ msgid "Used:"
-#~ msgstr "Použitá:"
-
-#~ msgid "Free:"
-#~ msgstr "Volná:"
-
-#~ msgid "Clear Now"
-#~ msgstr "Uvolnit"
-
-#~ msgid "MB"
-#~ msgstr "MB"
-
-#~ msgid "ClearMem Status"
-#~ msgstr "Stav ClearMem"
-
-#~ msgid "ClearMem Info"
-#~ msgstr "ClearMem Info"
-
-#~ msgid "Info"
-#~ msgstr "Info"
-
-#~ msgid "Auto timeout (5-150min):"
-#~ msgstr "Automatické spouštění (5-150min):"
-
-#~ msgid "Time of info message (1-10sec):"
-#~ msgstr "Délka zobrazení info (1-10sec):"
-
-#~ msgid "extensions"
-#~ msgstr "nabídce rozšíření"
-
-#~ msgid "event info"
-#~ msgstr "event info"
-
-#~ msgid "Refresh"
-#~ msgstr "Obnovit"
