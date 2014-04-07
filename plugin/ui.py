@@ -387,7 +387,8 @@ class AnalogClockScreen(Screen):
 				if not AnalogClock.isShow: 
 					AnalogClock.dialogAnalogClock.show()
 					AnalogClock.isShow = True
-				self.drawClock()
+				if not self.session.screen["Standby"].boolean:
+					self.drawClock()
 			else:
 				if AnalogClock.isShow:
 					AnalogClock.dialogAnalogClock.hide()
