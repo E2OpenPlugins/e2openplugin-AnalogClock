@@ -200,31 +200,35 @@ class AnalogClockSetup(Screen, ConfigListScreen):
 		self.changeItemsTimer = eTimer()
 		self.changeItemsTimer.timeout.get().append(self.changeItems)
 
+		self.enable = _("Enable AnalogClock")
 		self.itemSize = _("Size")
 		self.itemXpos = _("X Position")
 		self.itemYpos = _("Y Position")
 
-		self.list.append(getConfigListEntry(_("Enable AnalogClock"), cfg.enable))
-		self.list.append(getConfigListEntry( self.itemSize, cfg.size))
-		self.list.append(getConfigListEntry( self.itemXpos, cfg.xpos))
-		self.list.append(getConfigListEntry( self.itemYpos, cfg.ypos))
-		self.list.append(getConfigListEntry(_("Transparency"), cfg.transparency))
-		self.list.append(getConfigListEntry(_("Thin face"), cfg.thin))
-		self.list.append(getConfigListEntry(_("Hand's width"), cfg.handwidth))
-		self.list.append(getConfigListEntry(_("Filed hands"), cfg.filedhands))
-		self.list.append(getConfigListEntry(_("Seconds hand"), cfg.secs))
-		self.list.append(getConfigListEntry(_("Hand's parts ratio"), cfg.handratio))
-		self.list.append(getConfigListEntry(_("Center point size"), cfg.centerpoint))
-		self.list.append(getConfigListEntry(_("Dim"), cfg.dim))
-		self.list.append(getConfigListEntry(_("Display setup in"), cfg.where))
-
-		self["config"].list = self.list
-		self["config"].setList(self.list)
+		self.listMenu()
 
 		self.onLayoutFinish.append(self.layoutFinished)
 
+	def listMenu(self):
+		self.list = [ getConfigListEntry( self.enable, cfg.enable) ]
+		if cfg.enable.value:
+			self.list.append(getConfigListEntry( self.itemSize, cfg.size))
+			self.list.append(getConfigListEntry( self.itemXpos, cfg.xpos))
+			self.list.append(getConfigListEntry( self.itemYpos, cfg.ypos))
+			self.list.append(getConfigListEntry(_("Transparency"), cfg.transparency))
+			self.list.append(getConfigListEntry(_("Thin face"), cfg.thin))
+			self.list.append(getConfigListEntry(_("Hand's width"), cfg.handwidth))
+			self.list.append(getConfigListEntry(_("Filed hands"), cfg.filedhands))
+			self.list.append(getConfigListEntry(_("Seconds hand"), cfg.secs))
+			self.list.append(getConfigListEntry(_("Hand's parts ratio"), cfg.handratio))
+			self.list.append(getConfigListEntry(_("Center point size"), cfg.centerpoint))
+			self.list.append(getConfigListEntry(_("Dim"), cfg.dim))
+			self.list.append(getConfigListEntry(_("Display setup in"), cfg.where))
+		self["config"].list = self.list
+		self["config"].setList(self.list)
+
 	def layoutFinished(self):
-		AnalogClock.setup = True
+		AnalogClock.inSetup = True
 		self.setTitle(_("Analog Clock %s") % VERSION)
 
 	def keySave(self):
@@ -248,6 +252,12 @@ class AnalogClockSetup(Screen, ConfigListScreen):
 			self.invalidateItem()
 			AnalogClock.deleteDialog()
 			self.changeItemsTimer.start(200, True)
+		if self["config"].getCurrent()[0] == self.enable:
+			self.listMenu()
+			if not cfg.enable.value:
+				AnalogClock.deleteDialog()
+			else:
+				AnalogClock.reloadClock()
 
 	def changeItems(self):
 			self.invalidateItem()
@@ -270,15 +280,16 @@ class AnalogClockMain():
 		self.dialogAnalogClock = None
 		self.session = None
 		self.isShow = False
-		self.setup = False
+		self.inSetup = False
 
 		self.AnalogClockReload = eTimer()
 		self.AnalogClockReload.timeout.get().append(self.reloadClock)
 
 	def startAnalogClock(self, session):
 		self.session = session
-		self.dialogAnalogClock = self.session.instantiateDialog(AnalogClockScreen)
-		self.makeShow()
+		if cfg.enable.value:
+			self.dialogAnalogClock = self.session.instantiateDialog(AnalogClockScreen)
+			self.makeShow()
 
 	def makeShow(self):
 		if self.dialogAnalogClock:
@@ -290,7 +301,7 @@ class AnalogClockMain():
 				self.isShow = False
 
 	def cancelClock(self):
-		self.setup = False
+		self.inSetup = False
 		if self.dialogAnalogClock:
 			self.dialogAnalogClock.hide()
 			self.deleteDialog()
@@ -304,8 +315,9 @@ class AnalogClockMain():
 			self.isShow = False
 
 	def reloadClock(self):
-		self.isShow = False
-		self.dialogAnalogClock = self.session.instantiateDialog(AnalogClockScreen)
+		if not self.dialogAnalogClock:
+			self.isShow = False
+			self.dialogAnalogClock = self.session.instantiateDialog(AnalogClockScreen)
 
 AnalogClock = AnalogClockMain()
 
@@ -336,7 +348,6 @@ class AnalogClockScreen(Screen):
 		self.buildFace()
 		self["Canvas"].fill(0, 0, 0, 0, self.background)
 		self["Canvas"].flush()
-		self.checkState()
 		self.AnalogClockTimer.start(1000)
 
 	def initValues(self):
@@ -370,24 +381,20 @@ class AnalogClockScreen(Screen):
 					self.rotate( 0, begin, a), self.rotate( 0, end, a),
 					self.rotate( 1, begin, a), self.rotate( 1, end, a)))
 
-	def checkState(self):
+	def ControlLoop(self):
 		if AnalogClock.dialogAnalogClock:
 			if cfg.enable.value:
 				if not AnalogClock.isShow: 
 					AnalogClock.dialogAnalogClock.show()
 					AnalogClock.isShow = True
+				self.drawClock()
 			else:
 				if AnalogClock.isShow:
 					AnalogClock.dialogAnalogClock.hide()
 					AnalogClock.isShow = False
 
-	def ControlLoop(self):
-		self.checkState()
-		if cfg.enable.value:
-			self.drawClock()
-
 	def drawClock(self):
-		if AnalogClock.setup:
+		if AnalogClock.inSetup:
 			self.initValues()
 		self["Canvas"].fill(0, 0, size, size, self.background )
 		self.drawFace()
