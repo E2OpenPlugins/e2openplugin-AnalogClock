@@ -95,11 +95,12 @@ def sizes():
 
 class AnalogClockColorsSetup(Screen, ConfigListScreen):
 	skin = """
-	<screen name="AnalogClockColorSetup" position="80,center" size="410,148" title="Setup Analog Clock" backgroundColor="#31000000" flags="wfNoBorder">
+	<screen name="AnalogClockColorsSetup" position="80,center" size="410,148" title="AnalogClock - setup colors" backgroundColor="#31000000">
 		<widget name="config" position="10,10" size="390,100" zPosition="1" backgroundColor="#31000000" scrollbarMode="showOnDemand" />
 		<ePixmap pixmap="skin_default/div-h.png" position="5,113" zPosition="2" size="400,2" />
-		<widget name="key_red"   position="005,117" zPosition="2" size="200,28" valign="center" halign="center" font="Regular;22" foregroundColor="red" transparent="1" />
-		<widget name="key_green" position="205,117" zPosition="2" size="200,28" valign="center" halign="center" font="Regular;22" foregroundColor="green" transparent="1" />
+		<widget name="key_red"   position="005,119" zPosition="2" size="200,28" valign="center" halign="center" font="Regular;22" foregroundColor="red" transparent="1" />
+		<widget name="key_green" position="205,119" zPosition="2" size="200,28" valign="center" halign="center" font="Regular;22" foregroundColor="green" transparent="1" />
+		<widget name="version" position="360,122" size="35,22" font="Regular;12" valign="bottom" halign="right" transparent="1" />
 	</screen>"""
 
 	def __init__(self, session):
@@ -109,7 +110,7 @@ class AnalogClockColorsSetup(Screen, ConfigListScreen):
 		self.onChangedEntry = [ ]
 		ConfigListScreen.__init__(self, self.list, session = session, on_change = self.changedEntry)
 
-		self.setup_title = _("Setup AnalogClock Colors")
+		self.setup_title = _("Setup AnalogClock colors")
 		self["actions"] = ActionMap(["SetupActions", "ColorActions"],
 			{
 				"cancel": self.keyCancel,
@@ -120,6 +121,7 @@ class AnalogClockColorsSetup(Screen, ConfigListScreen):
 
 		self["key_green"] = Label(_("Ok"))
 		self["key_red"] = Label(_("Cancel"))
+		self["version"] = Label("v%s" % VERSION)
 
 		cfg.background.value[0] = int(cfg.transparency.value)
 		self.background = _("Background (a,r,g,b)")
@@ -134,7 +136,6 @@ class AnalogClockColorsSetup(Screen, ConfigListScreen):
 		self.onLayoutFinish.append(self.layoutFinished)
 
 	def layoutFinished(self):
-		self.setTitle(_("Analog Clock %s") % VERSION)
 		self.backupValues()
 
 	def changedEntry(self):
@@ -168,12 +169,11 @@ class AnalogClockColorsSetup(Screen, ConfigListScreen):
 class AnalogClockSetup(Screen, ConfigListScreen):
 	sizes()
 	skin = """
-	<screen name="AnalogClockSetup" position="80,center" size="410,373" title="Setup Analog Clock" backgroundColor="#31000000" flags="wfNoBorder">
+	<screen name="AnalogClockSetup" position="80,center" size="410,373" title="Setup AnalogClock" backgroundColor="#31000000">
 		<widget name="config" position="10,10" size="390,325" zPosition="1" backgroundColor="#31000000" scrollbarMode="showOnDemand" />
 		<ePixmap pixmap="skin_default/div-h.png" position="5,338" zPosition="2" size="400,2" />
-		<widget name="key_red"   position="005,342" zPosition="2" size="200,28" valign="center" halign="center" font="Regular;22" foregroundColor="red" transparent="1" />
-		<widget name="key_green" position="205,342" zPosition="2" size="200,28" valign="center" halign="center" font="Regular;22" foregroundColor="green" transparent="1" />
-		<widget name="version" position="360,345" size="35,22" font="Regular;12" valign="bottom" halign="right" transparent="1" />
+		<widget name="key_red"   position="005,344" zPosition="2" size="200,28" valign="center" halign="center" font="Regular;22" foregroundColor="red" transparent="1" />
+		<widget name="key_green" position="205,344" zPosition="2" size="200,28" valign="center" halign="center" font="Regular;22" foregroundColor="green" transparent="1" />
 	</screen>"""
 
 	def __init__(self, session):
@@ -195,7 +195,6 @@ class AnalogClockSetup(Screen, ConfigListScreen):
 
 		self["key_green"] = Label(_("Ok"))
 		self["key_red"] = Label(_("Cancel"))
-		self["version"] = Label("v%s" % VERSION)
 
 		self.changeItemsTimer = eTimer()
 		self.changeItemsTimer.timeout.get().append(self.changeItems)
@@ -229,7 +228,7 @@ class AnalogClockSetup(Screen, ConfigListScreen):
 
 	def layoutFinished(self):
 		AnalogClock.inSetup = True
-		self.setTitle(_("Analog Clock %s") % VERSION)
+		self.setTitle(_("Analog Clock v%s") % VERSION)
 
 	def keySave(self):
 		for x in self["config"].list:
