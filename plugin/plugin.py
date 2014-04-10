@@ -44,7 +44,7 @@ def Plugins(path, **kwargs):
 	descr = _("Displays analog clock permanently on the screen")
 	list = [PluginDescriptor(where=[PluginDescriptor.WHERE_SESSIONSTART], fnc=sessionstart),]
 	if config.plugins.AnalogClock.where.value == "0":
-		list.append(PluginDescriptor(name=name, description=descr, where=PluginDescriptor.WHERE_PLUGINMENU, needsRestart = True, icon = 'aclock.png', fnc=main))
+		list.append(PluginDescriptor(name=name, description=descr, where=PluginDescriptor.WHERE_PLUGINMENU, icon = 'aclock.png', fnc=main))
 	elif config.plugins.AnalogClock.where.value == "1":
-		list.append(PluginDescriptor(name=name, description=descr, where=PluginDescriptor.WHERE_MENU, needsRestart = True, fnc=startsetup))
+		list.append(PluginDescriptor(name=name, description=descr, where=PluginDescriptor.WHERE_MENU, fnc=startsetup))
 	return list
