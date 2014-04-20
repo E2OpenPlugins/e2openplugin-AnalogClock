@@ -251,12 +251,14 @@ class AnalogClockSetup(Screen, ConfigListScreen):
 			self.invalidateItem()
 			AnalogClock.deleteDialog()
 			self.changeItemsTimer.start(200, True)
-		if self["config"].getCurrent()[0] == self.enable:
+		elif self["config"].getCurrent()[0] == self.enable:
 			self.listMenu()
 			if not cfg.enable.value:
 				AnalogClock.deleteDialog()
 			else:
 				AnalogClock.reloadClock()
+		else:
+			AnalogClock.itemChanged = True
 
 	def changeItems(self):
 			self.invalidateItem()
@@ -280,6 +282,7 @@ class AnalogClockMain():
 		self.session = None
 		self.isShow = False
 		self.inSetup = False
+		self.itemChanged = False
 
 		self.AnalogClockReload = eTimer()
 		self.AnalogClockReload.timeout.get().append(self.reloadClock)
@@ -301,6 +304,7 @@ class AnalogClockMain():
 
 	def cancelClock(self):
 		self.inSetup = False
+		self.itemChanged = False
 		if self.dialogAnalogClock:
 			self.dialogAnalogClock.hide()
 			self.deleteDialog()
@@ -350,6 +354,8 @@ class AnalogClockScreen(Screen):
 		self.AnalogClockTimer.start(1000)
 
 	def initValues(self):
+		self.pH = []
+		self.pM = []
 		c = cfg.hands_color.value
 		self.colorH = self.colorM = aRGB(c[0],c[1],c[2],c[3])
 		c = cfg.shand_color.value
@@ -395,7 +401,9 @@ class AnalogClockScreen(Screen):
 
 	def drawClock(self):
 		if AnalogClock.inSetup:
-			self.initValues()
+			if AnalogClock.itemChanged:
+				AnalogClock.itemChanged = False
+				self.initValues()
 		self["Canvas"].fill(0, 0, size, size, self.background )
 		self.drawFace()
 		(h, m, s) = self.getTime()
@@ -445,42 +453,62 @@ class AnalogClockScreen(Screen):
 		return (w, l, L)
 
 	def drawHandH(self, h, m, s):
-		self.drawHand(self.dimensionH, self.alfaHour(h, m, s//20*20), self.colorH)
+		if s%20 == 0 or not len(self.pH):
+			self.pH = self.countHand(self.dimensionH, self.alfaHour(h, m, s))
+		self.drawHand(self.pH, self.colorH)
 
 	def drawHandM(self, m, s):
-		self.drawHand(self.dimensionM, self.alfaMin(m, s//20*20), self.colorM)
+		if s%20 == 0 or not len(self.pM):
+			self.pM = self.countHand(self.dimensionM, self.alfaMin(m, s))
+		self.drawHand(self.pM, self.colorM)
+
+	def countHand(self, dimensions, alfa):
+		(w, l, L) = dimensions
+		lb = -0.6*l	# back-length
+		Ll = L + l	# long hand's part
+		p = []
+		if w > 0:
+			while w > 0:
+				p.append((origin,origin))
+				p.append(self.rotate(w,l,alfa))
+				p.append(self.rotate(w,L,alfa))
+				p.append(self.rotate(0,Ll,alfa))
+				p.append(self.rotate(-w,L,alfa))
+				p.append(self.rotate(-w,l,alfa))
+				if not cfg.filedhands.value: # outlines only
+					break
+				w -= 1
+			p.append(p[0]) # center line
+			p.append(p[3])
+		else:
+			p = [ self.rotate(0,lb,alfa), self.rotate(0,Ll,alfa)]
+		return p
+
+	def drawHand(self, p, color):
+		n = len(p)
+		for i in range(n):
+			self.line(p[i], p[(i+1)%n], color)
 
 	def drawHandS(self, s):
-		self.drawHand(self.dimensionS, self.alfaSec(s), self.colorS, True)
-
-	def drawHand(self, dimensions, alfa, color, hand_secs = False):
-		(w, l, L) = dimensions
-		if hand_secs:
+		alfa = self.alfaSec(s)
+		(w, l, L) = self.dimensionS
+		if w > 0:
 			w -= 1
-			if w < 0:
-				w = 0
-		lbs = -1.2*l	# back-length for secs hand
-		lb = -0.6*l	# back-length for non sec hand
+		lbs = -1.2*l	# back-length
 		Ll = L + l	# long hand's part
 
 		if w > 0:
 			while w > 0:
-				if hand_secs:
-					p = [self.rotate(0,lbs,alfa), self.rotate(w,lbs,alfa), self.rotate(w,L,alfa), self.rotate(0,Ll,alfa), self.rotate(-w,L,alfa), self.rotate(-w,lbs,alfa)]
-				else:
-					p = [(origin,origin), self.rotate(w,l,alfa), self.rotate(w,L,alfa), self.rotate(0,Ll,alfa), self.rotate(-w,L,alfa), self.rotate(-w,l,alfa)]
+				p = [self.rotate(0,lbs,alfa), self.rotate(w,lbs,alfa), self.rotate(w,L,alfa), self.rotate(0,Ll,alfa), self.rotate(-w,L,alfa), self.rotate(-w,lbs,alfa)]
 				n = len(p)
 				for i in range(n):
-					self.line(p[i],p[(i+1)%n], color)
+					self.line(p[i],p[(i+1)%n], self.colorS)
 				if not cfg.filedhands.value: # outlines only 
 					break
 				w -= 1
-			self.line(p[0],p[3], color) # center line
+			self.line(p[0],p[3], self.colorS) # center line
 		else:
-			if hand_secs:
-				self.line(self.rotate(0,lbs,alfa),self.rotate(0,Ll,alfa), color) # center line ... p[0],p[3]
-			else:
-				self.line(self.rotate(0,lb,alfa),self.rotate(0,Ll,alfa), color) # center line ... p[0],p[3]
+			self.line(self.rotate(0,lbs,alfa),self.rotate(0,Ll,alfa), self.colorS ) # center line ... p[0],p[3]
 
 	def line(self, p0, p1, color):
 		(x0, y0), (x1, y1) = p0, p1
