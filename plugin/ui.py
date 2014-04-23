@@ -424,9 +424,9 @@ class AnalogClockScreen(Screen):
 		self["Canvas"].fill(self.cpb, self.cpb, self.cpw, self.cpw, self.colorCP)
 
 	def rotate(self, x, y, a):
-		a = radians(a)
-		xr = int(origin - round(x*cos(a)-y*sin(a),1))
-		yr = int(origin - round(x*sin(a)+y*cos(a),1))
+		a *= 0.017453292519943295769
+		xr = int(origin - round(x*cos(a)-y*sin(a)))
+		yr = int(origin - round(x*sin(a)+y*cos(a)))
 		return (xr, yr)
 
 	def drawFace(self):
