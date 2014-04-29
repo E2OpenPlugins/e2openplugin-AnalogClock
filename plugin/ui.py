@@ -508,7 +508,8 @@ class AnalogClockScreen(Screen):
 				w -= 1
 			self.line(p[0],p[3], self.colorS) # center line
 		else:
-			self.line(self.rotate(0,lbs,alfa),self.rotate(0,Ll,alfa), self.colorS ) # center line ... p[0],p[3]
+			self.line(self.rotate(0,lbs,alfa),self.rotate(0,0,0), self.colorS )
+			self.line(self.rotate(0,0,0),self.rotate(0,Ll,alfa), self.colorS )
 
 	def line(self, p0, p1, color):
 		(x0, y0), (x1, y1) = p0, p1
