@@ -15,18 +15,28 @@ from Components.Sources.CanvasSource import CanvasSource
 desktop = getDesktop(0)
 Width = desktop.size().width()
 Height = desktop.size().height()
+fullHD = False
+if Width > 1280:
+	fullHD = True
+	
 
 config.plugins.AnalogClock.enable = ConfigYesNo(default = False)
 choicelist = []
-for i in range(20, 710, 10):
+for i in range(20,1070, 10):
 	choicelist.append(("%d" % i))
-config.plugins.AnalogClock.size = ConfigSelection(default = "80", choices = choicelist)
+defpar = "80"
+if fullHD:
+	defpar = "120"
+config.plugins.AnalogClock.size = ConfigSelection(default = defpar, choices = choicelist)
 choicelist = []
-for i in range(0, 1290, 10):
+for i in range(0, Width + 10, 10):
 	choicelist.append(("%d" % i))
-config.plugins.AnalogClock.xpos = ConfigSelection(default = "1180", choices = choicelist)
+defpar = "1180"
+if fullHD:
+	defpar = "1790"
+config.plugins.AnalogClock.xpos = ConfigSelection(default = defpar, choices = choicelist)
 choicelist = []
-for i in range(0, 730, 10):
+for i in range(0, Height + 10, 10):
 	choicelist.append(("%d" % i))
 config.plugins.AnalogClock.ypos = ConfigSelection(default = "10", choices = choicelist)
 choicelist = []
@@ -41,11 +51,17 @@ config.plugins.AnalogClock.filedhands = ConfigYesNo(default = False)
 choicelist = []
 for i in range(60, 105, 5):
 	choicelist.append(("%s" % str(i/100.)))
-config.plugins.AnalogClock.handratio = ConfigSelection(default = "0.85", choices = choicelist)
+defpar = "0.85"
+if fullHD:
+	defpar = "0.8"
+config.plugins.AnalogClock.handratio = ConfigSelection(default = defpar, choices = choicelist)
 choicelist = []
 for i in range(0, 20, 1):
 	choicelist.append(("%d" % i))
-config.plugins.AnalogClock.centerpoint = ConfigSelection(default = "2", choices = choicelist)
+defpar = "2"
+if fullHD:
+	defpar = "3"
+config.plugins.AnalogClock.centerpoint = ConfigSelection(default = defpar, choices = choicelist)
 config.plugins.AnalogClock.dim = ConfigSelection(default = "0", choices = [("0", _("None")),("1", _("Half")),("2", _("Mid")),("3", _("Max")) ])
 config.plugins.AnalogClock.secs = ConfigYesNo(default = True)
 config.plugins.AnalogClock.thin = ConfigYesNo(default = True)
@@ -82,14 +98,16 @@ def sizes():
 	mHand = int(7 * origin / 10.)
 	hHand = int(5 * origin / 10.)
 
+	w = Width + 10
+	h = Height + 10
 	X_POS = int(cfg.xpos.value)
-	if X_POS + size > 1280:
-		cfg.xpos.value = str(1280 - size)
+	if X_POS + size > w:
+		cfg.xpos.value = str(w - size)
 		X_POS = int(cfg.xpos.value)
 
 	Y_POS = int(cfg.ypos.value)
-	if Y_POS + size > 720:
-		cfg.ypos.value = str(720 - size)
+	if Y_POS + size > h:
+		cfg.ypos.value = str(h - size)
 		Y_POS = int(cfg.ypos.value)
 
 
