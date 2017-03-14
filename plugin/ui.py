@@ -338,7 +338,10 @@ class AnalogClockMain():
 	def reloadClock(self):
 		if not self.dialogAnalogClock:
 			self.isShow = False
-			self.dialogAnalogClock = self.session.instantiateDialog(AnalogClockScreen)
+			try:
+				self.dialogAnalogClock = self.session.instantiateDialog(AnalogClockScreen)
+			except:
+				print "[AnalogClock] instanteDialog(AnalogClockScreen) failed"
 
 AnalogClock = AnalogClockMain()
 
