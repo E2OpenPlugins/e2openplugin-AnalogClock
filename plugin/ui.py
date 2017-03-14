@@ -307,8 +307,8 @@ class AnalogClockMain():
 
 	def startAnalogClock(self, session):
 		self.session = session
-		self.dialogAnalogClock = self.session.instantiateDialog(AnalogClockScreen)
 		if cfg.enable.value:
+			self.dialogAnalogClock = self.session.instantiateDialog(AnalogClockScreen)
 			self.makeShow()
 
 	def makeShow(self):
