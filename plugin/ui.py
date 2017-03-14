@@ -307,8 +307,8 @@ class AnalogClockMain():
 
 	def startAnalogClock(self, session):
 		self.session = session
+		self.dialogAnalogClock = self.session.instantiateDialog(AnalogClockScreen)
 		if cfg.enable.value:
-			self.dialogAnalogClock = self.session.instantiateDialog(AnalogClockScreen)
 			self.makeShow()
 
 	def makeShow(self):
@@ -326,7 +326,7 @@ class AnalogClockMain():
 		if self.dialogAnalogClock:
 			self.dialogAnalogClock.hide()
 			self.deleteDialog()
-			self.AnalogClockReload.start(250, True)
+			self.AnalogClockReload.start(100, True)
 
 	def deleteDialog(self):
 		if self.dialogAnalogClock:
