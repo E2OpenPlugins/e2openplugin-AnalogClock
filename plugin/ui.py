@@ -326,7 +326,7 @@ class AnalogClockMain():
 		if self.dialogAnalogClock:
 			self.dialogAnalogClock.hide()
 			self.deleteDialog()
-			self.AnalogClockReload.start(100, True)
+			self.AnalogClockReload.start(250, True)
 
 	def deleteDialog(self):
 		if self.dialogAnalogClock:
@@ -338,10 +338,7 @@ class AnalogClockMain():
 	def reloadClock(self):
 		if not self.dialogAnalogClock:
 			self.isShow = False
-			try:
-				self.dialogAnalogClock = self.session.instantiateDialog(AnalogClockScreen)
-			except:
-				print "[AnalogClock] instanteDialog(AnalogClockScreen) failed"
+			self.dialogAnalogClock = self.session.instantiateDialog(AnalogClockScreen)
 
 AnalogClock = AnalogClockMain()
 
