@@ -20,7 +20,7 @@ if Width > 1280:
 	fullHD = True
 	
 
-config.plugins.AnalogClock.enable = ConfigYesNo(default = False)
+config.plugins.AnalogClock.enable = ConfigYesNo(default = True)
 choicelist = []
 for i in range(20,1070, 10):
 	choicelist.append(("%d" % i))
