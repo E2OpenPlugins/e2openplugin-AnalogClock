@@ -192,6 +192,7 @@ class AnalogClockSetup(Screen, ConfigListScreen):
 		<ePixmap pixmap="skin_default/div-h.png" position="5,338" zPosition="2" size="400,2" />
 		<widget name="key_red"   position="005,344" zPosition="2" size="200,28" valign="center" halign="center" font="Regular;22" foregroundColor="red" transparent="1" />
 		<widget name="key_green" position="205,344" zPosition="2" size="200,28" valign="center" halign="center" font="Regular;22" foregroundColor="green" transparent="1" />
+		<ePixmap pixmap="skin_default/buttons/blue.png" position="385,348" size="15,15" zPosition="2" alphatest="blend"/>
 	</screen>"""
 
 	def __init__(self, session):
