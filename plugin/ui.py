@@ -3,7 +3,7 @@ from . import _
 
 from Screens.Screen import Screen
 from Components.ConfigList import ConfigListScreen
-from Components.config import ConfigYesNo, config, getConfigListEntry, ConfigSelection, ConfigIP
+from Components.config import ConfigSubsection, ConfigYesNo, config, getConfigListEntry, ConfigSelection, ConfigIP
 from Components.ActionMap import ActionMap
 from Components.Label import Label
 from enigma import eTimer, getDesktop
@@ -19,7 +19,7 @@ fullHD = False
 if Width > 1280:
 	fullHD = True
 	
-
+config.plugins.AnalogClock = ConfigSubsection()
 config.plugins.AnalogClock.enable = ConfigYesNo(default = True)
 choicelist = []
 for i in range(20,1070, 10):
@@ -241,7 +241,6 @@ class AnalogClockSetup(Screen, ConfigListScreen):
 			self.list.append(getConfigListEntry(_("Hand's parts ratio"), cfg.handratio))
 			self.list.append(getConfigListEntry(_("Center point size"), cfg.centerpoint))
 			self.list.append(getConfigListEntry(_("Dim"), cfg.dim))
-			self.list.append(getConfigListEntry(_("Display setup in"), cfg.where))
 		self["config"].list = self.list
 		self["config"].setList(self.list)
 
@@ -293,56 +292,6 @@ class AnalogClockSetup(Screen, ConfigListScreen):
 
 	def callBack(self, answer=False):
 		pass
-
-
-class AnalogClockMain():
-	def __init__(self):
-		self.dialogAnalogClock = None
-		self.session = None
-		self.isShow = False
-		self.inSetup = False
-		self.itemChanged = False
-
-		self.AnalogClockReload = eTimer()
-		self.AnalogClockReload.timeout.get().append(self.reloadClock)
-
-	def startAnalogClock(self, session):
-		self.session = session
-		if cfg.enable.value:
-			self.dialogAnalogClock = self.session.instantiateDialog(AnalogClockScreen)
-			self.makeShow()
-
-	def makeShow(self):
-		if self.dialogAnalogClock:
-			if cfg.enable.value:
-				self.dialogAnalogClock.show()
-				self.isShow = True
-			else:
-				self.dialogAnalogClock.hide()
-				self.isShow = False
-
-	def cancelClock(self):
-		self.inSetup = False
-		self.itemChanged = False
-		if self.dialogAnalogClock:
-			self.dialogAnalogClock.hide()
-			self.deleteDialog()
-			self.AnalogClockReload.start(100, True)
-
-	def deleteDialog(self):
-		if self.dialogAnalogClock:
-			if hasattr(self, "dialogAnalogClock"):
-				self.session.deleteDialog(self.dialogAnalogClock)
-			self.dialogAnalogClock = None
-			self.isShow = False
-
-	def reloadClock(self):
-		if not self.dialogAnalogClock:
-			self.isShow = False
-			self.dialogAnalogClock = self.session.instantiateDialog(AnalogClockScreen)
-
-AnalogClock = AnalogClockMain()
-
 
 def AnalogClockSkin():
 	skin = """
@@ -533,3 +482,51 @@ class AnalogClockScreen(Screen):
 	def line(self, p0, p1, color):
 		(x0, y0), (x1, y1) = p0, p1
 		self["Canvas"].line( x0, y0, x1, y1, color)
+
+class AnalogClockMain():
+	def __init__(self):
+		self.dialogAnalogClock = None
+		self.session = None
+		self.isShow = False
+		self.inSetup = False
+		self.itemChanged = False
+
+		self.AnalogClockReload = eTimer()
+		self.AnalogClockReload.timeout.get().append(self.reloadClock)
+
+	def startAnalogClock(self, session):
+		self.session = session
+		if cfg.enable.value:
+			self.dialogAnalogClock = self.session.instantiateDialog(AnalogClockScreen)
+			self.makeShow()
+
+	def makeShow(self):
+		if self.dialogAnalogClock:
+			if cfg.enable.value:
+				self.dialogAnalogClock.show()
+				self.isShow = True
+			else:
+				self.dialogAnalogClock.hide()
+				self.isShow = False
+
+	def cancelClock(self):
+		self.inSetup = False
+		self.itemChanged = False
+		if self.dialogAnalogClock:
+			self.dialogAnalogClock.hide()
+			self.deleteDialog()
+			self.AnalogClockReload.start(100, True)
+
+	def deleteDialog(self):
+		if self.dialogAnalogClock:
+			if hasattr(self, "dialogAnalogClock"):
+				self.session.deleteDialog(self.dialogAnalogClock)
+			self.dialogAnalogClock = None
+			self.isShow = False
+
+	def reloadClock(self):
+		if not self.dialogAnalogClock:
+			self.isShow = False
+			self.dialogAnalogClock = self.session.instantiateDialog(AnalogClockScreen)
+
+AnalogClock = AnalogClockMain()

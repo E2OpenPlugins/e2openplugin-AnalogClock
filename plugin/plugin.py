@@ -4,7 +4,7 @@ from . import _
 #
 #    Plugin for Enigma2
 #    version:
-VERSION = "1.15"
+VERSION = "1.16"
 #    Coded by ims (c)2014-2017
 #
 #    This program is free software; you can redistribute it and/or
@@ -20,15 +20,6 @@ VERSION = "1.15"
 #################################################################################
 
 from Plugins.Plugin import PluginDescriptor
-from Components.config import ConfigSubsection, config, ConfigSelection
-
-config.plugins.AnalogClock = ConfigSubsection()
-config.plugins.AnalogClock.where = ConfigSelection(default = "0", choices = [("0",_("plugins")),("1",_("menu-system"))])
-
-def startsetup(menuid, **kwargs):
-	if menuid != "system":
-		return [ ]
-	return [(_("Setup AnalogClock"), main, "analog_clock", None)]
 
 def sessionstart(reason, **kwargs):
 	if reason == 0:
@@ -42,9 +33,7 @@ def main(session,**kwargs):
 def Plugins(path, **kwargs):
 	name = "Permanent Analog Clock"
 	descr = _("Displays analog clock permanently on the screen")
-	list = [PluginDescriptor(where=[PluginDescriptor.WHERE_SESSIONSTART], fnc=sessionstart),]
-	if config.plugins.AnalogClock.where.value == "0":
-		list.append(PluginDescriptor(name=name, description=descr, where=PluginDescriptor.WHERE_PLUGINMENU, icon = 'aclock.png', fnc=main))
-	elif config.plugins.AnalogClock.where.value == "1":
-		list.append(PluginDescriptor(name=name, description=descr, where=PluginDescriptor.WHERE_MENU, fnc=startsetup))
+	list = []
+	list.append(PluginDescriptor(where=PluginDescriptor.WHERE_SESSIONSTART, fnc=sessionstart))
+	list.append(PluginDescriptor(name=name, description=descr, where=PluginDescriptor.WHERE_PLUGINMENU, icon = 'aclock.png', fnc=main))
 	return list
