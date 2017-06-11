@@ -126,7 +126,7 @@ class AnalogClockColorsSetup(Screen, ConfigListScreen):
 
 		self.list = [ ]
 		self.onChangedEntry = [ ]
-		ConfigListScreen.__init__(self, self.list, session = session, on_change = self.changedEntry)
+		ConfigListScreen.__init__(self, self.list, session = session, on_change = self.changedClockEntry)
 
 		self.setup_title = _("Setup AnalogClock colors")
 		self["actions"] = ActionMap(["SetupActions", "ColorActions"],
@@ -156,9 +156,10 @@ class AnalogClockColorsSetup(Screen, ConfigListScreen):
 	def layoutFinished(self):
 		self.backupValues()
 
-	def changedEntry(self):
+	def changedClockEntry(self):
 		if self["config"].getCurrent()[0] is self.background:
 			cfg.transparency.value = str(cfg.background.value[0])
+		AnalogClock.itemChanged = True
 
 	def backupValues(self):
 		a = cfg.hands_color.value
@@ -169,13 +170,15 @@ class AnalogClockColorsSetup(Screen, ConfigListScreen):
 		self.fc = [a[0],a[1],a[2],a[3]]
 		a = cfg.background.value
 		self.bc = [a[0],a[1],a[2],a[3]]
+		self.transp = cfg.transparency.value
 
 	def restoreValues(self):
 		cfg.hands_color.value = self.hc
 		cfg.shand_color.value = self.sc
 		cfg.faces_color.value = self.fc
 		cfg.background.value = self.bc
-		cfg.transparency.value =  str(cfg.background.value[0])
+		cfg.transparency.value =  self.transp
+		AnalogClock.itemChanged = True
 
 	def keySave(self):
 		self.close()

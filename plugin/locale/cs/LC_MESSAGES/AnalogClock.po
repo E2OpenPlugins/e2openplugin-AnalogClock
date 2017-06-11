@@ -118,3 +118,15 @@ msgstr "Zobrazovat nastavení v"
 msgid "Analog Clock %s"
 msgstr "Analog Clock %s"
 
+msgid "Background (a,r,g,b)"
+msgstr "Podklad (a,r,g,b)"
+
+msgid "Hand's color (a,r,g,b)"
+msgstr "Barva ručiček (a,r,g,b)"
+
+msgid "Seconds color (a,r,g,b)"
+msgstr "Vteřinová ručička (a,r,g,b)"
+
+msgid "Face's color (a,r,g,b)"
+msgstr "Barva ciferníku (a,r,g,b)"
+
