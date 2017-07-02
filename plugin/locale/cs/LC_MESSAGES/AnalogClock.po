@@ -130,3 +130,5 @@ msgstr "Vteřinová ručička (a,r,g,b)"
 msgid "Face's color (a,r,g,b)"
 msgstr "Barva ciferníku (a,r,g,b)"
 
+msgid "Extended settings"
+msgstr "Další nastavení"

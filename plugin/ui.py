@@ -22,7 +22,7 @@ if Width > 1280:
 config.plugins.AnalogClock = ConfigSubsection()
 config.plugins.AnalogClock.enable = ConfigYesNo(default = True)
 choicelist = []
-for i in range(20,1070, 10):
+for i in range(20, 1070, 10):
 	choicelist.append(("%d" % i))
 defpar = "80"
 if fullHD:
@@ -69,6 +69,7 @@ config.plugins.AnalogClock.hands_color = ConfigIP(default=[000,255,255, 80])
 config.plugins.AnalogClock.shand_color = ConfigIP(default=[000,255,064,064])
 config.plugins.AnalogClock.faces_color = ConfigIP(default=[000,255,255,255])
 config.plugins.AnalogClock.background = ConfigIP(default=[int(config.plugins.AnalogClock.transparency.value),0,0,0])
+config.plugins.AnalogClock.extended = ConfigYesNo(default = False)
 
 cfg = config.plugins.AnalogClock
 
@@ -225,25 +226,30 @@ class AnalogClockSetup(Screen, ConfigListScreen):
 		self.itemSize = _("Size")
 		self.itemXpos = _("X Position")
 		self.itemYpos = _("Y Position")
+		self.extended = _("Extended settings")
 
 		self.listMenu()
 
 		self.onLayoutFinish.append(self.layoutFinished)
 
 	def listMenu(self):
+		def posX(text):
+			return 4*" " + text
 		self.list = [ getConfigListEntry( self.enable, cfg.enable) ]
 		if cfg.enable.value:
 			self.list.append(getConfigListEntry( self.itemSize, cfg.size))
 			self.list.append(getConfigListEntry( self.itemXpos, cfg.xpos))
 			self.list.append(getConfigListEntry( self.itemYpos, cfg.ypos))
-			self.list.append(getConfigListEntry(_("Transparency"), cfg.transparency))
-			self.list.append(getConfigListEntry(_("Thin face"), cfg.thin))
-			self.list.append(getConfigListEntry(_("Hand's width"), cfg.handwidth))
-			self.list.append(getConfigListEntry(_("Filed hands"), cfg.filedhands))
-			self.list.append(getConfigListEntry(_("Seconds hand"), cfg.secs))
-			self.list.append(getConfigListEntry(_("Hand's parts ratio"), cfg.handratio))
-			self.list.append(getConfigListEntry(_("Center point size"), cfg.centerpoint))
-			self.list.append(getConfigListEntry(_("Dim"), cfg.dim))
+			self.list.append(getConfigListEntry( self.extended, cfg.extended))
+			if cfg.extended.value:
+				self.list.append(getConfigListEntry(posX(_("Transparency")), cfg.transparency))
+				self.list.append(getConfigListEntry(posX(_("Thin face")), cfg.thin))
+				self.list.append(getConfigListEntry(posX(_("Hand's width")), cfg.handwidth))
+				self.list.append(getConfigListEntry(posX(_("Filed hands")), cfg.filedhands))
+				self.list.append(getConfigListEntry(posX(_("Seconds hand")), cfg.secs))
+				self.list.append(getConfigListEntry(posX(_("Hand's parts ratio")), cfg.handratio))
+				self.list.append(getConfigListEntry(posX(_("Center point size")), cfg.centerpoint))
+				self.list.append(getConfigListEntry(posX(_("Dim")), cfg.dim))
 		self["config"].list = self.list
 		self["config"].setList(self.list)
 
@@ -278,6 +284,8 @@ class AnalogClockSetup(Screen, ConfigListScreen):
 				AnalogClock.deleteDialog()
 			else:
 				AnalogClock.reloadClock()
+		elif self["config"].getCurrent()[0] == self.extended:
+			self.listMenu()
 		else:
 			AnalogClock.itemChanged = True
 
