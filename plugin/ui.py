@@ -1,5 +1,23 @@
 # for localized messages
 from . import _
+#################################################################################
+#
+#    Plugin for Enigma2
+#
+#
+#    Coded by ims (c)2014-2017
+#
+#    This program is free software; you can redistribute it and/or
+#    modify it under the terms of the GNU General Public License
+#    as published by the Free Software Foundation; either version 2
+#    of the License, or (at your option) any later version.
+#
+#    This program is distributed in the hope that it will be useful,
+#    but WITHOUT ANY WARRANTY; without even the implied warranty of
+#    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#    GNU General Public License for more details.
+#
+#################################################################################
 
 from Screens.Screen import Screen
 from Components.ConfigList import ConfigListScreen
@@ -11,6 +29,8 @@ from plugin import VERSION
 from time import localtime, time
 from math import radians, cos, sin
 from Components.Sources.CanvasSource import CanvasSource
+from enigma import eSize, ePoint
+from Components.Pixmap import Pixmap
 
 desktop = getDesktop(0)
 Width = desktop.size().width()
@@ -113,14 +133,26 @@ def sizes():
 
 
 class AnalogClockColorsSetup(Screen, ConfigListScreen):
-	skin = """
-	<screen name="AnalogClockColorsSetup" position="80,center" size="410,148" title="AnalogClock - setup colors" backgroundColor="#31000000">
-		<widget name="config" position="10,10" size="390,100" zPosition="1" backgroundColor="#31000000" scrollbarMode="showOnDemand" />
-		<ePixmap pixmap="skin_default/div-h.png" position="5,113" zPosition="2" size="400,2" />
-		<widget name="key_red"   position="005,119" zPosition="2" size="200,28" valign="center" halign="center" font="Regular;22" foregroundColor="red" transparent="1" />
-		<widget name="key_green" position="205,119" zPosition="2" size="200,28" valign="center" halign="center" font="Regular;22" foregroundColor="green" transparent="1" />
-		<widget name="version" position="360,122" size="35,22" font="Regular;12" valign="bottom" halign="right" transparent="1" />
-	</screen>"""
+	if fullHD:
+		skin = """
+		<screen name="AnalogClockColorsSetup" position="60,c-280" size="615,222" title="AnalogClock - setup colors" flags="wfNoBorder">
+		<widget name="config" position="15,15" size="585,152" itemHeight="38" font="Regular;28" zPosition="1" scrollbarMode="showOnDemand"/>
+		<widget name="key_red" position="112,175" zPosition="2" size="187,42" valign="center" halign="left" font="Regular;33" transparent="1"/>
+		<widget name="key_green" position="412,175" zPosition="2" size="187,42" valign="center" halign="left" font="Regular;33" transparent="1"/>
+		<ePixmap pixmap="PLi-FullHD/buttons/red30.png" position="67,181" size="30,30" alphatest="blend"/>
+		<ePixmap pixmap="PLi-FullHD/buttons/green30.png" position="367,181" size="30,30" alphatest="blend"/>
+		<widget name="version" position="540,180" size="52,33" font="Regular;18" valign="bottom" halign="right" transparent="1"/>
+		</screen>"""
+	else:
+		skin = """
+		<screen name="AnalogClockColorsSetup" position="80,c-187" size="410,148" title="AnalogClock - setup colors" flags="wfNoBorder">
+		<widget name="config" position="10,10" size="390,100" zPosition="1" scrollbarMode="showOnDemand"/>
+		<widget name="key_red"   position="100,117" zPosition="2" size="125,28" valign="center" halign="left" font="Regular;22" transparent="1"/>
+		<widget name="key_green" position="285,117" zPosition="2" size="125,28" valign="center" halign="left" font="Regular;22" transparent="1"/>
+		<ePixmap pixmap="PLi-HD/buttons/red20.png" position="70,121" size="20,20" alphatest="blend"/>
+		<ePixmap pixmap="PLi-HD/buttons/green20.png" position="255,121" size="20,20" alphatest="blend"/>
+		<widget name="version" position="360,120" size="35,22" font="Regular;12" valign="bottom" halign="right" transparent="1"/>
+		</screen>"""
 
 	def __init__(self, session):
 		Screen.__init__(self, session)
@@ -190,15 +222,26 @@ class AnalogClockColorsSetup(Screen, ConfigListScreen):
 
 class AnalogClockSetup(Screen, ConfigListScreen):
 	sizes()
-	skin = """
-	<screen name="AnalogClockSetup" position="80,center" size="410,373" title="Setup AnalogClock" backgroundColor="#31000000">
-		<widget name="config" position="10,10" size="390,325" zPosition="1" backgroundColor="#31000000" scrollbarMode="showOnDemand" />
-		<ePixmap pixmap="skin_default/div-h.png" position="5,338" zPosition="2" size="400,2" />
-		<widget name="key_red"   position="005,344" zPosition="2" size="200,28" valign="center" halign="center" font="Regular;22" foregroundColor="red" transparent="1" />
-		<widget name="key_green" position="205,344" zPosition="2" size="200,28" valign="center" halign="center" font="Regular;22" foregroundColor="green" transparent="1" />
-		<ePixmap pixmap="skin_default/buttons/blue.png" position="385,348" size="15,15" zPosition="2" alphatest="blend"/>
-	</screen>"""
-
+	if fullHD:
+		skin = """
+		<screen name="AnalogClockSetup" position="60,c-280" size="615,559" title="Setup AnalogClock" flags="wfNoBorder">
+		<widget name="config" position="15,15" size="585,494" itemHeight="38" font="Regular;28" zPosition="1" scrollbarMode="showOnDemand"/>
+		<widget name="red" pixmap="PLi-FullHD/buttons/red30.png" position="67,519" size="30,30" alphatest="blend" zPosition="2"/>
+		<widget name="green" pixmap="PLi-FullHD/buttons/green30.png" position="367,519" size="30,30" alphatest="blend" zPosition="2"/>
+		<widget name="blue" pixmap="PLi-FullHD/buttons/blue30.png" position="580,537" size="15,15" alphatest="blend" zPosition="2"/>
+		<widget name="key_red" position="112,513" zPosition="2" size="187,42" valign="center" font="Regular;33" transparent="1"/>
+		<widget name="key_green" position="412,513" zPosition="2" size="187,42" valign="center" font="Regular;33" transparent="1"/>
+		</screen>"""
+	else:
+		skin = """
+		<screen name="AnalogClockSetup" position="80,c-187" size="410,373" title="Setup AnalogClock" flags="wfNoBorder">
+		<widget name="config" position="10,10" size="390,325" zPosition="1" scrollbarMode="showOnDemand"/>
+		<widget name="key_red" position="100,330" zPosition="2" size="125,28" valign="center" font="Regular;22" transparent="1"/>
+		<widget name="key_green" position="285,330" zPosition="2" size="125,28" valign="center" font="Regular;22" transparent="1"/>
+		<widget name="red" pixmap="PLi-HD/buttons/red20.png" position="70,340" size="20,20" alphatest="blend" zPosition="2"/>
+		<widget name="green" pixmap="PLi-HD/buttons/green20.png" position="255,340" size="20,20" alphatest="blend" zPosition="2"/>
+		<widget name="blue" pixmap="PLi-HD/buttons/blue20.png" position="380,350" size="10,10" alphatest="blend" zPosition="2"/>
+		</screen>"""
 	def __init__(self, session):
 		Screen.__init__(self, session)
 
@@ -219,6 +262,10 @@ class AnalogClockSetup(Screen, ConfigListScreen):
 		self["key_green"] = Label(_("Ok"))
 		self["key_red"] = Label(_("Cancel"))
 
+		self["red"] = Pixmap()
+		self["green"] = Pixmap()
+		self["blue"] = Pixmap()
+
 		self.changeItemsTimer = eTimer()
 		self.changeItemsTimer.timeout.get().append(self.changeItems)
 
@@ -227,8 +274,6 @@ class AnalogClockSetup(Screen, ConfigListScreen):
 		self.itemXpos = _("X Position")
 		self.itemYpos = _("Y Position")
 		self.extended = _("Extended settings")
-
-		self.listMenu()
 
 		self.onLayoutFinish.append(self.layoutFinished)
 
@@ -250,12 +295,33 @@ class AnalogClockSetup(Screen, ConfigListScreen):
 				self.list.append(getConfigListEntry(posX(_("Hand's parts ratio")), cfg.handratio))
 				self.list.append(getConfigListEntry(posX(_("Center point size")), cfg.centerpoint))
 				self.list.append(getConfigListEntry(posX(_("Dim")), cfg.dim))
+
 		self["config"].list = self.list
 		self["config"].setList(self.list)
+		self.resizeScreen()
 
 	def layoutFinished(self):
+		self.width = self.instance.size().width()
+		self.height = self["config"].l.getItemSize().height()
 		AnalogClock.inSetup = True
 		self.setTitle(_("Analog Clock v%s") % VERSION)
+		self.listMenu()
+
+	def resizeScreen(self):
+		n = len(self["config"].getList())
+		y = n * self.height
+		if fullHD:
+			x = [112,412,67,367,580]
+			dy = [35,25,31]
+		else:
+			x = [100,285,70,255,380]
+			dy = [25,17,20]
+		self.instance.resize(eSize(self.width, self.height*(n+1)+ dy[0]))
+		self["key_red"].instance.move(ePoint(x[0], y + dy[1]))
+		self["key_green"].instance.move(ePoint(x[1], y + dy[1]))
+		self["red"].instance.move(ePoint(x[2], y + dy[2]))
+		self["green"].instance.move(ePoint(x[3], y + dy[2]))
+		self["blue"].instance.move(ePoint(x[4], y + dy[2]))
 
 	def keySave(self):
 		for x in self["config"].list:
