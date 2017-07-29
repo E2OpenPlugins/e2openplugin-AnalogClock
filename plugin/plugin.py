@@ -4,7 +4,7 @@ from . import _
 #
 #    Plugin for Enigma2
 #    version:
-VERSION = "1.20"
+VERSION = "1.21"
 #    Coded by ims (c)2014-2017
 #
 #    This program is free software; you can redistribute it and/or
@@ -28,12 +28,14 @@ def sessionstart(reason, **kwargs):
 
 def main(session,**kwargs):
 	import ui
-	session.open(ui.AnalogClockSetup)
+	session.open(ui.AnalogClockSetup, plugin_path)
 
 def Plugins(path, **kwargs):
+	global plugin_path
+	plugin_path = path
 	name = "Permanent Analog Clock"
 	descr = _("Displays analog clock permanently on the screen")
 	list = []
 	list.append(PluginDescriptor(where=PluginDescriptor.WHERE_SESSIONSTART, fnc=sessionstart))
-	list.append(PluginDescriptor(name=name, description=descr, where=PluginDescriptor.WHERE_PLUGINMENU, icon = 'aclock.png', fnc=main))
+	list.append(PluginDescriptor(name=name, description=descr, where=PluginDescriptor.WHERE_PLUGINMENU, icon = 'png/aclock.png', fnc=main))
 	return list

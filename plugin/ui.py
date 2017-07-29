@@ -139,8 +139,8 @@ class AnalogClockColorsSetup(Screen, ConfigListScreen):
 		<widget name="config" position="15,15" size="585,152" itemHeight="38" font="Regular;28" zPosition="1" scrollbarMode="showOnDemand"/>
 		<widget name="key_red" position="112,175" zPosition="2" size="187,42" valign="center" halign="left" font="Regular;33" transparent="1"/>
 		<widget name="key_green" position="412,175" zPosition="2" size="187,42" valign="center" halign="left" font="Regular;33" transparent="1"/>
-		<ePixmap pixmap="PLi-FullHD/buttons/red30.png" position="67,181" size="30,30" alphatest="blend"/>
-		<ePixmap pixmap="PLi-FullHD/buttons/green30.png" position="367,181" size="30,30" alphatest="blend"/>
+		<ePixmap pixmap="~/png/red30.png" position="67,181" size="30,30" alphatest="blend"/>
+		<ePixmap pixmap="~/png/green30.png" position="367,181" size="30,30" alphatest="blend"/>
 		<widget name="version" position="540,180" size="52,33" font="Regular;18" valign="bottom" halign="right" transparent="1"/>
 		</screen>"""
 	else:
@@ -149,12 +149,13 @@ class AnalogClockColorsSetup(Screen, ConfigListScreen):
 		<widget name="config" position="10,10" size="390,100" zPosition="1" scrollbarMode="showOnDemand"/>
 		<widget name="key_red"   position="100,117" zPosition="2" size="125,28" valign="center" halign="left" font="Regular;22" transparent="1"/>
 		<widget name="key_green" position="285,117" zPosition="2" size="125,28" valign="center" halign="left" font="Regular;22" transparent="1"/>
-		<ePixmap pixmap="PLi-HD/buttons/red20.png" position="70,121" size="20,20" alphatest="blend"/>
-		<ePixmap pixmap="PLi-HD/buttons/green20.png" position="255,121" size="20,20" alphatest="blend"/>
+		<ePixmap pixmap="~/png/red20.png" position="70,121" size="20,20" alphatest="blend"/>
+		<ePixmap pixmap="~/png/green20.png" position="255,121" size="20,20" alphatest="blend"/>
 		<widget name="version" position="360,120" size="35,22" font="Regular;12" valign="bottom" halign="right" transparent="1"/>
 		</screen>"""
 
-	def __init__(self, session):
+	def __init__(self, session, plugin_path):
+		self.skin_path = plugin_path
 		Screen.__init__(self, session)
 
 		self.list = [ ]
@@ -226,9 +227,9 @@ class AnalogClockSetup(Screen, ConfigListScreen):
 		skin = """
 		<screen name="AnalogClockSetup" position="60,c-280" size="615,559" title="Setup AnalogClock" flags="wfNoBorder">
 		<widget name="config" position="15,15" size="585,494" itemHeight="38" font="Regular;28" zPosition="1" scrollbarMode="showOnDemand"/>
-		<widget name="red" pixmap="PLi-FullHD/buttons/red30.png" position="67,519" size="30,30" alphatest="blend" zPosition="2"/>
-		<widget name="green" pixmap="PLi-FullHD/buttons/green30.png" position="367,519" size="30,30" alphatest="blend" zPosition="2"/>
-		<widget name="blue" pixmap="PLi-FullHD/buttons/blue30.png" position="580,537" size="15,15" alphatest="blend" zPosition="2"/>
+		<widget name="red" pixmap="~/png/red30.png" position="67,519" size="30,30" alphatest="blend" zPosition="2"/>
+		<widget name="green" pixmap="~/png/green30.png" position="367,519" size="30,30" alphatest="blend" zPosition="2"/>
+		<widget name="blue" pixmap="~/png/blue30.png" position="580,537" size="15,15" alphatest="blend" zPosition="2"/>
 		<widget name="key_red" position="112,513" zPosition="2" size="187,42" valign="center" font="Regular;33" transparent="1"/>
 		<widget name="key_green" position="412,513" zPosition="2" size="187,42" valign="center" font="Regular;33" transparent="1"/>
 		</screen>"""
@@ -238,11 +239,12 @@ class AnalogClockSetup(Screen, ConfigListScreen):
 		<widget name="config" position="10,10" size="390,325" zPosition="1" scrollbarMode="showOnDemand"/>
 		<widget name="key_red" position="100,330" zPosition="2" size="125,28" valign="center" font="Regular;22" transparent="1"/>
 		<widget name="key_green" position="285,330" zPosition="2" size="125,28" valign="center" font="Regular;22" transparent="1"/>
-		<widget name="red" pixmap="PLi-HD/buttons/red20.png" position="70,340" size="20,20" alphatest="blend" zPosition="2"/>
-		<widget name="green" pixmap="PLi-HD/buttons/green20.png" position="255,340" size="20,20" alphatest="blend" zPosition="2"/>
-		<widget name="blue" pixmap="PLi-HD/buttons/blue20.png" position="380,350" size="10,10" alphatest="blend" zPosition="2"/>
+		<widget name="red" pixmap="~/png/red20.png" position="70,340" size="20,20" alphatest="blend" zPosition="2"/>
+		<widget name="green" pixmap="~/png/green20.png" position="255,340" size="20,20" alphatest="blend" zPosition="2"/>
+		<widget name="blue" pixmap="~/png/blue20.png" position="380,350" size="10,10" alphatest="blend" zPosition="2"/>
 		</screen>"""
-	def __init__(self, session):
+	def __init__(self, session, plugin_path):
+		self.skin_path = plugin_path
 		Screen.__init__(self, session)
 
 		self.list = [ ]
@@ -365,7 +367,7 @@ class AnalogClockSetup(Screen, ConfigListScreen):
 				self["config"].invalidate(self["config"].list[i])
 
 	def keyBlue(self):
-		self.session.openWithCallback(self.callBack, AnalogClockColorsSetup)
+		self.session.openWithCallback(self.callBack, AnalogClockColorsSetup, self.skin_path)
 
 	def callBack(self, answer=False):
 		pass
