@@ -1,9 +1,9 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: ims\n"
+"Project-Id-Version: AnalogClock\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-03-31 17:30+0200\n"
+"POT-Creation-Date: 2017-08-08 20:50+0100\n"
 "PO-Revision-Date: \n"
 "Last-Translator: ims <ims21@users.sourceforge.net>\n"
 "Language-Team:  <ims21@users.sourceforge.net>\n"
@@ -14,14 +14,6 @@ msgstr ""
 "X-Poedit-Language: Czech\n"
 "X-Poedit-Country: CZECH REPUBLIC\n"
 "Plural-Forms: nplurals=3; plural=n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
-
-#: plugin.py:26
-msgid "plugins"
-msgstr "pluginech"
-
-#: plugin.py:26
-msgid "menu-system"
-msgstr "menu-systém"
 
 #: plugin.py:31
 #: ui.py:109
@@ -35,23 +27,23 @@ msgstr "Zobrazuje analogové hodiny na obrazovce"
 #: ui.py:35
 #: ui.py:49
 msgid "None"
-msgstr "ne"
+msgstr "Ne"
 
 #: ui.py:35
 msgid "Full"
-msgstr "plná"
+msgstr "Plná"
 
 #: ui.py:49
 msgid "Half"
-msgstr "poloviční"
+msgstr "Poloviční"
 
 #: ui.py:49
 msgid "Mid"
-msgstr "střední"
+msgstr "Střední"
 
 #: ui.py:49
 msgid "Max"
-msgstr "maximální"
+msgstr "Maximální"
 
 #: ui.py:118
 msgid "Ok"
