@@ -3,9 +3,8 @@ from . import _
 #################################################################################
 #
 #    Plugin for Enigma2
-#    version:
-VERSION = "1.21"
-#    Coded by ims (c)2014-2017
+#
+#    Coded by ims (c)2014-2018
 #
 #    This program is free software; you can redistribute it and/or
 #    modify it under the terms of the GNU General Public License

@@ -4,8 +4,9 @@ from . import _
 #
 #    Plugin for Enigma2
 #
+VERSION = "1.22"
 #
-#    Coded by ims (c)2014-2017
+#    Coded by ims (c)2014-2018
 #
 #    This program is free software; you can redistribute it and/or
 #    modify it under the terms of the GNU General Public License
@@ -25,7 +26,6 @@ from Components.config import ConfigSubsection, ConfigYesNo, config, getConfigLi
 from Components.ActionMap import ActionMap
 from Components.Label import Label
 from enigma import eTimer, getDesktop
-from plugin import VERSION
 from time import localtime, time
 from math import radians, cos, sin
 from Components.Sources.CanvasSource import CanvasSource
@@ -221,6 +221,7 @@ class AnalogClockColorsSetup(Screen, ConfigListScreen):
 		self.restoreValues()
 		self.close()
 
+
 class AnalogClockSetup(Screen, ConfigListScreen):
 	sizes()
 	if fullHD:
@@ -379,7 +380,7 @@ def AnalogClockSkin():
 	</screen>""" % (X_POS, Y_POS, size, size, size, size)
 	return skin
 
-
+# clock routines
 class AnalogClockScreen(Screen):
 	def __init__(self, session):
 		Screen.__init__(self, session)
@@ -398,6 +399,7 @@ class AnalogClockScreen(Screen):
 		self.buildFace()
 		self["Canvas"].fill(0, 0, 0, 0, self.background)
 		self["Canvas"].flush()
+		self.start=10
 		self.AnalogClockTimer.start(1000)
 
 	def initValues(self):
@@ -454,8 +456,12 @@ class AnalogClockScreen(Screen):
 		self["Canvas"].fill(0, 0, size, size, self.background )
 		self.drawFace()
 		(h, m, s) = self.getTime()
-		self.drawHandH(h, m, s)
-		self.drawHandM(m, s)
+		mod = 20
+		if self.start > 0:
+			mod = 1
+			self.start -= 1
+		self.drawHandH(mod, h, m, s)
+		self.drawHandM(mod, m, s)
 		if cfg.secs.value:
 			self.drawHandS(s)
 		self.drawCenterPoint()
@@ -499,13 +505,13 @@ class AnalogClockScreen(Screen):
 		w = int(cfg.handwidth.value)
 		return (w, l, L)
 
-	def drawHandH(self, h, m, s):
-		if s%20 == 0 or not len(self.pH):
+	def drawHandH(self, mod, h, m, s):
+		if s%mod == 0 or not len(self.pH):
 			self.pH = self.countHand(self.dimensionH, self.alfaHour(h, m, s))
 		self.drawHand(self.pH, self.colorH)
 
-	def drawHandM(self, m, s):
-		if s%20 == 0 or not len(self.pM):
+	def drawHandM(self, mod, m, s):
+		if s%mod == 0 or not len(self.pM):
 			self.pM = self.countHand(self.dimensionM, self.alfaMin(m, s))
 		self.drawHand(self.pM, self.colorM)
 
@@ -561,6 +567,7 @@ class AnalogClockScreen(Screen):
 	def line(self, p0, p1, color):
 		(x0, y0), (x1, y1) = p0, p1
 		self["Canvas"].line( x0, y0, x1, y1, color)
+
 
 class AnalogClockMain():
 	def __init__(self):
