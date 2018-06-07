@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: AnalogClock\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-08-08 20:50+0100\n"
+"POT-Creation-Date: 2018-06-07 17:23+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: ims <ims21@users.sourceforge.net>\n"
 "Language-Team:  <ims21@users.sourceforge.net>\n"
@@ -15,112 +15,88 @@ msgstr ""
 "X-Poedit-Country: CZECH REPUBLIC\n"
 "Plural-Forms: nplurals=3; plural=n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
 
-#: plugin.py:31
-#: ui.py:109
-msgid "Setup AnalogClock"
-msgstr "Nastavení AnalogClock"
-
-#: plugin.py:44
-msgid "Displays analog clock permanently on the screen"
-msgstr "Zobrazuje analogové hodiny na obrazovce"
-
-#: ui.py:35
-#: ui.py:49
-msgid "None"
-msgstr "Ne"
-
-#: ui.py:35
-msgid "Full"
-msgstr "Plná"
-
-#: ui.py:49
-msgid "Half"
-msgstr "Poloviční"
-
-#: ui.py:49
-msgid "Mid"
-msgstr "Střední"
-
-#: ui.py:49
-msgid "Max"
-msgstr "Maximální"
-
-#: ui.py:118
-msgid "Ok"
-msgstr "Ok"
-
-#: ui.py:119
-msgid "Cancel"
-msgstr "Zavřít"
-
-#: ui.py:124
-msgid "Size"
-msgstr "Velikost"
-
-#: ui.py:125
-msgid "X Position"
-msgstr "X pozice"
-
-#: ui.py:126
-msgid "Y Position"
-msgstr "Y pozice"
-
-#: ui.py:128
-msgid "Enable AnalogClock"
-msgstr "Povolit AnalogClock"
-
-#: ui.py:132
-msgid "Transparency"
-msgstr "Průhlednost"
-
-#: ui.py:133
-msgid "Hand's width"
-msgstr "Šířka ručiček"
-
-#: ui.py:134
-msgid "Filed hands"
-msgstr "Vyplněné ručičky"
-
-#: ui.py:135
-msgid "Hand's parts ratio"
-msgstr "Poměr úseků ručiček"
-
-#: ui.py:136
-msgid "Center point size"
-msgstr "Středový bod"
-
-#: ui.py:137
-msgid "Dim"
-msgstr "Snížení jasu"
-
-#: ui.py:138
-msgid "Seconds hand"
-msgstr "Vteřinová ručička"
-
-#: ui.py:139
-msgid "Thin face"
-msgstr "Tenký ciferník"
-
-#: ui.py:140
-msgid "Display setup in"
-msgstr "Zobrazovat nastavení v"
-
-#: ui.py:148
-#, python-format
-msgid "Analog Clock %s"
+#, fuzzy, python-format
+msgid "Analog Clock v%s"
 msgstr "Analog Clock %s"
 
 msgid "Background (a,r,g,b)"
 msgstr "Podklad (a,r,g,b)"
 
-msgid "Hand's color (a,r,g,b)"
-msgstr "Barva ručiček (a,r,g,b)"
+msgid "Cancel"
+msgstr "Zavřít"
 
-msgid "Seconds color (a,r,g,b)"
-msgstr "Vteřinová ručička (a,r,g,b)"
+msgid "Center point size"
+msgstr "Středový bod"
+
+msgid "Dim"
+msgstr "Snížení jasu"
+
+msgid "Displays analog clock permanently on the screen"
+msgstr "Zobrazuje analogové hodiny na obrazovce"
+
+msgid "Enable AnalogClock"
+msgstr "Povolit AnalogClock"
+
+msgid "Extended settings"
+msgstr "Další nastavení"
 
 msgid "Face's color (a,r,g,b)"
 msgstr "Barva ciferníku (a,r,g,b)"
 
-msgid "Extended settings"
-msgstr "Další nastavení"
+msgid "Filed hands"
+msgstr "Vyplněné ručičky"
+
+msgid "Full"
+msgstr "Plná"
+
+msgid "Half"
+msgstr "Poloviční"
+
+msgid "Hand's color (a,r,g,b)"
+msgstr "Barva ručiček (a,r,g,b)"
+
+msgid "Hand's parts ratio"
+msgstr "Poměr úseků ručiček"
+
+msgid "Hand's width"
+msgstr "Šířka ručiček"
+
+msgid "Max"
+msgstr "Maximální"
+
+msgid "Mid"
+msgstr "Střední"
+
+msgid "None"
+msgstr "Ne"
+
+msgid "Ok"
+msgstr "Ok"
+
+msgid "Seconds color (a,r,g,b)"
+msgstr "Vteřinová ručička (a,r,g,b)"
+
+msgid "Seconds hand"
+msgstr "Vteřinová ručička"
+
+msgid "Setup AnalogClock"
+msgstr "Nastavení AnalogClock"
+
+#, fuzzy
+msgid "Setup AnalogClock colors"
+msgstr "Nastavení AnalogClock"
+
+msgid "Size"
+msgstr "Velikost"
+
+msgid "Thin face"
+msgstr "Tenký ciferník"
+
+msgid "Transparency"
+msgstr "Průhlednost"
+
+msgid "X Position"
+msgstr "X pozice"
+
+msgid "Y Position"
+msgstr "Y pozice"

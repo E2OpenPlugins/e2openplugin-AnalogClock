@@ -1,0 +1,103 @@
+# Language  translations for e package.
+# Copyright (C) 2018 THE e'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the e package.
+# Automatically generated, 2018.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: e 2openplugin-AnalogClock\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2018-06-07 17:23+0200\n"
+"PO-Revision-Date: 2018-06-07 17:44+0200\n"
+"Last-Translator: Automatically generated\n"
+"Language-Team: none\n"
+"Language: fr\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 2.0.8\n"
+
+#, python-format
+msgid "Analog Clock v%s"
+msgstr "Horloge analogique v%s"
+
+msgid "Background (a,r,g,b)"
+msgstr "Couleur du fond (a,r,v,b)"
+
+msgid "Cancel"
+msgstr "Annuler"
+
+msgid "Center point size"
+msgstr "Taille du point central"
+
+msgid "Dim"
+msgstr "Dim"
+
+msgid "Displays analog clock permanently on the screen"
+msgstr "Afficher l’horloge analogique en permanence à l’écran"
+
+msgid "Enable AnalogClock"
+msgstr "Activer l’horloge analogique"
+
+msgid "Extended settings"
+msgstr "Paramètres étendus"
+
+msgid "Face's color (a,r,g,b)"
+msgstr "Couleur face avant (a,r,v,b)"
+
+msgid "Filed hands"
+msgstr "Aiguilles pleines"
+
+msgid "Full"
+msgstr "Plein"
+
+msgid "Half"
+msgstr "Demi"
+
+msgid "Hand's color (a,r,g,b)"
+msgstr "Couleur des aiguilles (a,r,v,b)"
+
+msgid "Hand's parts ratio"
+msgstr "Ratio des aiguilles"
+
+msgid "Hand's width"
+msgstr "Largeur des aiguilles"
+
+msgid "Max"
+msgstr "Max"
+
+msgid "Mid"
+msgstr "Demi"
+
+msgid "None"
+msgstr "Aucun"
+
+msgid "Ok"
+msgstr "Ok"
+
+msgid "Seconds color (a,r,g,b)"
+msgstr "Couleur des secondes (a,r,v,b)"
+
+msgid "Seconds hand"
+msgstr "Aiguille des secondes"
+
+msgid "Setup AnalogClock"
+msgstr "Configurer l’Horloge Analogique"
+
+msgid "Setup AnalogClock colors"
+msgstr "Configurer les couleurs de l’horloge analogique"
+
+msgid "Size"
+msgstr "Taille"
+
+msgid "Thin face"
+msgstr "Cadran fin"
+
+msgid "Transparency"
+msgstr "Transparence"
+
+msgid "X Position"
+msgstr "X Position"
+
+msgid "Y Position"
+msgstr "Y Position"
