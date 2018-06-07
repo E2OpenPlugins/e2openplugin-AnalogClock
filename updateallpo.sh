@@ -28,6 +28,7 @@ printf "Creating file $extension.pot\n"
 find -s -X .. -name "*.py" -exec xgettext --no-wrap -L Python --from-code=UTF-8 -kpgettext:1c,2 --add-comments="TRANSLATORS:" -d $extension -s -o $extension-py.pot {} \+
 gsed --in-place $extension-py.pot --expression=s/CHARSET/UTF-8/
 cat $extension-py.pot | msguniq --no-wrap --no-location -o $extension.pot -
+#git add $extension.pot
 OLDIFS=$IFS
 IFS=" "
 for lang in "${languages[@]}" ; do
@@ -36,7 +37,7 @@ for lang in "${languages[@]}" ; do
 		msgmerge --backup=none --no-wrap --no-location -s -U ./locale/$lang/LC_MESSAGES/$extension.po $extension.pot && touch ./locale/$lang/LC_MESSAGES/$extension.po; \
 		msgattrib --no-wrap --no-obsolete ./locale/$lang/LC_MESSAGES/$extension.po -o ./locale/$lang/LC_MESSAGES/$extension.po; \
 		msgfmt -o ./locale/$lang/LC_MESSAGES/$extension.mo ./locale/$lang/LC_MESSAGES/$extension.po; \
-		git add ./locale/$lang/LC_MESSAGES/$extension.po; \
+#		git add ./locale/$lang/LC_MESSAGES/$extension.po; \
 	else \
 		printf "New file created for %s, please add it to github before commit\n" $lang; \
 		mkdir ./locale/$lang/LC_MESSAGES/; \
