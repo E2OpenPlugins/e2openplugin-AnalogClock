@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: AnalogClock\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-08-08 20:50+0100\n"
+"POT-Creation-Date: 2018-06-07 17:23+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Vytenis P. <vyteniui@gmail.com>\n"
 "Language-Team: Vytenis P. vyteniui@gmail.com\n"
@@ -15,110 +15,88 @@ msgstr ""
 "X-Generator: Poedit 2.0.4\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 
-#: plugin.py:31 ui.py:109
-msgid "Setup AnalogClock"
-msgstr "AnalogClock sąranka"
-
-#: plugin.py:44
-msgid "Displays analog clock permanently on the screen"
-msgstr "Ekrane pastoviai rodo analoginį laikrodį"
-
-#: ui.py:35 ui.py:49
-msgid "None"
-msgstr "Nieko"
-
-#: ui.py:35
-msgid "Full"
-msgstr "Pilnas"
-
-#: ui.py:49
-msgid "Half"
-msgstr "Puse dydžio"
-
-#: ui.py:49
-msgid "Mid"
-msgstr "Vidutinis"
-
-#: ui.py:49
-msgid "Max"
-msgstr "Maksimalus"
-
-#: ui.py:118
-msgid "Ok"
-msgstr "Gerai"
-
-#: ui.py:119
-msgid "Cancel"
-msgstr "Atšaukti"
-
-#: ui.py:124
-msgid "Size"
-msgstr "Dydis"
-
-#: ui.py:125
-msgid "X Position"
-msgstr "X padėtis"
-
-#: ui.py:126
-msgid "Y Position"
-msgstr "Y padėtis"
-
-#: ui.py:128
-msgid "Enable AnalogClock"
-msgstr "Įjungti AnalogClock"
-
-#: ui.py:132
-msgid "Transparency"
-msgstr "Skaidrumas"
-
-#: ui.py:133
-msgid "Hand's width"
-msgstr "Rodyklės plotis"
-
-#: ui.py:134
-msgid "Filed hands"
-msgstr "Rodyklės užpildymas"
-
-#: ui.py:135
-msgid "Hand's parts ratio"
-msgstr "Rodyklių santykis"
-
-#: ui.py:136
-msgid "Center point size"
-msgstr "Centrinio taško dydis"
-
-#: ui.py:137
-msgid "Dim"
-msgstr "Pritemdymas"
-
-#: ui.py:138
-msgid "Seconds hand"
-msgstr "Sekundžių rodyklė"
-
-#: ui.py:139
-msgid "Thin face"
-msgstr "Plonas ciferblatas"
-
-#: ui.py:140
-msgid "Display setup in"
-msgstr "Sąranką rodyti"
-
-#: ui.py:148
-#, python-format
-msgid "Analog Clock %s"
+#, fuzzy, python-format
+msgid "Analog Clock v%s"
 msgstr "Analoginis laikrodis %s"
 
 msgid "Background (a,r,g,b)"
 msgstr "Fonas (a,r,g,b)"
 
-msgid "Hand's color (a,r,g,b)"
-msgstr "Rodyklių spalva (a,r,g,b)"
+msgid "Cancel"
+msgstr "Atšaukti"
 
-msgid "Seconds color (a,r,g,b)"
-msgstr "Sekundžių rodyklė (a,r,g,b)"
+msgid "Center point size"
+msgstr "Centrinio taško dydis"
+
+msgid "Dim"
+msgstr "Pritemdymas"
+
+msgid "Displays analog clock permanently on the screen"
+msgstr "Ekrane pastoviai rodo analoginį laikrodį"
+
+msgid "Enable AnalogClock"
+msgstr "Įjungti AnalogClock"
+
+msgid "Extended settings"
+msgstr "Išplėstiniai parametrai"
 
 msgid "Face's color (a,r,g,b)"
 msgstr "Ciferblato spalva (a,r,g,b)"
 
-msgid "Extended settings"
-msgstr "Išplėstiniai parametrai"
+msgid "Filed hands"
+msgstr "Rodyklės užpildymas"
+
+msgid "Full"
+msgstr "Pilnas"
+
+msgid "Half"
+msgstr "Puse dydžio"
+
+msgid "Hand's color (a,r,g,b)"
+msgstr "Rodyklių spalva (a,r,g,b)"
+
+msgid "Hand's parts ratio"
+msgstr "Rodyklių santykis"
+
+msgid "Hand's width"
+msgstr "Rodyklės plotis"
+
+msgid "Max"
+msgstr "Maksimalus"
+
+msgid "Mid"
+msgstr "Vidutinis"
+
+msgid "None"
+msgstr "Nieko"
+
+msgid "Ok"
+msgstr "Gerai"
+
+msgid "Seconds color (a,r,g,b)"
+msgstr "Sekundžių rodyklė (a,r,g,b)"
+
+msgid "Seconds hand"
+msgstr "Sekundžių rodyklė"
+
+msgid "Setup AnalogClock"
+msgstr "AnalogClock sąranka"
+
+#, fuzzy
+msgid "Setup AnalogClock colors"
+msgstr "AnalogClock sąranka"
+
+msgid "Size"
+msgstr "Dydis"
+
+msgid "Thin face"
+msgstr "Plonas ciferblatas"
+
+msgid "Transparency"
+msgstr "Skaidrumas"
+
+msgid "X Position"
+msgstr "X padėtis"
+
+msgid "Y Position"
+msgstr "Y padėtis"

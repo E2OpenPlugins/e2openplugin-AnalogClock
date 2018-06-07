@@ -1,0 +1,103 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2018-06-07 17:23+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#, python-format
+msgid "Analog Clock v%s"
+msgstr ""
+
+msgid "Background (a,r,g,b)"
+msgstr ""
+
+msgid "Cancel"
+msgstr ""
+
+msgid "Center point size"
+msgstr ""
+
+msgid "Dim"
+msgstr ""
+
+msgid "Displays analog clock permanently on the screen"
+msgstr ""
+
+msgid "Enable AnalogClock"
+msgstr ""
+
+msgid "Extended settings"
+msgstr ""
+
+msgid "Face's color (a,r,g,b)"
+msgstr ""
+
+msgid "Filed hands"
+msgstr ""
+
+msgid "Full"
+msgstr ""
+
+msgid "Half"
+msgstr ""
+
+msgid "Hand's color (a,r,g,b)"
+msgstr ""
+
+msgid "Hand's parts ratio"
+msgstr ""
+
+msgid "Hand's width"
+msgstr ""
+
+msgid "Max"
+msgstr ""
+
+msgid "Mid"
+msgstr ""
+
+msgid "None"
+msgstr ""
+
+msgid "Ok"
+msgstr ""
+
+msgid "Seconds color (a,r,g,b)"
+msgstr ""
+
+msgid "Seconds hand"
+msgstr ""
+
+msgid "Setup AnalogClock"
+msgstr ""
+
+msgid "Setup AnalogClock colors"
+msgstr ""
+
+msgid "Size"
+msgstr ""
+
+msgid "Thin face"
+msgstr ""
+
+msgid "Transparency"
+msgstr ""
+
+msgid "X Position"
+msgstr ""
+
+msgid "Y Position"
+msgstr ""
