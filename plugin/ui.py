@@ -82,21 +82,21 @@ defpar = "2"
 if fullHD:
 	defpar = "3"
 config.plugins.AnalogClock.centerpoint = ConfigSelection(default = defpar, choices = choicelist)
-config.plugins.AnalogClock.dim = ConfigSelection(default = "0", choices = [("0", _("None")),("1", _("Half")),("2", _("Mid")),("3", _("Max")) ])
+config.plugins.AnalogClock.dim = ConfigSelection(default = "0", choices = [("0", _("None")), ("1", _("Half")), ("2", _("Mid")), ("3", _("Max")) ])
 config.plugins.AnalogClock.secs = ConfigYesNo(default = True)
 config.plugins.AnalogClock.thin = ConfigYesNo(default = True)
-config.plugins.AnalogClock.hands_color = ConfigIP(default=[000,255,255, 80])
-config.plugins.AnalogClock.shand_color = ConfigIP(default=[000,255,064,064])
-config.plugins.AnalogClock.faces_color = ConfigIP(default=[000,255,255,255])
-config.plugins.AnalogClock.background = ConfigIP(default=[int(config.plugins.AnalogClock.transparency.value),0,0,0])
+config.plugins.AnalogClock.hands_color = ConfigIP(default=[000, 255, 255, 80])
+config.plugins.AnalogClock.shand_color = ConfigIP(default=[000, 255, 0o64, 0o64])
+config.plugins.AnalogClock.faces_color = ConfigIP(default=[000, 255, 255, 255])
+config.plugins.AnalogClock.background = ConfigIP(default=[int(config.plugins.AnalogClock.transparency.value), 0, 0, 0])
 config.plugins.AnalogClock.extended = ConfigYesNo(default = False)
 
 cfg = config.plugins.AnalogClock
 
-def aRGB(a,r,g,b):
-	return (a<<24)|RGB(r,g,b)
+def aRGB(a, r, g, b):
+	return (a<<24)|RGB(r, g, b)
 
-def RGB(r,g,b):
+def RGB(r, g, b):
 	dim = 1
 	if int(cfg.dim.value) == 1:
 		dim = 2	
@@ -197,13 +197,13 @@ class AnalogClockColorsSetup(Screen, ConfigListScreen):
 
 	def backupValues(self):
 		a = cfg.hands_color.value
-		self.hc = [a[0],a[1],a[2],a[3]]
+		self.hc = [a[0], a[1], a[2], a[3]]
 		a = cfg.shand_color.value
-		self.sc = [a[0],a[1],a[2],a[3]]
+		self.sc = [a[0], a[1], a[2], a[3]]
 		a = cfg.faces_color.value
-		self.fc = [a[0],a[1],a[2],a[3]]
+		self.fc = [a[0], a[1], a[2], a[3]]
 		a = cfg.background.value
-		self.bc = [a[0],a[1],a[2],a[3]]
+		self.bc = [a[0], a[1], a[2], a[3]]
 		self.transp = cfg.transparency.value
 
 	def restoreValues(self):
@@ -314,11 +314,11 @@ class AnalogClockSetup(Screen, ConfigListScreen):
 		n = len(self["config"].getList())
 		y = n * self.height
 		if fullHD:
-			x = [112,412,67,367,580]
-			dy = [35,25,31]
+			x = [112, 412, 67, 367, 580]
+			dy = [35, 25, 31]
 		else:
-			x = [100,285,70,255,380]
-			dy = [25,17,20]
+			x = [100, 285, 70, 255, 380]
+			dy = [25, 17, 20]
 		self.instance.resize(eSize(self.width, self.height*(n+1)+ dy[0]))
 		self["key_red"].instance.move(ePoint(x[0], y + dy[1]))
 		self["key_green"].instance.move(ePoint(x[1], y + dy[1]))
@@ -343,7 +343,7 @@ class AnalogClockSetup(Screen, ConfigListScreen):
 		self.close()
 
 	def changedEntry(self):
-		if self["config"].getCurrent()[0] in [self.itemSize,self.itemXpos,self.itemYpos]:
+		if self["config"].getCurrent()[0] in [self.itemSize, self.itemXpos, self.itemYpos]:
 			self.invalidateItem()
 			AnalogClock.deleteDialog()
 			self.changeItemsTimer.start(200, True)
@@ -406,13 +406,13 @@ class AnalogClockScreen(Screen):
 		self.pH = []
 		self.pM = []
 		c = cfg.hands_color.value
-		self.colorH = self.colorM = aRGB(c[0],c[1],c[2],c[3])
+		self.colorH = self.colorM = aRGB(c[0], c[1], c[2], c[3])
 		c = cfg.shand_color.value
-		self.colorS = aRGB(c[0],c[1],c[2],c[3])
+		self.colorS = aRGB(c[0], c[1], c[2], c[3])
 		c = cfg.faces_color.value
-		self.colorF = aRGB(c[0],c[1],c[2],c[3])
+		self.colorF = aRGB(c[0], c[1], c[2], c[3])
 		c = cfg.background.value
-		self.background = aRGB(int(cfg.transparency.value),c[1],c[2],c[3])
+		self.background = aRGB(int(cfg.transparency.value), c[1], c[2], c[3])
 		self.cpb = origin - int(cfg.centerpoint.value)
 		self.cpw = 2 * int(cfg.centerpoint.value)
 		if cfg.secs.value:
@@ -427,7 +427,7 @@ class AnalogClockScreen(Screen):
 		self.pf = []  # points face
 		beg = mHand * 1.2
 		end = sHand * 1.02
-		for a in range(0,360,30):
+		for a in range(0, 360, 30):
 			begin = beg
 			if not a%90:
 				begin = mHand
@@ -483,7 +483,7 @@ class AnalogClockScreen(Screen):
 		return (xr, yr)
 
 	def drawFace(self):
-		for a in range(0,12,1):
+		for a in range(0, 12, 1):
 			if not cfg.thin.value:
 				self.line(self.pf[a][0], self.pf[a][1], self.colorF) 	# left part
 				self.line(self.pf[a][4], self.pf[a][5], self.colorF) 	# right part
@@ -522,19 +522,19 @@ class AnalogClockScreen(Screen):
 		p = []
 		if w > 0:
 			while w > 0:
-				p.append((origin,origin))
-				p.append(self.rotate(w,l,alfa))
-				p.append(self.rotate(w,L,alfa))
-				p.append(self.rotate(0,Ll,alfa))
-				p.append(self.rotate(-w,L,alfa))
-				p.append(self.rotate(-w,l,alfa))
+				p.append((origin, origin))
+				p.append(self.rotate(w, l, alfa))
+				p.append(self.rotate(w, L, alfa))
+				p.append(self.rotate(0, Ll, alfa))
+				p.append(self.rotate(-w, L, alfa))
+				p.append(self.rotate(-w, l, alfa))
 				if not cfg.filedhands.value: # outlines only
 					break
 				w -= 1
 			p.append(p[0]) # center line
 			p.append(p[3])
 		else:
-			p = [ self.rotate(0,lb,alfa), self.rotate(0,Ll,alfa)]
+			p = [ self.rotate(0, lb, alfa), self.rotate(0, Ll, alfa)]
 		return p
 
 	def drawHand(self, p, color):
@@ -552,17 +552,17 @@ class AnalogClockScreen(Screen):
 
 		if w > 0:
 			while w > 0:
-				p = [self.rotate(0,lbs,alfa), self.rotate(w,lbs,alfa), self.rotate(w,L,alfa), self.rotate(0,Ll,alfa), self.rotate(-w,L,alfa), self.rotate(-w,lbs,alfa)]
+				p = [self.rotate(0, lbs, alfa), self.rotate(w, lbs, alfa), self.rotate(w, L, alfa), self.rotate(0, Ll, alfa), self.rotate(-w, L, alfa), self.rotate(-w, lbs, alfa)]
 				n = len(p)
 				for i in range(n):
-					self.line(p[i],p[(i+1)%n], self.colorS)
+					self.line(p[i], p[(i+1)%n], self.colorS)
 				if not cfg.filedhands.value: # outlines only 
 					break
 				w -= 1
-			self.line(p[0],p[3], self.colorS) # center line
+			self.line(p[0], p[3], self.colorS) # center line
 		else:
-			self.line(self.rotate(0,lbs,alfa),self.rotate(0,0,0), self.colorS )
-			self.line(self.rotate(0,0,0),self.rotate(0,Ll,alfa), self.colorS )
+			self.line(self.rotate(0, lbs, alfa), self.rotate(0, 0, 0), self.colorS )
+			self.line(self.rotate(0, 0, 0), self.rotate(0, Ll, alfa), self.colorS )
 
 	def line(self, p0, p1, color):
 		(x0, y0), (x1, y1) = p0, p1

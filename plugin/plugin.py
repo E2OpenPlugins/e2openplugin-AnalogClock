@@ -1,3 +1,4 @@
+from __future__ import absolute_import
 # for localized messages
 from . import _
 #################################################################################
@@ -22,11 +23,11 @@ from Plugins.Plugin import PluginDescriptor
 
 def sessionstart(reason, **kwargs):
 	if reason == 0:
-		import ui
+		from . import ui
 		ui.AnalogClock.startAnalogClock(kwargs["session"])
 
 def main(session,**kwargs):
-	import ui
+	from . import ui
 	session.open(ui.AnalogClockSetup, plugin_path)
 
 def Plugins(path, **kwargs):
