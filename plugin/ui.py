@@ -586,7 +586,7 @@ class AnalogClockScreen(Screen):
 			limit = int(cfg.random.value)
 			if limit == 255:
 				X_POS = random.randint(0, Width - size)
-				Y_POS = random.randint(0, h - size)
+				Y_POS = random.randint(0, Height - size)
 			else:
 				minX = (X_POS - limit) if (X_POS - limit) >= 0 else 0
 				maxX = (X_POS + limit) if (X_POS + size + limit) <= Width else (Width - size)
