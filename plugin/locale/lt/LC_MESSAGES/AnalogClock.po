@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: AnalogClock\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-06-07 17:23+0200\n"
+"POT-Creation-Date: 2020-12-08 20:00+0100\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Vytenis P. <vyteniui@gmail.com>\n"
 "Language-Team: Vytenis P. vyteniui@gmail.com\n"
@@ -15,88 +15,130 @@ msgstr ""
 "X-Generator: Poedit 2.0.4\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 
+#: ../ui.py:317
 #, fuzzy, python-format
 msgid "Analog Clock v%s"
 msgstr "Analoginis laikrodis %s"
 
+#: ../ui.py:183
 msgid "Background (a,r,g,b)"
 msgstr "Fonas (a,r,g,b)"
 
+#: ../ui.py:179 ../ui.py:270
 msgid "Cancel"
 msgstr "Atšaukti"
 
+#: ../ui.py:305
 msgid "Center point size"
 msgstr "Centrinio taško dydis"
 
+#: ../ui.py:306
 msgid "Dim"
 msgstr "Pritemdymas"
 
+#: ../plugin.py:36
 msgid "Displays analog clock permanently on the screen"
 msgstr "Ekrane pastoviai rodo analoginį laikrodį"
 
+#: ../ui.py:279
 msgid "Enable AnalogClock"
 msgstr "Įjungti AnalogClock"
 
+#: ../ui.py:283
 msgid "Extended settings"
 msgstr "Išplėstiniai parametrai"
 
+#: ../ui.py:186
 msgid "Face's color (a,r,g,b)"
 msgstr "Ciferblato spalva (a,r,g,b)"
 
+#: ../ui.py:302
 msgid "Filed hands"
 msgstr "Rodyklės užpildymas"
 
+#: ../ui.py:66
 msgid "Full"
 msgstr "Pilnas"
 
+#: ../ui.py:97
+msgid "Full screen"
+msgstr ""
+
+#: ../ui.py:86
 msgid "Half"
 msgstr "Puse dydžio"
 
+#: ../ui.py:184
 msgid "Hand's color (a,r,g,b)"
 msgstr "Rodyklių spalva (a,r,g,b)"
 
+#: ../ui.py:304
 msgid "Hand's parts ratio"
 msgstr "Rodyklių santykis"
 
+#: ../ui.py:301
 msgid "Hand's width"
 msgstr "Rodyklės plotis"
 
+#: ../ui.py:86
 msgid "Max"
 msgstr "Maksimalus"
 
+#: ../ui.py:86
 msgid "Mid"
 msgstr "Vidutinis"
 
+#: ../ui.py:97
+#, fuzzy
+msgid "No"
+msgstr "Nieko"
+
+#: ../ui.py:66 ../ui.py:86
 msgid "None"
 msgstr "Nieko"
 
+#: ../ui.py:178 ../ui.py:269
 msgid "Ok"
 msgstr "Gerai"
 
+#: ../ui.py:292
+#, fuzzy
+msgid "Random position"
+msgstr "X padėtis"
+
+#: ../ui.py:185
 msgid "Seconds color (a,r,g,b)"
 msgstr "Sekundžių rodyklė (a,r,g,b)"
 
+#: ../ui.py:303
 msgid "Seconds hand"
 msgstr "Sekundžių rodyklė"
 
+#: ../ui.py:259
 msgid "Setup AnalogClock"
 msgstr "AnalogClock sąranka"
 
+#: ../ui.py:169
 #, fuzzy
 msgid "Setup AnalogClock colors"
 msgstr "AnalogClock sąranka"
 
+#: ../ui.py:280
 msgid "Size"
 msgstr "Dydis"
 
+#: ../ui.py:300
 msgid "Thin face"
 msgstr "Plonas ciferblatas"
 
+#: ../ui.py:299
 msgid "Transparency"
 msgstr "Skaidrumas"
 
+#: ../ui.py:281
 msgid "X Position"
 msgstr "X padėtis"
 
+#: ../ui.py:282
 msgid "Y Position"
 msgstr "Y padėtis"

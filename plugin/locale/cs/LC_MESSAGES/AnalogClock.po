@@ -3,100 +3,138 @@ msgid ""
 msgstr ""
 "Project-Id-Version: AnalogClock\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-06-07 17:23+0200\n"
+"POT-Creation-Date: 2020-12-08 20:00+0100\n"
 "PO-Revision-Date: \n"
 "Last-Translator: ims <ims21@users.sourceforge.net>\n"
-"Language-Team:  <ims21@users.sourceforge.net>\n"
-"Language: \n"
+"Language-Team: <ims21@users.sourceforge.net>\n"
+"Language: cs_CZ\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Poedit-Language: Czech\n"
-"X-Poedit-Country: CZECH REPUBLIC\n"
 "Plural-Forms: nplurals=3; plural=n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
+"X-Generator: Poedit 2.4.2\n"
 
-#, fuzzy, python-format
+#: ../ui.py:317
+#, python-format
 msgid "Analog Clock v%s"
-msgstr "Analog Clock %s"
+msgstr "Analog Clock v%s"
 
+#: ../ui.py:183
 msgid "Background (a,r,g,b)"
 msgstr "Podklad (a,r,g,b)"
 
+#: ../ui.py:179 ../ui.py:270
 msgid "Cancel"
 msgstr "Zavřít"
 
+#: ../ui.py:305
 msgid "Center point size"
 msgstr "Středový bod"
 
+#: ../ui.py:306
 msgid "Dim"
 msgstr "Snížení jasu"
 
+#: ../plugin.py:36
 msgid "Displays analog clock permanently on the screen"
 msgstr "Zobrazuje analogové hodiny na obrazovce"
 
+#: ../ui.py:279
 msgid "Enable AnalogClock"
 msgstr "Povolit AnalogClock"
 
+#: ../ui.py:283
 msgid "Extended settings"
 msgstr "Další nastavení"
 
+#: ../ui.py:186
 msgid "Face's color (a,r,g,b)"
 msgstr "Barva ciferníku (a,r,g,b)"
 
+#: ../ui.py:302
 msgid "Filed hands"
 msgstr "Vyplněné ručičky"
 
+#: ../ui.py:66
 msgid "Full"
 msgstr "Plná"
 
+#: ../ui.py:97
+msgid "Full screen"
+msgstr ""
+
+#: ../ui.py:86
 msgid "Half"
 msgstr "Poloviční"
 
+#: ../ui.py:184
 msgid "Hand's color (a,r,g,b)"
 msgstr "Barva ručiček (a,r,g,b)"
 
+#: ../ui.py:304
 msgid "Hand's parts ratio"
 msgstr "Poměr úseků ručiček"
 
+#: ../ui.py:301
 msgid "Hand's width"
 msgstr "Šířka ručiček"
 
+#: ../ui.py:86
 msgid "Max"
 msgstr "Maximální"
 
+#: ../ui.py:86
 msgid "Mid"
 msgstr "Střední"
 
+#: ../ui.py:97
+msgid "No"
+msgstr "Ne"
+
+#: ../ui.py:66 ../ui.py:86
 msgid "None"
 msgstr "Ne"
 
+#: ../ui.py:178 ../ui.py:269
 msgid "Ok"
 msgstr "Ok"
 
+#: ../ui.py:292
+msgid "Random position"
+msgstr "Náhodná pozice"
+
+#: ../ui.py:185
 msgid "Seconds color (a,r,g,b)"
 msgstr "Vteřinová ručička (a,r,g,b)"
 
+#: ../ui.py:303
 msgid "Seconds hand"
 msgstr "Vteřinová ručička"
 
+#: ../ui.py:259
 msgid "Setup AnalogClock"
 msgstr "Nastavení AnalogClock"
 
-#, fuzzy
+#: ../ui.py:169
 msgid "Setup AnalogClock colors"
-msgstr "Nastavení AnalogClock"
+msgstr "Nastavení AnalogClock barev"
 
+#: ../ui.py:280
 msgid "Size"
 msgstr "Velikost"
 
+#: ../ui.py:300
 msgid "Thin face"
 msgstr "Tenký ciferník"
 
+#: ../ui.py:299
 msgid "Transparency"
 msgstr "Průhlednost"
 
+#: ../ui.py:281
 msgid "X Position"
 msgstr "X pozice"
 
+#: ../ui.py:282
 msgid "Y Position"
 msgstr "Y pozice"
