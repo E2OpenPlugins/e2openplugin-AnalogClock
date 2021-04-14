@@ -39,7 +39,7 @@ Height = desktop.size().height()
 fullHD = False
 if Width > 1280:
 	fullHD = True
-	
+
 config.plugins.AnalogClock = ConfigSubsection()
 config.plugins.AnalogClock.enable = ConfigYesNo(default=True)
 choicelist = []
@@ -106,7 +106,7 @@ def aRGB(a, r, g, b):
 def RGB(r, g, b):
 	dim = 1
 	if int(cfg.dim.value) == 1:
-		dim = 2	
+		dim = 2
 	elif int(cfg.dim.value) == 2:
 		dim = 3
 	if int(cfg.dim.value) == 3:
@@ -453,7 +453,7 @@ class AnalogClockScreen(Screen):
 	def ControlLoop(self):
 		if AnalogClock.dialogAnalogClock:
 			if cfg.enable.value:
-				if not AnalogClock.isShow: 
+				if not AnalogClock.isShow:
 					AnalogClock.dialogAnalogClock.show()
 					AnalogClock.isShow = True
 				if not self.session.screen["Standby"].boolean:
@@ -576,7 +576,7 @@ class AnalogClockScreen(Screen):
 				n = len(p)
 				for i in range(n):
 					self.line(p[i], p[(i + 1) % n], self.colorS)
-				if not cfg.filedhands.value: # outlines only 
+				if not cfg.filedhands.value: # outlines only
 					break
 				w -= 1
 			self.line(p[0], p[3], self.colorS) # center line
