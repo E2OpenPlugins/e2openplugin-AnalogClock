@@ -25,7 +25,7 @@ def sessionstart(reason, **kwargs):
 		import ui
 		ui.AnalogClock.startAnalogClock(kwargs["session"])
 
-def main(session,**kwargs):
+def main(session, **kwargs):
 	import ui
 	session.open(ui.AnalogClockSetup, plugin_path)
 
