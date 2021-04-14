@@ -83,7 +83,7 @@ defpar = "2"
 if fullHD:
 	defpar = "3"
 config.plugins.AnalogClock.centerpoint = ConfigSelection(default=defpar, choices=choicelist)
-config.plugins.AnalogClock.dim = ConfigSelection(default="0", choices=[("0", _("None")),("1", _("Half")),("2", _("Mid")),("3", _("Max")) ])
+config.plugins.AnalogClock.dim = ConfigSelection(default="0", choices=[("0", _("None")),("1", _("Half")),("2", _("Mid")),("3", _("Max"))])
 config.plugins.AnalogClock.secs = ConfigYesNo(default=True)
 config.plugins.AnalogClock.thin = ConfigYesNo(default=True)
 config.plugins.AnalogClock.hands_color = ConfigIP(default=[000,255,255, 80])
@@ -162,8 +162,8 @@ class AnalogClockColorsSetup(Screen, ConfigListScreen):
 		self.skin_path = plugin_path
 		Screen.__init__(self, session)
 
-		self.list = [ ]
-		self.onChangedEntry = [ ]
+		self.list = []
+		self.onChangedEntry = []
 		ConfigListScreen.__init__(self, self.list, session=session, on_change=self.changedClockEntry)
 
 		self.setup_title = _("Setup AnalogClock colors")
@@ -184,7 +184,7 @@ class AnalogClockColorsSetup(Screen, ConfigListScreen):
 		self.list.append(getConfigListEntry(_("Hand's color (a,r,g,b)"), cfg.hands_color))
 		self.list.append(getConfigListEntry(_("Seconds color (a,r,g,b)"), cfg.shand_color))
 		self.list.append(getConfigListEntry(_("Face's color (a,r,g,b)"), cfg.faces_color))
-		self.list.append(getConfigListEntry( self.background, cfg.background))
+		self.list.append(getConfigListEntry(self.background, cfg.background))
 
 		self["config"].list = self.list
 		self["config"].setList(self.list)
@@ -252,8 +252,8 @@ class AnalogClockSetup(Screen, ConfigListScreen):
 		self.skin_path = plugin_path
 		Screen.__init__(self, session)
 
-		self.list = [ ]
-		self.onChangedEntry = [ ]
+		self.list = []
+		self.onChangedEntry = []
 		ConfigListScreen.__init__(self, self.list, session=session, on_change=self.changedEntry)
 
 		self.setup_title = _("Setup AnalogClock")
@@ -288,13 +288,13 @@ class AnalogClockSetup(Screen, ConfigListScreen):
 	def listMenu(self):
 		def posX(text):
 			return 4*" " + text
-		self.list = [ getConfigListEntry( self.enable, cfg.enable) ]
+		self.list = [getConfigListEntry(self.enable, cfg.enable)]
 		self.random = posX(_("Random position"))
 		if cfg.enable.value:
-			self.list.append(getConfigListEntry( self.itemSize, cfg.size))
-			self.list.append(getConfigListEntry( self.itemXpos, cfg.xpos))
-			self.list.append(getConfigListEntry( self.itemYpos, cfg.ypos))
-			self.list.append(getConfigListEntry( self.extended, cfg.extended))
+			self.list.append(getConfigListEntry(self.itemSize, cfg.size))
+			self.list.append(getConfigListEntry(self.itemXpos, cfg.xpos))
+			self.list.append(getConfigListEntry(self.itemYpos, cfg.ypos))
+			self.list.append(getConfigListEntry(self.extended, cfg.extended))
 			if cfg.extended.value:
 				self.list.append(getConfigListEntry(posX(_("Transparency")), cfg.transparency))
 				self.list.append(getConfigListEntry(posX(_("Thin face")), cfg.thin))
@@ -439,8 +439,8 @@ class AnalogClockScreen(Screen):
 			if not a%90:
 				begin = mHand
 			self.pf.append((self.rotate(-1, begin, a), self.rotate(-1, end, a),
-					self.rotate( 0, begin, a), self.rotate( 0, end, a),
-					self.rotate( 1, begin, a), self.rotate( 1, end, a)))
+					self.rotate(0, begin, a), self.rotate(0, end, a),
+					self.rotate(1, begin, a), self.rotate(1, end, a)))
 
 	def ControlLoop(self):
 		if AnalogClock.dialogAnalogClock:
@@ -461,7 +461,7 @@ class AnalogClockScreen(Screen):
 				AnalogClock.itemChanged = False
 				self.initValues()
 
-		self["Canvas"].fill(0, 0, size, size, self.background )
+		self["Canvas"].fill(0, 0, size, size, self.background)
 		self.drawFace()
 		(h, m, s) = self.getTime()
 		mod = 20
@@ -546,7 +546,7 @@ class AnalogClockScreen(Screen):
 			p.append(p[0]) # center line
 			p.append(p[3])
 		else:
-			p = [ self.rotate(0,lb,alfa), self.rotate(0,Ll,alfa)]
+			p = [self.rotate(0,lb,alfa), self.rotate(0,Ll,alfa)]
 		return p
 
 	def drawHand(self, p, color):
@@ -573,12 +573,12 @@ class AnalogClockScreen(Screen):
 				w -= 1
 			self.line(p[0],p[3], self.colorS) # center line
 		else:
-			self.line(self.rotate(0,lbs,alfa),self.rotate(0,0,0), self.colorS )
-			self.line(self.rotate(0,0,0),self.rotate(0,Ll,alfa), self.colorS )
+			self.line(self.rotate(0,lbs,alfa),self.rotate(0,0,0), self.colorS)
+			self.line(self.rotate(0,0,0),self.rotate(0,Ll,alfa), self.colorS)
 
 	def line(self, p0, p1, color):
 		(x0, y0), (x1, y1) = p0, p1
-		self["Canvas"].line( x0, y0, x1, y1, color)
+		self["Canvas"].line(x0, y0, x1, y1, color)
 
 	def random_position(self):
 		global X_POS, Y_POS
@@ -592,7 +592,7 @@ class AnalogClockScreen(Screen):
 				maxX = (X_POS + limit) if (X_POS + size + limit) <= Width else (Width - size)
 				minY = (Y_POS - limit) if (Y_POS - limit) >= 0 else 0
 				maxY = (Y_POS + limit) if (Y_POS + size + limit) <= Height else (Height - size)
-				X_POS = random.randint(minX, maxX )
+				X_POS = random.randint(minX, maxX)
 				Y_POS = random.randint(minY, maxY)
 	#			print X_POS, Y_POS, minX, maxX, minY, maxY
 
