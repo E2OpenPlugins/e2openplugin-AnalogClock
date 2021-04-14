@@ -41,60 +41,60 @@ if Width > 1280:
 	fullHD = True
 	
 config.plugins.AnalogClock = ConfigSubsection()
-config.plugins.AnalogClock.enable = ConfigYesNo(default = True)
+config.plugins.AnalogClock.enable = ConfigYesNo(default=True)
 choicelist = []
 for i in range(20, 1070, 10):
 	choicelist.append(("%d" % i))
 defpar = "80"
 if fullHD:
 	defpar = "120"
-config.plugins.AnalogClock.size = ConfigSelection(default = defpar, choices = choicelist)
+config.plugins.AnalogClock.size = ConfigSelection(default=defpar, choices=choicelist)
 choicelist = []
 for i in range(0, Width, 10):
 	choicelist.append(("%d" % i))
 defpar = "1180"
 if fullHD:
 	defpar = "1790"
-config.plugins.AnalogClock.xpos = ConfigSelection(default = defpar, choices = choicelist)
+config.plugins.AnalogClock.xpos = ConfigSelection(default=defpar, choices=choicelist)
 choicelist = []
 for i in range(0, Height, 10):
 	choicelist.append(("%d" % i))
-config.plugins.AnalogClock.ypos = ConfigSelection(default = "10", choices = choicelist)
+config.plugins.AnalogClock.ypos = ConfigSelection(default="10", choices=choicelist)
 choicelist = []
 for i in range(1, 255, 1):
 	choicelist.append(("%d" % i))
-config.plugins.AnalogClock.transparency = ConfigSelection(default = "255", choices = [("0", _("None"))] + choicelist + [("255", _("Full"))])
+config.plugins.AnalogClock.transparency = ConfigSelection(default="255", choices=[("0", _("None"))] + choicelist + [("255", _("Full"))])
 choicelist = []
 for i in range(0, 11, 1):
 	choicelist.append(("%d" % i))
-config.plugins.AnalogClock.handwidth = ConfigSelection(default = "0", choices = choicelist)
-config.plugins.AnalogClock.filedhands = ConfigYesNo(default = False)
+config.plugins.AnalogClock.handwidth = ConfigSelection(default="0", choices=choicelist)
+config.plugins.AnalogClock.filedhands = ConfigYesNo(default=False)
 choicelist = []
 for i in range(60, 105, 5):
 	choicelist.append(("%s" % str(i/100.)))
 defpar = "0.85"
 if fullHD:
 	defpar = "0.8"
-config.plugins.AnalogClock.handratio = ConfigSelection(default = defpar, choices = choicelist)
+config.plugins.AnalogClock.handratio = ConfigSelection(default=defpar, choices=choicelist)
 choicelist = []
 for i in range(0, 20, 1):
 	choicelist.append(("%d" % i))
 defpar = "2"
 if fullHD:
 	defpar = "3"
-config.plugins.AnalogClock.centerpoint = ConfigSelection(default = defpar, choices = choicelist)
-config.plugins.AnalogClock.dim = ConfigSelection(default = "0", choices = [("0", _("None")),("1", _("Half")),("2", _("Mid")),("3", _("Max")) ])
-config.plugins.AnalogClock.secs = ConfigYesNo(default = True)
-config.plugins.AnalogClock.thin = ConfigYesNo(default = True)
+config.plugins.AnalogClock.centerpoint = ConfigSelection(default=defpar, choices=choicelist)
+config.plugins.AnalogClock.dim = ConfigSelection(default="0", choices=[("0", _("None")),("1", _("Half")),("2", _("Mid")),("3", _("Max")) ])
+config.plugins.AnalogClock.secs = ConfigYesNo(default=True)
+config.plugins.AnalogClock.thin = ConfigYesNo(default=True)
 config.plugins.AnalogClock.hands_color = ConfigIP(default=[000,255,255, 80])
 config.plugins.AnalogClock.shand_color = ConfigIP(default=[000,255,064,064])
 config.plugins.AnalogClock.faces_color = ConfigIP(default=[000,255,255,255])
 config.plugins.AnalogClock.background = ConfigIP(default=[int(config.plugins.AnalogClock.transparency.value),0,0,0])
-config.plugins.AnalogClock.extended = ConfigYesNo(default = False)
+config.plugins.AnalogClock.extended = ConfigYesNo(default=False)
 choicelist = []
 for i in range(1, 25, 1):
 	choicelist.append(("%d" %i, "%d px" % i))
-config.plugins.AnalogClock.random = ConfigSelection(default = "0", choices = [("0", _("No"))] + choicelist + [("255", _("Full screen"))])
+config.plugins.AnalogClock.random = ConfigSelection(default="0", choices=[("0", _("No"))] + choicelist + [("255", _("Full screen"))])
 
 cfg = config.plugins.AnalogClock
 
@@ -164,7 +164,7 @@ class AnalogClockColorsSetup(Screen, ConfigListScreen):
 
 		self.list = [ ]
 		self.onChangedEntry = [ ]
-		ConfigListScreen.__init__(self, self.list, session = session, on_change = self.changedClockEntry)
+		ConfigListScreen.__init__(self, self.list, session=session, on_change=self.changedClockEntry)
 
 		self.setup_title = _("Setup AnalogClock colors")
 		self["actions"] = ActionMap(["SetupActions", "ColorActions"],
@@ -254,7 +254,7 @@ class AnalogClockSetup(Screen, ConfigListScreen):
 
 		self.list = [ ]
 		self.onChangedEntry = [ ]
-		ConfigListScreen.__init__(self, self.list, session = session, on_change = self.changedEntry)
+		ConfigListScreen.__init__(self, self.list, session=session, on_change=self.changedEntry)
 
 		self.setup_title = _("Setup AnalogClock")
 		self["actions"] = ActionMap(["SetupActions", "ColorActions"],

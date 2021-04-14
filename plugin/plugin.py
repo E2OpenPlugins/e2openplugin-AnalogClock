@@ -36,5 +36,5 @@ def Plugins(path, **kwargs):
 	descr = _("Displays analog clock permanently on the screen")
 	list = []
 	list.append(PluginDescriptor(where=PluginDescriptor.WHERE_SESSIONSTART, fnc=sessionstart))
-	list.append(PluginDescriptor(name=name, description=descr, where=PluginDescriptor.WHERE_PLUGINMENU, icon = 'png/aclock.png', fnc=main))
+	list.append(PluginDescriptor(name=name, description=descr, where=PluginDescriptor.WHERE_PLUGINMENU, icon='png/aclock.png', fnc=main))
 	return list
