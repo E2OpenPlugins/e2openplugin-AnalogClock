@@ -20,14 +20,17 @@ from . import _
 
 from Plugins.Plugin import PluginDescriptor
 
+
 def sessionstart(reason, **kwargs):
 	if reason == 0:
 		import ui
 		ui.AnalogClock.startAnalogClock(kwargs["session"])
 
+
 def main(session, **kwargs):
 	import ui
 	session.open(ui.AnalogClockSetup, plugin_path)
+
 
 def Plugins(path, **kwargs):
 	global plugin_path

@@ -98,8 +98,10 @@ config.plugins.AnalogClock.random = ConfigSelection(default="0", choices=[("0", 
 
 cfg = config.plugins.AnalogClock
 
+
 def aRGB(a, r, g, b):
 	return (a << 24) | RGB(r, g, b)
+
 
 def RGB(r, g, b):
 	dim = 1
@@ -113,6 +115,7 @@ def RGB(r, g, b):
 	g = g / dim
 	b = b / dim
 	return (r << 16) | (g << 8) | b
+
 
 def sizes():
 	global size, origin, hHand, mHand, sHand, X_POS, Y_POS
@@ -135,6 +138,7 @@ def sizes():
 	if Y_POS + size > h:
 		cfg.ypos.value = str(h - size)
 		Y_POS = int(cfg.ypos.value)
+
 
 class AnalogClockColorsSetup(Screen, ConfigListScreen):
 	if fullHD:
@@ -248,6 +252,7 @@ class AnalogClockSetup(Screen, ConfigListScreen):
 		<widget name="green" pixmap="~/png/green20.png" position="255,3650" size="20,20" alphatest="blend" zPosition="2"/>
 		<widget name="blue" pixmap="~/png/blue20.png" position="380,375" size="10,10" alphatest="blend" zPosition="2"/>
 		</screen>"""
+
 	def __init__(self, session, plugin_path):
 		self.skin_path = plugin_path
 		Screen.__init__(self, session)
@@ -380,6 +385,7 @@ class AnalogClockSetup(Screen, ConfigListScreen):
 	def callBack(self, answer=False):
 		pass
 
+
 def AnalogClockSkin():
 	skin = """
 	<screen name="AnalogClockScreen" position="%d,%d" size="%d,%d" zPosition="-1" backgroundColor="#50802020" flags="wfNoBorder">
@@ -388,6 +394,8 @@ def AnalogClockSkin():
 	return skin
 
 # clock routines
+
+
 class AnalogClockScreen(Screen):
 	def __init__(self, session):
 		Screen.__init__(self, session)
@@ -642,5 +650,6 @@ class AnalogClockMain():
 		if not self.dialogAnalogClock:
 			self.isShow = False
 			self.dialogAnalogClock = self.session.instantiateDialog(AnalogClockScreen)
+
 
 AnalogClock = AnalogClockMain()
