@@ -71,7 +71,7 @@ config.plugins.AnalogClock.handwidth = ConfigSelection(default="0", choices=choi
 config.plugins.AnalogClock.filedhands = ConfigYesNo(default=False)
 choicelist = []
 for i in range(60, 105, 5):
-	choicelist.append(("%s" % str(i/100.)))
+	choicelist.append(("%s" % str(i / 100.)))
 defpar = "0.85"
 if fullHD:
 	defpar = "0.8"
@@ -93,13 +93,13 @@ config.plugins.AnalogClock.background = ConfigIP(default=[int(config.plugins.Ana
 config.plugins.AnalogClock.extended = ConfigYesNo(default=False)
 choicelist = []
 for i in range(1, 25, 1):
-	choicelist.append(("%d" %i, "%d px" % i))
+	choicelist.append(("%d" % i, "%d px" % i))
 config.plugins.AnalogClock.random = ConfigSelection(default="0", choices=[("0", _("No"))] + choicelist + [("255", _("Full screen"))])
 
 cfg = config.plugins.AnalogClock
 
 def aRGB(a,r,g,b):
-	return (a<<24)|RGB(r,g,b)
+	return (a << 24) | RGB(r,g,b)
 
 def RGB(r,g,b):
 	dim = 1
@@ -109,16 +109,16 @@ def RGB(r,g,b):
 		dim = 3
 	if int(cfg.dim.value) == 3:
 		dim = 5
-	r = r/dim
-	g = g/dim
-	b = b/dim
-	return (r<<16)|(g<<8)|b
+	r = r / dim
+	g = g / dim
+	b = b / dim
+	return (r << 16) | (g << 8) | b
 
 def sizes():
 	global size, origin, hHand, mHand, sHand, X_POS, Y_POS
 
-	size=int(cfg.size.value)
-	origin = size/2
+	size = int(cfg.size.value)
+	origin = size / 2
 
 	sHand = int(9.2 * origin / 10.)
 	mHand = int(7 * origin / 10.)
@@ -215,7 +215,7 @@ class AnalogClockColorsSetup(Screen, ConfigListScreen):
 		cfg.shand_color.value = self.sc
 		cfg.faces_color.value = self.fc
 		cfg.background.value = self.bc
-		cfg.transparency.value =  self.transp
+		cfg.transparency.value = self.transp
 		AnalogClock.itemChanged = True
 
 	def keySave(self):
@@ -287,7 +287,7 @@ class AnalogClockSetup(Screen, ConfigListScreen):
 
 	def listMenu(self):
 		def posX(text):
-			return 4*" " + text
+			return 4 * " " + text
 		self.list = [getConfigListEntry(self.enable, cfg.enable)]
 		self.random = posX(_("Random position"))
 		if cfg.enable.value:
@@ -326,7 +326,7 @@ class AnalogClockSetup(Screen, ConfigListScreen):
 		else:
 			x = [100,285,70,255,380]
 			dy = [25,17,20]
-		self.instance.resize(eSize(self.width, self.height*(n+1)+ dy[0]))
+		self.instance.resize(eSize(self.width, self.height * (n + 1) + dy[0]))
 		self["key_red"].instance.move(ePoint(x[0], y + dy[1]))
 		self["key_green"].instance.move(ePoint(x[1], y + dy[1]))
 		self["red"].instance.move(ePoint(x[2], y + dy[2]))
@@ -406,7 +406,7 @@ class AnalogClockScreen(Screen):
 		self.buildFace()
 		self["Canvas"].fill(0, 0, 0, 0, self.background)
 		self["Canvas"].flush()
-		self.start=10
+		self.start = 10
 		self.AnalogClockTimer.start(1000)
 
 	def initValues(self):
@@ -436,7 +436,7 @@ class AnalogClockScreen(Screen):
 		end = sHand * 1.02
 		for a in range(0,360,30):
 			begin = beg
-			if not a%90:
+			if not a % 90:
 				begin = mHand
 			self.pf.append((self.rotate(-1, begin, a), self.rotate(-1, end, a),
 					self.rotate(0, begin, a), self.rotate(0, end, a),
@@ -483,15 +483,15 @@ class AnalogClockScreen(Screen):
 
 	def getTime(self):
 		t = localtime(time())
-		return (t.tm_hour%12, t.tm_min, t.tm_sec)
+		return (t.tm_hour % 12, t.tm_min, t.tm_sec)
 
 	def drawCenterPoint(self):
 		self["Canvas"].fill(self.cpb, self.cpb, self.cpw, self.cpw, self.colorCP)
 
 	def rotate(self, x, y, a):
 		a *= 0.017453292519943295769
-		xr = int(origin - round(x*cos(a)-y*sin(a)))
-		yr = int(origin - round(x*sin(a)+y*cos(a)))
+		xr = int(origin - round(x * cos(a) - y * sin(a)))
+		yr = int(origin - round(x * sin(a) + y * cos(a)))
 		return (xr, yr)
 
 	def drawFace(self):
@@ -502,34 +502,34 @@ class AnalogClockScreen(Screen):
 			self.line(self.pf[a][2], self.pf[a][3], self.colorF)		# center part
 
 	def alfaHour(self, hours, mins, secs):
-		return 30*hours + mins/2. + secs/120.
+		return 30 * hours + mins / 2. + secs / 120.
 
 	def alfaMin(self, mins, secs):
-		return 6*mins + secs/10.
+		return 6 * mins + secs / 10.
 
 	def alfaSec(self, secs):
-		return 6*secs
+		return 6 * secs
 
 	def handDimensions(self, length):
 		ratio = float(cfg.handratio.value)
-		l = int((1 - ratio)*length)
-		L = int(ratio*length)
+		l = int((1 - ratio) * length)
+		L = int(ratio * length)
 		w = int(cfg.handwidth.value)
 		return (w, l, L)
 
 	def drawHandH(self, mod, h, m, s):
-		if s%mod == 0 or not len(self.pH):
+		if s % mod == 0 or not len(self.pH):
 			self.pH = self.countHand(self.dimensionH, self.alfaHour(h, m, s))
 		self.drawHand(self.pH, self.colorH)
 
 	def drawHandM(self, mod, m, s):
-		if s%mod == 0 or not len(self.pM):
+		if s % mod == 0 or not len(self.pM):
 			self.pM = self.countHand(self.dimensionM, self.alfaMin(m, s))
 		self.drawHand(self.pM, self.colorM)
 
 	def countHand(self, dimensions, alfa):
 		(w, l, L) = dimensions
-		lb = -0.6*l	# back-length
+		lb = -0.6 * l	# back-length
 		Ll = L + l	# long hand's part
 		p = []
 		if w > 0:
@@ -552,14 +552,14 @@ class AnalogClockScreen(Screen):
 	def drawHand(self, p, color):
 		n = len(p)
 		for i in range(n):
-			self.line(p[i], p[(i+1)%n], color)
+			self.line(p[i], p[(i + 1) % n], color)
 
 	def drawHandS(self, s):
 		alfa = self.alfaSec(s)
 		(w, l, L) = self.dimensionS
 		if w > 0:
 			w -= 1
-		lbs = -1.2*l	# back-length
+		lbs = -1.2 * l	# back-length
 		Ll = L + l	# long hand's part
 
 		if w > 0:
@@ -567,7 +567,7 @@ class AnalogClockScreen(Screen):
 				p = [self.rotate(0,lbs,alfa), self.rotate(w,lbs,alfa), self.rotate(w,L,alfa), self.rotate(0,Ll,alfa), self.rotate(-w,L,alfa), self.rotate(-w,lbs,alfa)]
 				n = len(p)
 				for i in range(n):
-					self.line(p[i],p[(i+1)%n], self.colorS)
+					self.line(p[i],p[(i + 1) % n], self.colorS)
 				if not cfg.filedhands.value: # outlines only 
 					break
 				w -= 1
