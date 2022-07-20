@@ -104,9 +104,9 @@ def RGB(r, g, b):
 		dim = 3
 	if int(cfg.dim.value) == 3:
 		dim = 5
-	r = r/dim
-	g = g/dim
-	b = b/dim
+	r = r // dim
+	g = g // dim
+	b = b // dim
 	return (r<<16)|(g<<8)|b
 
 def sizes():
@@ -413,7 +413,7 @@ class AnalogClockScreen(Screen):
 		self.colorF = aRGB(c[0], c[1], c[2], c[3])
 		c = cfg.background.value
 		self.background = aRGB(int(cfg.transparency.value), c[1], c[2], c[3])
-		self.cpb = origin - int(cfg.centerpoint.value)
+		self.cpb = int(origin - int(cfg.centerpoint.value))
 		self.cpw = 2 * int(cfg.centerpoint.value)
 		if cfg.secs.value:
 			self.colorCP = self.colorS
