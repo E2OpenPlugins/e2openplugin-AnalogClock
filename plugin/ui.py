@@ -4,9 +4,9 @@ from . import _
 #
 #    Plugin for Enigma2
 #
-VERSION = "1.22"
+VERSION = "1.23"
 #
-#    Coded by ims (c)2014-2018
+#    Coded by ims (c)2014-2023
 #
 #    This program is free software; you can redistribute it and/or
 #    modify it under the terms of the GNU General Public License
@@ -31,6 +31,7 @@ from math import radians, cos, sin
 from Components.Sources.CanvasSource import CanvasSource
 from enigma import eSize, ePoint
 from Components.Pixmap import Pixmap
+import random
 
 desktop = getDesktop(0)
 Width = desktop.size().width()
@@ -49,14 +50,14 @@ if fullHD:
 	defpar = "120"
 config.plugins.AnalogClock.size = ConfigSelection(default = defpar, choices = choicelist)
 choicelist = []
-for i in range(0, Width + 10, 10):
+for i in range(0, Width, 10):
 	choicelist.append(("%d" % i))
 defpar = "1180"
 if fullHD:
 	defpar = "1790"
 config.plugins.AnalogClock.xpos = ConfigSelection(default = defpar, choices = choicelist)
 choicelist = []
-for i in range(0, Height + 10, 10):
+for i in range(0, Height, 10):
 	choicelist.append(("%d" % i))
 config.plugins.AnalogClock.ypos = ConfigSelection(default = "10", choices = choicelist)
 choicelist = []
@@ -86,10 +87,14 @@ config.plugins.AnalogClock.dim = ConfigSelection(default = "0", choices = [("0",
 config.plugins.AnalogClock.secs = ConfigYesNo(default = True)
 config.plugins.AnalogClock.thin = ConfigYesNo(default = True)
 config.plugins.AnalogClock.hands_color = ConfigIP(default=[000, 255, 255, 80])
-config.plugins.AnalogClock.shand_color = ConfigIP(default=[000, 255, 0o64, 0o64])
+config.plugins.AnalogClock.shand_color = ConfigIP(default=[000, 255, 56, 56])
 config.plugins.AnalogClock.faces_color = ConfigIP(default=[000, 255, 255, 255])
 config.plugins.AnalogClock.background = ConfigIP(default=[int(config.plugins.AnalogClock.transparency.value), 0, 0, 0])
 config.plugins.AnalogClock.extended = ConfigYesNo(default = False)
+choicelist = []
+for i in range(1, 25, 1):
+	choicelist.append(("%d" %i, "%d px" % i))
+config.plugins.AnalogClock.random = ConfigSelection(default = "0", choices = [("0", _("No"))] + choicelist + [("255", _("Full screen"))])
 
 cfg = config.plugins.AnalogClock
 
@@ -119,8 +124,8 @@ def sizes():
 	mHand = int(7 * origin / 10.)
 	hHand = int(5 * origin / 10.)
 
-	w = Width + 10
-	h = Height + 10
+	w = Width
+	h = Height
 	X_POS = int(cfg.xpos.value)
 	if X_POS + size > w:
 		cfg.xpos.value = str(w - size)
@@ -226,23 +231,23 @@ class AnalogClockSetup(Screen, ConfigListScreen):
 	sizes()
 	if fullHD:
 		skin = """
-		<screen name="AnalogClockSetup" position="60,c-280" size="615,559" title="Setup AnalogClock" flags="wfNoBorder">
-		<widget name="config" position="15,15" size="585,494" itemHeight="38" font="Regular;28" zPosition="1" scrollbarMode="showOnDemand"/>
-		<widget name="red" pixmap="~/png/red30.png" position="67,519" size="30,30" alphatest="blend" zPosition="2"/>
-		<widget name="green" pixmap="~/png/green30.png" position="367,519" size="30,30" alphatest="blend" zPosition="2"/>
-		<widget name="blue" pixmap="~/png/blue30.png" position="580,537" size="15,15" alphatest="blend" zPosition="2"/>
-		<widget name="key_red" position="112,513" zPosition="2" size="187,42" valign="center" font="Regular;33" transparent="1"/>
-		<widget name="key_green" position="412,513" zPosition="2" size="187,42" valign="center" font="Regular;33" transparent="1"/>
+		<screen name="AnalogClockSetup" position="60,c-280" size="615,595" title="Setup AnalogClock" flags="wfNoBorder">
+		<widget name="config" position="15,15" size="585,532" itemHeight="38" font="Regular;28" zPosition="1" scrollbarMode="showOnDemand"/>
+		<widget name="red" pixmap="~/png/red30.png" position="67,557" size="30,30" alphatest="blend" zPosition="2"/>
+		<widget name="green" pixmap="~/png/green30.png" position="367,557" size="30,30" alphatest="blend" zPosition="2"/>
+		<widget name="blue" pixmap="~/png/blue30.png" position="580,575" size="15,15" alphatest="blend" zPosition="2"/>
+		<widget name="key_red" position="112,551" zPosition="2" size="187,42" valign="center" font="Regular;33" transparent="1"/>
+		<widget name="key_green" position="412,551" zPosition="2" size="187,42" valign="center" font="Regular;33" transparent="1"/>
 		</screen>"""
 	else:
 		skin = """
-		<screen name="AnalogClockSetup" position="80,c-187" size="410,373" title="Setup AnalogClock" flags="wfNoBorder">
-		<widget name="config" position="10,10" size="390,325" zPosition="1" scrollbarMode="showOnDemand"/>
-		<widget name="key_red" position="100,330" zPosition="2" size="125,28" valign="center" font="Regular;22" transparent="1"/>
-		<widget name="key_green" position="285,330" zPosition="2" size="125,28" valign="center" font="Regular;22" transparent="1"/>
-		<widget name="red" pixmap="~/png/red20.png" position="70,340" size="20,20" alphatest="blend" zPosition="2"/>
-		<widget name="green" pixmap="~/png/green20.png" position="255,340" size="20,20" alphatest="blend" zPosition="2"/>
-		<widget name="blue" pixmap="~/png/blue20.png" position="380,350" size="10,10" alphatest="blend" zPosition="2"/>
+		<screen name="AnalogClockSetup" position="80,c-187" size="410,398" title="Setup AnalogClock" flags="wfNoBorder">
+		<widget name="config" position="10,10" size="390,350" zPosition="1" scrollbarMode="showOnDemand"/>
+		<widget name="key_red" position="100,355" zPosition="2" size="125,28" valign="center" font="Regular;22" transparent="1"/>
+		<widget name="key_green" position="285,355" zPosition="2" size="125,28" valign="center" font="Regular;22" transparent="1"/>
+		<widget name="red" pixmap="~/png/red20.png" position="70,365" size="20,20" alphatest="blend" zPosition="2"/>
+		<widget name="green" pixmap="~/png/green20.png" position="255,3650" size="20,20" alphatest="blend" zPosition="2"/>
+		<widget name="blue" pixmap="~/png/blue20.png" position="380,375" size="10,10" alphatest="blend" zPosition="2"/>
 		</screen>"""
 	def __init__(self, session, plugin_path):
 		self.skin_path = plugin_path
@@ -277,6 +282,7 @@ class AnalogClockSetup(Screen, ConfigListScreen):
 		self.itemXpos = _("X Position")
 		self.itemYpos = _("Y Position")
 		self.extended = _("Extended settings")
+		self.random = ""
 
 		self.onLayoutFinish.append(self.layoutFinished)
 
@@ -284,6 +290,7 @@ class AnalogClockSetup(Screen, ConfigListScreen):
 		def posX(text):
 			return 4*" " + text
 		self.list = [ getConfigListEntry( self.enable, cfg.enable) ]
+		self.random = posX(_("Random position"))
 		if cfg.enable.value:
 			self.list.append(getConfigListEntry( self.itemSize, cfg.size))
 			self.list.append(getConfigListEntry( self.itemXpos, cfg.xpos))
@@ -298,6 +305,7 @@ class AnalogClockSetup(Screen, ConfigListScreen):
 				self.list.append(getConfigListEntry(posX(_("Hand's parts ratio")), cfg.handratio))
 				self.list.append(getConfigListEntry(posX(_("Center point size")), cfg.centerpoint))
 				self.list.append(getConfigListEntry(posX(_("Dim")), cfg.dim))
+				self.list.append(getConfigListEntry(self.random, cfg.random))
 
 		self["config"].list = self.list
 		self["config"].setList(self.list)
@@ -343,7 +351,7 @@ class AnalogClockSetup(Screen, ConfigListScreen):
 		self.close()
 
 	def changedEntry(self):
-		if self["config"].getCurrent()[0] in [self.itemSize, self.itemXpos, self.itemYpos]:
+		if self["config"].getCurrent()[0] in [self.itemSize, self.itemXpos, self.itemYpos, self.random]:
 			self.invalidateItem()
 			AnalogClock.deleteDialog()
 			self.changeItemsTimer.start(200, True)
@@ -453,6 +461,7 @@ class AnalogClockScreen(Screen):
 			if AnalogClock.itemChanged:
 				AnalogClock.itemChanged = False
 				self.initValues()
+
 		self["Canvas"].fill(0, 0, size, size, self.background )
 		self.drawFace()
 		(h, m, s) = self.getTime()
@@ -460,6 +469,7 @@ class AnalogClockScreen(Screen):
 		if self.start > 0:
 			mod = 1
 			self.start -= 1
+
 		self.drawHandH(mod, h, m, s)
 		self.drawHandM(mod, m, s)
 		if cfg.secs.value:
@@ -468,6 +478,9 @@ class AnalogClockScreen(Screen):
 		self["Canvas"].flush()
 		if s == 0:
 			self["Canvas"].clear()
+			if cfg.random.value != "0":
+				self.random_position()
+				self.instance.move(ePoint(X_POS,Y_POS))
 
 	def getTime(self):
 		t = localtime(time())
@@ -567,6 +580,23 @@ class AnalogClockScreen(Screen):
 	def line(self, p0, p1, color):
 		(x0, y0), (x1, y1) = p0, p1
 		self["Canvas"].line( x0, y0, x1, y1, color)
+
+
+	def random_position(self):
+		global X_POS, Y_POS
+		if cfg.random.value != "0":
+			limit = int(cfg.random.value)
+			if limit == 255:
+				X_POS = random.randint(0, Width - size)
+				Y_POS = random.randint(0, Height - size)
+			else:
+				minX = (X_POS - limit) if (X_POS - limit) >= 0 else 0
+				maxX = (X_POS + limit) if (X_POS + size + limit) <= Width else (Width - size)
+				minY = (Y_POS - limit) if (Y_POS - limit) >= 0 else 0
+				maxY = (Y_POS + limit) if (Y_POS + size + limit) <= Height else (Height - size)
+				X_POS = random.randint(minX, maxX )
+				Y_POS = random.randint(minY, maxY)
+	#			print X_POS, Y_POS, minX, maxX, minY, maxY
 
 
 class AnalogClockMain():
