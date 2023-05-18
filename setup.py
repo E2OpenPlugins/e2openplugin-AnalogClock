@@ -3,7 +3,7 @@ import setup_translate
 
 pkg = 'Extensions.AnalogClock'
 setup (name = 'enigma2-plugin-extensions-analogclock',
-	version = '1.22',
+	version = '1.23',
 	description = 'permanent analog clock on TV screen',
 	packages = [pkg],
 	package_dir = {pkg: 'plugin'},
