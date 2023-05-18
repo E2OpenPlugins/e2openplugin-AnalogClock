@@ -92,7 +92,6 @@ config.plugins.AnalogClock.faces_color = ConfigIP(default=[0, 255, 255, 255])
 config.plugins.AnalogClock.background = ConfigIP(default=[int(config.plugins.AnalogClock.transparency.value), 0, 0, 0])
 config.plugins.AnalogClock.extended = ConfigYesNo(default=False)
 choicelist = []
-
 for i in range(1, 25):
 	choicelist.append(("%d" % i, "%d px" % i))
 config.plugins.AnalogClock.random = ConfigSelection(default="0", choices=[("0", _("No"))] + choicelist + [("255", _("Full screen"))])
