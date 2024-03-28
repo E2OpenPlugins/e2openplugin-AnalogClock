@@ -4,9 +4,9 @@ from . import _
 #
 #    Plugin for Enigma2
 #
-VERSION = "1.23"
+VERSION = "1.24"
 #
-#    Coded by ims (c)2014-2023
+#    Coded by ims (c)2014-2024
 #
 #    This program is free software; you can redistribute it and/or
 #    modify it under the terms of the GNU General Public License
@@ -41,7 +41,7 @@ if Width > 1280:
 	fullHD = True
 	
 config.plugins.AnalogClock = ConfigSubsection()
-config.plugins.AnalogClock.enable = ConfigYesNo(default=True)
+config.plugins.AnalogClock.enable = ConfigYesNo(default=False)
 choicelist = []
 for i in range(20, 1070, 10):
 	choicelist.append(("%d" % i))
