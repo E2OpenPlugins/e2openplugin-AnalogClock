@@ -5,7 +5,7 @@ from . import _
 #
 #    Plugin for Enigma2
 #
-#    Coded by ims (c)2014-2023
+#    Coded by ims (c)2014-2024
 #
 #    This program is free software; you can redistribute it and/or
 #    modify it under the terms of the GNU General Public License
@@ -28,6 +28,8 @@ def sessionstart(reason, **kwargs):
 
 def main(session,**kwargs):
 	from . import ui
+	if not ui.AnalogClock.session:
+		ui.AnalogClock.startAnalogClock(session)
 	session.open(ui.AnalogClockSetup, plugin_path)
 
 def Plugins(path, **kwargs):
