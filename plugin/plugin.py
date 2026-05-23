@@ -20,11 +20,14 @@ from . import _
 
 from Plugins.Plugin import PluginDescriptor
 
+plugin_path = None
 
 def sessionstart(reason, **kwargs):
 	if reason == 0:
-		import ui
-		ui.AnalogClock.startAnalogClock(kwargs["session"])
+		session = kwargs.get("session")
+		if session:
+			import ui
+			ui.AnalogClock.startAnalogClock(session)
 
 
 def main(session, **kwargs):

@@ -4,9 +4,9 @@ from . import _
 #
 #    Plugin for Enigma2
 #
-VERSION = "1.24"
+VERSION = "1.25"
 #
-#    Coded by ims (c)2014-2024
+#    Coded by ims (c)2014-2026
 #
 #    This program is free software; you can redistribute it and/or
 #    modify it under the terms of the GNU General Public License
@@ -249,7 +249,7 @@ class AnalogClockSetup(Screen, ConfigListScreen):
 		<widget name="key_red" position="100,355" zPosition="2" size="125,28" valign="center" font="Regular;22" transparent="1"/>
 		<widget name="key_green" position="285,355" zPosition="2" size="125,28" valign="center" font="Regular;22" transparent="1"/>
 		<widget name="red" pixmap="~/png/red20.png" position="70,365" size="20,20" alphatest="blend" zPosition="2"/>
-		<widget name="green" pixmap="~/png/green20.png" position="255,3650" size="20,20" alphatest="blend" zPosition="2"/>
+		<widget name="green" pixmap="~/png/green20.png" position="255,365" size="20,20" alphatest="blend" zPosition="2"/>
 		<widget name="blue" pixmap="~/png/blue20.png" position="380,375" size="10,10" alphatest="blend" zPosition="2"/>
 		</screen>"""
 
