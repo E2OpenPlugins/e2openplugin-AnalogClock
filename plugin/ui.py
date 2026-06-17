@@ -415,7 +415,11 @@ class AnalogClockScreen(Screen):
 		self["Canvas"].fill(0, 0, 0, 0, self.background)
 		self["Canvas"].flush()
 		self.start = 10
-		self.AnalogClockTimer.start(1000)
+		self.startTimer()
+
+	def startTimer(self, ):
+		delay = int((1.0 - (time() % 1.0)) * 1000) + 20
+		self.AnalogClockTimer.start(delay, True)
 
 	def initValues(self):
 		self.pH = []
@@ -462,6 +466,7 @@ class AnalogClockScreen(Screen):
 				if AnalogClock.isShow:
 					AnalogClock.dialogAnalogClock.hide()
 					AnalogClock.isShow = False
+		self.startTimer()
 
 	def drawClock(self):
 		if AnalogClock.inSetup:
