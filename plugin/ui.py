@@ -417,7 +417,7 @@ class AnalogClockScreen(Screen):
 		self.start = 10
 		self.startTimer()
 
-	def startTimer(self, ):
+	def startTimer(self):
 		delay = int((1.0 - (time() % 1.0)) * 1000) + 20
 		self.AnalogClockTimer.start(delay, True)
 
