@@ -1,10 +1,11 @@
 # for localized messages
 from . import _
+
 #################################################################################
 #
 #    Plugin for Enigma2
 #
-#    Coded by ims (c)2014-2024
+#    Coded by ims (c)2014-2026
 #
 #    This program is free software; you can redistribute it and/or
 #    modify it under the terms of the GNU General Public License
@@ -19,6 +20,8 @@ from . import _
 #################################################################################
 
 from Plugins.Plugin import PluginDescriptor
+from Components.config import config
+from Screens.MessageBox import MessageBox
 
 plugin_path = None
 
@@ -29,13 +32,53 @@ def sessionstart(reason, **kwargs):
 			import ui
 			ui.AnalogClock.startAnalogClock(session)
 
+def subtitlesCallback(answer, session):
+	import ui
+	if answer:
+		session.infobar.enableSubtitle(None)
+	session.openWithCallback(lambda *ret: setupClosed(session), ui.AnalogClockSetup, plugin_path)
+
+def setupClosed(session):
+	import ui
+	if ui.AnalogClock.restartRequired:
+		ui.AnalogClock.restartRequired = False
+		session.openWithCallback(
+			lambda answer: restartCallback(answer, session),
+			MessageBox,
+			_("Changes have been made that require a GUI restart.\n\n"
+			"If the GUI is not restarted, the clock will be hidden on services with enabled subtitles.\n\n"
+			"Restart GUI now?"),
+			type=MessageBox.TYPE_YESNO,
+			default=True,
+			simple=True
+		)
+
+def restartCallback(answer, session):
+	if answer:
+		from Screens.Standby import TryQuitMainloop
+		session.open(TryQuitMainloop, 3)
 
 def main(session, **kwargs):
 	import ui
 	if not ui.AnalogClock.session:
 		ui.AnalogClock.startAnalogClock(session)
-	session.open(ui.AnalogClockSetup, plugin_path)
 
+	if config.subtitles.show.value and session.infobar.selected_subtitle:
+		session.openWithCallback(
+			lambda answer: subtitlesCallback(answer, session),
+			MessageBox,
+			_("Subtitles are enabled.\n\n"
+			"If you want to enable the clock or change its size, "
+			"disable subtitles now.\n\n"
+			"Otherwise enabling the clock or changing its size "
+			"will hide the clock during configuration.\n\n"
+			"Disable subtitles now?"),
+			type=MessageBox.TYPE_YESNO,
+			default=True,
+			simple=True
+		)
+	else:
+		session.openWithCallback(lambda *ret: setupClosed(session), ui.AnalogClockSetup, plugin_path)
 
 def Plugins(path, **kwargs):
 	global plugin_path

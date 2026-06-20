@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: e 2openplugin-AnalogClock\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-12-08 20:00+0100\n"
+"POT-Creation-Date: 2026-06-20 09:58+0200\n"
 "PO-Revision-Date: 2018-06-07 17:44+0200\n"
 "Last-Translator: Automatically generated\n"
 "Language-Team: none\n"
@@ -17,44 +17,53 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Poedit 2.0.8\n"
 
-#: ../ui.py:317
+#: ../ui.py:320
 #, python-format
 msgid "Analog Clock v%s"
 msgstr "Horloge analogique v%s"
 
-#: ../ui.py:183
+#: ../ui.py:184
 msgid "Background (a,r,g,b)"
 msgstr "Couleur du fond (a,r,v,b)"
 
-#: ../ui.py:179 ../ui.py:270
+#: ../ui.py:180 ../ui.py:272
 msgid "Cancel"
 msgstr "Annuler"
 
-#: ../ui.py:305
+#: ../ui.py:308
 msgid "Center point size"
 msgstr "Taille du point central"
 
-#: ../ui.py:306
+#: ../plugin.py:49
+msgid ""
+"Changes have been made that require a GUI restart.\n"
+"\n"
+"If the GUI is not restarted, the clock will be hidden on services with enabled subtitles.\n"
+"\n"
+"Restart GUI now?"
+msgstr ""
+
+#: ../ui.py:309
 msgid "Dim"
 msgstr "Dim"
 
-#: ../plugin.py:36
+#: ../plugin.py:88
 msgid "Displays analog clock permanently on the screen"
 msgstr "Afficher l’horloge analogique en permanence à l’écran"
 
-#: ../ui.py:279
+#: ../ui.py:281
 msgid "Enable AnalogClock"
 msgstr "Activer l’horloge analogique"
 
-#: ../ui.py:283
+#: ../ui.py:285
 msgid "Extended settings"
 msgstr "Paramètres étendus"
 
-#: ../ui.py:186
+#: ../ui.py:187
 msgid "Face's color (a,r,g,b)"
 msgstr "Couleur face avant (a,r,v,b)"
 
-#: ../ui.py:302
+#: ../ui.py:305
 msgid "Filed hands"
 msgstr "Aiguilles pleines"
 
@@ -70,15 +79,15 @@ msgstr ""
 msgid "Half"
 msgstr "Demi"
 
-#: ../ui.py:184
+#: ../ui.py:185
 msgid "Hand's color (a,r,g,b)"
 msgstr "Couleur des aiguilles (a,r,v,b)"
 
-#: ../ui.py:304
+#: ../ui.py:307
 msgid "Hand's parts ratio"
 msgstr "Ratio des aiguilles"
 
-#: ../ui.py:301
+#: ../ui.py:304
 msgid "Hand's width"
 msgstr "Largeur des aiguilles"
 
@@ -99,47 +108,58 @@ msgstr "Aucun"
 msgid "None"
 msgstr "Aucun"
 
-#: ../ui.py:178 ../ui.py:269
+#: ../ui.py:179 ../ui.py:271
 msgid "Ok"
 msgstr "Ok"
 
-#: ../ui.py:292
+#: ../ui.py:295
 #, fuzzy
 msgid "Random position"
 msgstr "X Position"
 
-#: ../ui.py:185
+#: ../ui.py:186
 msgid "Seconds color (a,r,g,b)"
 msgstr "Couleur des secondes (a,r,v,b)"
 
-#: ../ui.py:303
+#: ../ui.py:306
 msgid "Seconds hand"
 msgstr "Aiguille des secondes"
 
-#: ../ui.py:259
+#: ../ui.py:261
 msgid "Setup AnalogClock"
 msgstr "Configurer l’Horloge Analogique"
 
-#: ../ui.py:169
+#: ../ui.py:170
 msgid "Setup AnalogClock colors"
 msgstr "Configurer les couleurs de l’horloge analogique"
 
-#: ../ui.py:280
+#: ../ui.py:282
 msgid "Size"
 msgstr "Taille"
 
-#: ../ui.py:300
+#: ../plugin.py:71
+msgid ""
+"Subtitles are enabled.\n"
+"\n"
+"If you want to enable the clock or change its size, disable subtitles now.\n"
+"\n"
+"Otherwise enabling the clock or changing its size will hide the clock during configuration.\n"
+"\n"
+"Disable subtitles now?"
+msgstr ""
+
+#: ../ui.py:303
 msgid "Thin face"
 msgstr "Cadran fin"
 
-#: ../ui.py:299
+#: ../ui.py:302
 msgid "Transparency"
 msgstr "Transparence"
 
-#: ../ui.py:281
+#: ../ui.py:283
 msgid "X Position"
 msgstr "X Position"
 
-#: ../ui.py:282
+#: ../ui.py:284
 msgid "Y Position"
 msgstr "Y Position"
