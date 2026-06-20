@@ -4,7 +4,7 @@ from . import _
 #
 #    Plugin for Enigma2
 #
-VERSION = "1.26"
+VERSION = "1.27"
 #
 #    Coded by ims (c)2014-2026
 #
@@ -284,6 +284,7 @@ class AnalogClockSetup(Screen, ConfigListScreen):
 		self.itemYpos = _("Y Position")
 		self.extended = _("Extended settings")
 		self.random = ""
+		self.size = cfg.size.value
 
 		self.onLayoutFinish.append(self.layoutFinished)
 
@@ -342,20 +343,27 @@ class AnalogClockSetup(Screen, ConfigListScreen):
 		cfg.shand_color.save()
 		cfg.faces_color.save()
 		cfg.background.save()
-		AnalogClock.cancelClock()
+		needReload = self.size != cfg.size.value
+		AnalogClock.cancelClock(needReload)
 		self.close(True)
 
 	def keyCancel(self):
+		needReload = self.size != cfg.size.value
 		for x in self["config"].list:
 			x[1].cancel()
-		AnalogClock.cancelClock()
+		AnalogClock.cancelClock(needReload)
 		self.close()
 
 	def changedEntry(self):
-		if self["config"].getCurrent()[0] in [self.itemSize, self.itemXpos, self.itemYpos, self.random]:
+		if self["config"].getCurrent()[0] == self.itemSize:
 			self.invalidateItem()
 			AnalogClock.deleteDialog()
 			self.changeItemsTimer.start(200, True)
+		elif self["config"].getCurrent()[0] in [self.itemXpos, self.itemYpos]:
+			sizes()
+			if AnalogClock.dialogAnalogClock:
+				AnalogClock.dialogAnalogClock.instance.move(ePoint(X_POS, Y_POS))
+			self.invalidateItem()
 		elif self["config"].getCurrent()[0] == self.enable:
 			self.listMenu()
 			if not cfg.enable.value:
@@ -631,10 +639,10 @@ class AnalogClockMain():
 				self.dialogAnalogClock.hide()
 				self.isShow = False
 
-	def cancelClock(self):
+	def cancelClock(self, reload=False):
 		self.inSetup = False
 		self.itemChanged = False
-		if self.dialogAnalogClock:
+		if self.dialogAnalogClock and reload:
 			self.dialogAnalogClock.hide()
 			self.deleteDialog()
 			self.AnalogClockReload.start(100, True)

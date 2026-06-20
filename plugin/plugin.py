@@ -1,6 +1,7 @@
 from __future__ import absolute_import
 # for localized messages
 from . import _
+
 #################################################################################
 #
 #    Plugin for Enigma2
@@ -20,6 +21,8 @@ from . import _
 #################################################################################
 
 from Plugins.Plugin import PluginDescriptor
+from Components.config import config
+from Screens.MessageBox import MessageBox
 
 plugin_path = None
 
@@ -30,11 +33,32 @@ def sessionstart(reason, **kwargs):
 			from . import ui
 			ui.AnalogClock.startAnalogClock(session)
 
+def subtitlesCallback(answer, session):
+	from . import ui
+	if answer:
+		session.infobar.enableSubtitle(None)
+	session.open(ui.AnalogClockSetup, plugin_path)
+
 def main(session,**kwargs):
 	from . import ui
 	if not ui.AnalogClock.session:
 		ui.AnalogClock.startAnalogClock(session)
-	session.open(ui.AnalogClockSetup, plugin_path)
+
+	if config.subtitles.show.value and session.infobar.selected_subtitle:
+		session.openWithCallback(
+			lambda answer: subtitlesCallback(answer, session),
+			MessageBox,
+			_("Subtitles are enabled.\n\n"
+			"If you want to enable the clock or change its size, "
+			"disable subtitles now.\n\n"
+			"GUI must be restarted before subtitles are enabled again, "
+			"otherwise the clock will be hidden.\n\n"
+			"Disable subtitles now?"),
+			type=MessageBox.TYPE_YESNO,
+			default=True
+		)
+	else:
+		session.open(ui.AnalogClockSetup, plugin_path)
 
 def Plugins(path, **kwargs):
 	global plugin_path
