@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: AnalogClock\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-06-20 03:11+0200\n"
+"POT-Creation-Date: 2026-06-20 09:58+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Vytenis P. <vyteniui@gmail.com>\n"
 "Language-Team: Vytenis P. vyteniui@gmail.com\n"
@@ -32,11 +32,20 @@ msgstr "Atšaukti"
 msgid "Center point size"
 msgstr "Centrinio taško dydis"
 
+#: ../plugin.py:49
+msgid ""
+"Changes have been made that require a GUI restart.\n"
+"\n"
+"If the GUI is not restarted, the clock will be hidden on services with enabled subtitles.\n"
+"\n"
+"Restart GUI now?"
+msgstr ""
+
 #: ../ui.py:309
 msgid "Dim"
 msgstr "Pritemdymas"
 
-#: ../plugin.py:67
+#: ../plugin.py:88
 msgid "Displays analog clock permanently on the screen"
 msgstr "Ekrane pastoviai rodo analoginį laikrodį"
 
@@ -127,13 +136,13 @@ msgstr "AnalogClock sąranka"
 msgid "Size"
 msgstr "Dydis"
 
-#: ../plugin.py:51
+#: ../plugin.py:71
 msgid ""
 "Subtitles are enabled.\n"
 "\n"
 "If you want to enable the clock or change its size, disable subtitles now.\n"
 "\n"
-"GUI must be restarted before subtitles are enabled again, otherwise the clock will be hidden.\n"
+"Otherwise enabling the clock or changing its size will hide the clock during configuration.\n"
 "\n"
 "Disable subtitles now?"
 msgstr ""

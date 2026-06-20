@@ -71,8 +71,8 @@ def main(session,**kwargs):
 			_("Subtitles are enabled.\n\n"
 			"If you want to enable the clock or change its size, "
 			"disable subtitles now.\n\n"
-			"GUI must be restarted before subtitles are enabled again, "
-			"otherwise the clock will be hidden.\n\n"
+			"Otherwise enabling the clock or changing its size "
+			"will hide the clock during configuration.\n\n"
 			"Disable subtitles now?"),
 			type=MessageBox.TYPE_YESNO,
 			default=True,
