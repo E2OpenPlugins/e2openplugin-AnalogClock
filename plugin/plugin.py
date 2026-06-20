@@ -37,7 +37,27 @@ def subtitlesCallback(answer, session):
 	from . import ui
 	if answer:
 		session.infobar.enableSubtitle(None)
-	session.open(ui.AnalogClockSetup, plugin_path)
+	session.openWithCallback(lambda *ret: setupClosed(session), ui.AnalogClockSetup, plugin_path)
+
+def setupClosed(session):
+	from . import ui
+	if ui.AnalogClock.restartRequired:
+		ui.AnalogClock.restartRequired = False
+		session.openWithCallback(
+			lambda answer: restartCallback(answer, session),
+			MessageBox,
+			_("Changes have been made that require a GUI restart.\n\n"
+			"If the GUI is not restarted, the clock will be hidden on services with enabled subtitles.\n\n"
+			"Restart GUI now?"),
+			type=MessageBox.TYPE_YESNO,
+			default=True,
+			simple=True
+		)
+
+def restartCallback(answer, session):
+	if answer:
+		from Screens.Standby import TryQuitMainloop
+		session.open(TryQuitMainloop, 3)
 
 def main(session,**kwargs):
 	from . import ui
@@ -55,10 +75,11 @@ def main(session,**kwargs):
 			"otherwise the clock will be hidden.\n\n"
 			"Disable subtitles now?"),
 			type=MessageBox.TYPE_YESNO,
-			default=True
+			default=True,
+			simple=True
 		)
 	else:
-		session.open(ui.AnalogClockSetup, plugin_path)
+		session.openWithCallback(lambda *ret: setupClosed(session), ui.AnalogClockSetup, plugin_path)
 
 def Plugins(path, **kwargs):
 	global plugin_path

@@ -4,7 +4,7 @@ from . import _
 #
 #    Plugin for Enigma2
 #
-VERSION = "1.27"
+VERSION = "1.28"
 #
 #    Coded by ims (c)2014-2026
 #
@@ -344,11 +344,15 @@ class AnalogClockSetup(Screen, ConfigListScreen):
 		cfg.faces_color.save()
 		cfg.background.save()
 		needReload = self.size != cfg.size.value
+		if needReload:
+			AnalogClock.restartRequired = True
 		AnalogClock.cancelClock(needReload)
 		self.close(True)
 
 	def keyCancel(self):
 		needReload = self.size != cfg.size.value
+		if needReload:
+			AnalogClock.restartRequired = True
 		for x in self["config"].list:
 			x[1].cancel()
 		AnalogClock.cancelClock(needReload)
@@ -369,6 +373,7 @@ class AnalogClockSetup(Screen, ConfigListScreen):
 			if not cfg.enable.value:
 				AnalogClock.deleteDialog()
 			else:
+				AnalogClock.restartRequired = True
 				AnalogClock.reloadClock()
 		elif self["config"].getCurrent()[0] == self.extended:
 			self.listMenu()
@@ -620,6 +625,7 @@ class AnalogClockMain():
 		self.isShow = False
 		self.inSetup = False
 		self.itemChanged = False
+		self.restartRequired = False
 
 		self.AnalogClockReload = eTimer()
 		self.AnalogClockReload.timeout.get().append(self.reloadClock)
