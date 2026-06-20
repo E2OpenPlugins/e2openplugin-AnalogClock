@@ -360,6 +360,7 @@ class AnalogClockSetup(Screen, ConfigListScreen):
 
 	def changedEntry(self):
 		if self["config"].getCurrent()[0] == self.itemSize:
+			AnalogClock.restartRequired = True
 			self.invalidateItem()
 			AnalogClock.deleteDialog()
 			self.changeItemsTimer.start(200, True)
