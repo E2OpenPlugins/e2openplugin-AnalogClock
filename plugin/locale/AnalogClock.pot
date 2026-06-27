@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-06-20 09:58+0200\n"
+"POT-Creation-Date: 2026-06-27 10:33+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,21 +17,25 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: ../ui.py:320
+#: ../ui.py:323
 #, python-format
 msgid "Analog Clock v%s"
 msgstr ""
 
-#: ../ui.py:184
+#: ../ui.py:185
 msgid "Background (a,r,g,b)"
 msgstr ""
 
-#: ../ui.py:180 ../ui.py:272
+#: ../ui.py:181 ../ui.py:272
 msgid "Cancel"
 msgstr ""
 
-#: ../ui.py:308
+#: ../ui.py:309
 msgid "Center point size"
+msgstr ""
+
+#: ../ui.py:296
+msgid "Change interval"
 msgstr ""
 
 #: ../plugin.py:49
@@ -43,7 +47,7 @@ msgid ""
 "Restart GUI now?"
 msgstr ""
 
-#: ../ui.py:309
+#: ../ui.py:310
 msgid "Dim"
 msgstr ""
 
@@ -59,11 +63,11 @@ msgstr ""
 msgid "Extended settings"
 msgstr ""
 
-#: ../ui.py:187
+#: ../ui.py:188
 msgid "Face's color (a,r,g,b)"
 msgstr ""
 
-#: ../ui.py:305
+#: ../ui.py:306
 msgid "Filed hands"
 msgstr ""
 
@@ -79,15 +83,15 @@ msgstr ""
 msgid "Half"
 msgstr ""
 
-#: ../ui.py:185
+#: ../ui.py:186
 msgid "Hand's color (a,r,g,b)"
 msgstr ""
 
-#: ../ui.py:307
+#: ../ui.py:308
 msgid "Hand's parts ratio"
 msgstr ""
 
-#: ../ui.py:304
+#: ../ui.py:305
 msgid "Hand's width"
 msgstr ""
 
@@ -107,7 +111,7 @@ msgstr ""
 msgid "None"
 msgstr ""
 
-#: ../ui.py:179 ../ui.py:271
+#: ../ui.py:180 ../ui.py:271
 msgid "Ok"
 msgstr ""
 
@@ -115,19 +119,19 @@ msgstr ""
 msgid "Random position"
 msgstr ""
 
-#: ../ui.py:186
+#: ../ui.py:187
 msgid "Seconds color (a,r,g,b)"
 msgstr ""
 
-#: ../ui.py:306
+#: ../ui.py:307
 msgid "Seconds hand"
 msgstr ""
 
-#: ../ui.py:261
+#: ../ui.py:262
 msgid "Setup AnalogClock"
 msgstr ""
 
-#: ../ui.py:170
+#: ../ui.py:172
 msgid "Setup AnalogClock colors"
 msgstr ""
 
@@ -146,11 +150,11 @@ msgid ""
 "Disable subtitles now?"
 msgstr ""
 
-#: ../ui.py:303
+#: ../ui.py:304
 msgid "Thin face"
 msgstr ""
 
-#: ../ui.py:302
+#: ../ui.py:303
 msgid "Transparency"
 msgstr ""
 
