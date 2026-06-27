@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: AnalogClock\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-06-20 09:58+0200\n"
+"POT-Creation-Date: 2026-06-27 21:28+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Vytenis P. <vyteniui@gmail.com>\n"
 "Language-Team: Vytenis P. vyteniui@gmail.com\n"
@@ -15,24 +15,28 @@ msgstr ""
 "X-Generator: Poedit 2.0.4\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 
-#: ../ui.py:320
+#: ../ui.py:327
 #, fuzzy, python-format
 msgid "Analog Clock v%s"
 msgstr "Analoginis laikrodis %s"
 
-#: ../ui.py:184
+#: ../ui.py:188
 msgid "Background (a,r,g,b)"
 msgstr "Fonas (a,r,g,b)"
 
-#: ../ui.py:180 ../ui.py:272
+#: ../ui.py:184 ../ui.py:276
 msgid "Cancel"
 msgstr "Atšaukti"
 
-#: ../ui.py:308
+#: ../ui.py:313
 msgid "Center point size"
 msgstr "Centrinio taško dydis"
 
-#: ../plugin.py:49
+#: ../ui.py:300
+msgid "Change interval"
+msgstr ""
+
+#: ../plugin.py:48
 msgid ""
 "Changes have been made that require a GUI restart.\n"
 "\n"
@@ -41,27 +45,27 @@ msgid ""
 "Restart GUI now?"
 msgstr ""
 
-#: ../ui.py:309
+#: ../ui.py:314
 msgid "Dim"
 msgstr "Pritemdymas"
 
-#: ../plugin.py:88
+#: ../plugin.py:87
 msgid "Displays analog clock permanently on the screen"
 msgstr "Ekrane pastoviai rodo analoginį laikrodį"
 
-#: ../ui.py:281
+#: ../ui.py:285
 msgid "Enable AnalogClock"
 msgstr "Įjungti AnalogClock"
 
-#: ../ui.py:285
+#: ../ui.py:289
 msgid "Extended settings"
 msgstr "Išplėstiniai parametrai"
 
-#: ../ui.py:187
+#: ../ui.py:191
 msgid "Face's color (a,r,g,b)"
 msgstr "Ciferblato spalva (a,r,g,b)"
 
-#: ../ui.py:305
+#: ../ui.py:310
 msgid "Filed hands"
 msgstr "Rodyklės užpildymas"
 
@@ -77,15 +81,15 @@ msgstr ""
 msgid "Half"
 msgstr "Puse dydžio"
 
-#: ../ui.py:185
+#: ../ui.py:189
 msgid "Hand's color (a,r,g,b)"
 msgstr "Rodyklių spalva (a,r,g,b)"
 
-#: ../ui.py:307
+#: ../ui.py:312
 msgid "Hand's parts ratio"
 msgstr "Rodyklių santykis"
 
-#: ../ui.py:304
+#: ../ui.py:309
 msgid "Hand's width"
 msgstr "Rodyklės plotis"
 
@@ -106,37 +110,37 @@ msgstr "Nieko"
 msgid "None"
 msgstr "Nieko"
 
-#: ../ui.py:179 ../ui.py:271
+#: ../ui.py:183 ../ui.py:275
 msgid "Ok"
 msgstr "Gerai"
 
-#: ../ui.py:295
+#: ../ui.py:299
 #, fuzzy
 msgid "Random position"
 msgstr "X padėtis"
 
-#: ../ui.py:186
+#: ../ui.py:190
 msgid "Seconds color (a,r,g,b)"
 msgstr "Sekundžių rodyklė (a,r,g,b)"
 
-#: ../ui.py:306
+#: ../ui.py:311
 msgid "Seconds hand"
 msgstr "Sekundžių rodyklė"
 
-#: ../ui.py:261
+#: ../ui.py:265
 msgid "Setup AnalogClock"
 msgstr "AnalogClock sąranka"
 
-#: ../ui.py:170
+#: ../ui.py:174
 #, fuzzy
 msgid "Setup AnalogClock colors"
 msgstr "AnalogClock sąranka"
 
-#: ../ui.py:282
+#: ../ui.py:286
 msgid "Size"
 msgstr "Dydis"
 
-#: ../plugin.py:71
+#: ../plugin.py:70
 msgid ""
 "Subtitles are enabled.\n"
 "\n"
@@ -147,18 +151,18 @@ msgid ""
 "Disable subtitles now?"
 msgstr ""
 
-#: ../ui.py:303
+#: ../ui.py:308
 msgid "Thin face"
 msgstr "Plonas ciferblatas"
 
-#: ../ui.py:302
+#: ../ui.py:307
 msgid "Transparency"
 msgstr "Skaidrumas"
 
-#: ../ui.py:283
+#: ../ui.py:287
 msgid "X Position"
 msgstr "X padėtis"
 
-#: ../ui.py:284
+#: ../ui.py:288
 msgid "Y Position"
 msgstr "Y padėtis"

@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: AnalogClock\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-06-20 09:58+0200\n"
+"POT-Creation-Date: 2026-06-27 21:28+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: ims <ims@openpli.org>\n"
 "Language-Team: <ims21@users.sourceforge.net>\n"
@@ -14,24 +14,28 @@ msgstr ""
 "Plural-Forms: nplurals=3; plural=n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
 "X-Generator: Poedit 3.9\n"
 
-#: ../ui.py:320
+#: ../ui.py:327
 #, python-format
 msgid "Analog Clock v%s"
 msgstr "Analog Clock v%s"
 
-#: ../ui.py:184
+#: ../ui.py:188
 msgid "Background (a,r,g,b)"
 msgstr "Podklad (a,r,g,b)"
 
-#: ../ui.py:180 ../ui.py:272
+#: ../ui.py:184 ../ui.py:276
 msgid "Cancel"
 msgstr "Zavřít"
 
-#: ../ui.py:308
+#: ../ui.py:313
 msgid "Center point size"
 msgstr "Středový bod"
 
-#: ../plugin.py:49
+#: ../ui.py:300
+msgid "Change interval"
+msgstr "Interval změny"
+
+#: ../plugin.py:48
 msgid ""
 "Changes have been made that require a GUI restart.\n"
 "\n"
@@ -45,27 +49,27 @@ msgstr ""
 "\n"
 "Chcete restartovat enigma?"
 
-#: ../ui.py:309
+#: ../ui.py:314
 msgid "Dim"
 msgstr "Snížení jasu"
 
-#: ../plugin.py:88
+#: ../plugin.py:87
 msgid "Displays analog clock permanently on the screen"
 msgstr "Zobrazuje analogové hodiny na obrazovce"
 
-#: ../ui.py:281
+#: ../ui.py:285
 msgid "Enable AnalogClock"
 msgstr "Povolit AnalogClock"
 
-#: ../ui.py:285
+#: ../ui.py:289
 msgid "Extended settings"
 msgstr "Další nastavení"
 
-#: ../ui.py:187
+#: ../ui.py:191
 msgid "Face's color (a,r,g,b)"
 msgstr "Barva ciferníku (a,r,g,b)"
 
-#: ../ui.py:305
+#: ../ui.py:310
 msgid "Filed hands"
 msgstr "Vyplněné ručičky"
 
@@ -81,15 +85,15 @@ msgstr "Celá obrazovka"
 msgid "Half"
 msgstr "Poloviční"
 
-#: ../ui.py:185
+#: ../ui.py:189
 msgid "Hand's color (a,r,g,b)"
 msgstr "Barva ručiček (a,r,g,b)"
 
-#: ../ui.py:307
+#: ../ui.py:312
 msgid "Hand's parts ratio"
 msgstr "Poměr úseků ručiček"
 
-#: ../ui.py:304
+#: ../ui.py:309
 msgid "Hand's width"
 msgstr "Šířka ručiček"
 
@@ -109,35 +113,35 @@ msgstr "Ne"
 msgid "None"
 msgstr "Ne"
 
-#: ../ui.py:179 ../ui.py:271
+#: ../ui.py:183 ../ui.py:275
 msgid "Ok"
 msgstr "Ok"
 
-#: ../ui.py:295
+#: ../ui.py:299
 msgid "Random position"
 msgstr "Náhodná pozice"
 
-#: ../ui.py:186
+#: ../ui.py:190
 msgid "Seconds color (a,r,g,b)"
 msgstr "Vteřinová ručička (a,r,g,b)"
 
-#: ../ui.py:306
+#: ../ui.py:311
 msgid "Seconds hand"
 msgstr "Vteřinová ručička"
 
-#: ../ui.py:261
+#: ../ui.py:265
 msgid "Setup AnalogClock"
 msgstr "Nastavení AnalogClock"
 
-#: ../ui.py:170
+#: ../ui.py:174
 msgid "Setup AnalogClock colors"
 msgstr "Nastavení barev pro AnalogClock"
 
-#: ../ui.py:282
+#: ../ui.py:286
 msgid "Size"
 msgstr "Velikost"
 
-#: ../plugin.py:71
+#: ../plugin.py:70
 msgid ""
 "Subtitles are enabled.\n"
 "\n"
@@ -155,18 +159,18 @@ msgstr ""
 "\n"
 "Vypnout titulky?"
 
-#: ../ui.py:303
+#: ../ui.py:308
 msgid "Thin face"
 msgstr "Tenký ciferník"
 
-#: ../ui.py:302
+#: ../ui.py:307
 msgid "Transparency"
 msgstr "Průhlednost"
 
-#: ../ui.py:283
+#: ../ui.py:287
 msgid "X Position"
 msgstr "X pozice"
 
-#: ../ui.py:284
+#: ../ui.py:288
 msgid "Y Position"
 msgstr "Y pozice"

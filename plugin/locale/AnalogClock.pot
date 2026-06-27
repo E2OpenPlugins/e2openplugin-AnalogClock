@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-06-20 09:58+0200\n"
+"POT-Creation-Date: 2026-06-27 21:28+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,24 +17,28 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: ../ui.py:320
+#: ../ui.py:327
 #, python-format
 msgid "Analog Clock v%s"
 msgstr ""
 
-#: ../ui.py:184
+#: ../ui.py:188
 msgid "Background (a,r,g,b)"
 msgstr ""
 
-#: ../ui.py:180 ../ui.py:272
+#: ../ui.py:184 ../ui.py:276
 msgid "Cancel"
 msgstr ""
 
-#: ../ui.py:308
+#: ../ui.py:313
 msgid "Center point size"
 msgstr ""
 
-#: ../plugin.py:49
+#: ../ui.py:300
+msgid "Change interval"
+msgstr ""
+
+#: ../plugin.py:48
 msgid ""
 "Changes have been made that require a GUI restart.\n"
 "\n"
@@ -43,27 +47,27 @@ msgid ""
 "Restart GUI now?"
 msgstr ""
 
-#: ../ui.py:309
+#: ../ui.py:314
 msgid "Dim"
 msgstr ""
 
-#: ../plugin.py:88
+#: ../plugin.py:87
 msgid "Displays analog clock permanently on the screen"
 msgstr ""
 
-#: ../ui.py:281
+#: ../ui.py:285
 msgid "Enable AnalogClock"
 msgstr ""
 
-#: ../ui.py:285
+#: ../ui.py:289
 msgid "Extended settings"
 msgstr ""
 
-#: ../ui.py:187
+#: ../ui.py:191
 msgid "Face's color (a,r,g,b)"
 msgstr ""
 
-#: ../ui.py:305
+#: ../ui.py:310
 msgid "Filed hands"
 msgstr ""
 
@@ -79,15 +83,15 @@ msgstr ""
 msgid "Half"
 msgstr ""
 
-#: ../ui.py:185
+#: ../ui.py:189
 msgid "Hand's color (a,r,g,b)"
 msgstr ""
 
-#: ../ui.py:307
+#: ../ui.py:312
 msgid "Hand's parts ratio"
 msgstr ""
 
-#: ../ui.py:304
+#: ../ui.py:309
 msgid "Hand's width"
 msgstr ""
 
@@ -107,35 +111,35 @@ msgstr ""
 msgid "None"
 msgstr ""
 
-#: ../ui.py:179 ../ui.py:271
+#: ../ui.py:183 ../ui.py:275
 msgid "Ok"
 msgstr ""
 
-#: ../ui.py:295
+#: ../ui.py:299
 msgid "Random position"
 msgstr ""
 
-#: ../ui.py:186
+#: ../ui.py:190
 msgid "Seconds color (a,r,g,b)"
 msgstr ""
 
-#: ../ui.py:306
+#: ../ui.py:311
 msgid "Seconds hand"
 msgstr ""
 
-#: ../ui.py:261
+#: ../ui.py:265
 msgid "Setup AnalogClock"
 msgstr ""
 
-#: ../ui.py:170
+#: ../ui.py:174
 msgid "Setup AnalogClock colors"
 msgstr ""
 
-#: ../ui.py:282
+#: ../ui.py:286
 msgid "Size"
 msgstr ""
 
-#: ../plugin.py:71
+#: ../plugin.py:70
 msgid ""
 "Subtitles are enabled.\n"
 "\n"
@@ -146,18 +150,18 @@ msgid ""
 "Disable subtitles now?"
 msgstr ""
 
-#: ../ui.py:303
+#: ../ui.py:308
 msgid "Thin face"
 msgstr ""
 
-#: ../ui.py:302
+#: ../ui.py:307
 msgid "Transparency"
 msgstr ""
 
-#: ../ui.py:283
+#: ../ui.py:287
 msgid "X Position"
 msgstr ""
 
-#: ../ui.py:284
+#: ../ui.py:288
 msgid "Y Position"
 msgstr ""
