@@ -4,7 +4,7 @@ from . import _
 #
 #    Plugin for Enigma2
 #
-VERSION = "1.28"
+VERSION = "1.29"
 #
 #    Coded by ims (c)2014-2026
 #
@@ -95,6 +95,8 @@ choicelist = []
 for i in range(1, 25):
 	choicelist.append(("%d" % i, "%d px" % i))
 config.plugins.AnalogClock.random = ConfigSelection(default="0", choices=[("0", _("No"))] + choicelist + [("255", _("Full screen"))])
+config.plugins.AnalogClock.randomtime = ConfigSelection(default="60", choices=[("10","10 s"), ("30","30 s"), ("60","60 s")]
+)
 
 cfg = config.plugins.AnalogClock
 
@@ -173,7 +175,6 @@ class AnalogClockColorsSetup(Screen, ConfigListScreen):
 				"cancel": self.keyCancel,
 				"red": self.keyCancel,
 				"green": self.keySave,
-				"ok": self.keySave,
 			}, -2)
 
 		self["key_green"] = Label(_("Ok"))
@@ -232,7 +233,7 @@ class AnalogClockSetup(Screen, ConfigListScreen):
 	if fullHD:
 		skin = """
 		<screen name="AnalogClockSetup" position="60,c-280" size="615,595" title="Setup AnalogClock" flags="wfNoBorder">
-			<widget name="config" position="15,15" size="585,532" itemHeight="38" font="Regular;28" zPosition="1" scrollbarMode="showOnDemand"/>
+			<widget name="config" position="15,15" size="585,570" itemHeight="38" font="Regular;28" zPosition="1" scrollbarMode="showOnDemand"/>
 			<widget name="red" pixmap="~/png/red30.png" position="67,557" size="30,30" alphatest="blend" zPosition="2"/>
 			<widget name="green" pixmap="~/png/green30.png" position="367,557" size="30,30" alphatest="blend" zPosition="2"/>
 			<widget name="blue" pixmap="~/png/blue30.png" position="580,575" size="15,15" alphatest="blend" zPosition="2"/>
@@ -242,7 +243,7 @@ class AnalogClockSetup(Screen, ConfigListScreen):
 	else:
 		skin = """
 		<screen name="AnalogClockSetup" position="80,c-187" size="410,398" title="Setup AnalogClock" flags="wfNoBorder">
-			<widget name="config" position="10,10" size="390,350" zPosition="1" scrollbarMode="showOnDemand"/>
+			<widget name="config" position="10,10" size="390,375" zPosition="1" scrollbarMode="showOnDemand"/>
 			<widget name="key_red" position="100,355" zPosition="2" size="125,28" valign="center" font="Regular;22" transparent="1"/>
 			<widget name="key_green" position="285,355" zPosition="2" size="125,28" valign="center" font="Regular;22" transparent="1"/>
 			<widget name="red" pixmap="~/png/red20.png" position="70,365" size="20,20" alphatest="blend" zPosition="2"/>
@@ -264,7 +265,6 @@ class AnalogClockSetup(Screen, ConfigListScreen):
 				"cancel": self.keyCancel,
 				"red": self.keyCancel,
 				"green": self.keySave,
-				"ok": self.keySave,
 				"blue": self.keyBlue,
 			}, -2)
 
@@ -283,8 +283,8 @@ class AnalogClockSetup(Screen, ConfigListScreen):
 		self.itemXpos = _("X Position")
 		self.itemYpos = _("Y Position")
 		self.extended = _("Extended settings")
-		self.random = ""
-		self.size = cfg.size.value
+		self.cfg_size = cfg.size.value
+		self.cfg_random = cfg.random.value
 
 		self.onLayoutFinish.append(self.layoutFinished)
 
@@ -293,6 +293,7 @@ class AnalogClockSetup(Screen, ConfigListScreen):
 			return 4 * " " + text
 		self.list = [getConfigListEntry(self.enable, cfg.enable)]
 		self.random = posX(_("Random position"))
+		self.randomtime = posX(posX(_("Change interval")))
 		if cfg.enable.value:
 			self.list.append(getConfigListEntry(self.itemSize, cfg.size))
 			self.list.append(getConfigListEntry(self.itemXpos, cfg.xpos))
@@ -308,6 +309,8 @@ class AnalogClockSetup(Screen, ConfigListScreen):
 				self.list.append(getConfigListEntry(posX(_("Center point size")), cfg.centerpoint))
 				self.list.append(getConfigListEntry(posX(_("Dim")), cfg.dim))
 				self.list.append(getConfigListEntry(self.random, cfg.random))
+				if cfg.random.value != "0":
+					self.list.append(getConfigListEntry(self.randomtime, cfg.randomtime))
 
 		self["config"].list = self.list
 		self["config"].setList(self.list)
@@ -336,28 +339,6 @@ class AnalogClockSetup(Screen, ConfigListScreen):
 		self["green"].instance.move(ePoint(x[3], y + dy[2]))
 		self["blue"].instance.move(ePoint(x[4], y + dy[2]))
 
-	def keySave(self):
-		for x in self["config"].list:
-			x[1].save()
-		cfg.hands_color.save()
-		cfg.shand_color.save()
-		cfg.faces_color.save()
-		cfg.background.save()
-		needReload = self.size != cfg.size.value
-		if needReload:
-			AnalogClock.restartRequired = True
-		AnalogClock.cancelClock(needReload)
-		self.close(True)
-
-	def keyCancel(self):
-		needReload = self.size != cfg.size.value
-		if needReload:
-			AnalogClock.restartRequired = True
-		for x in self["config"].list:
-			x[1].cancel()
-		AnalogClock.cancelClock(needReload)
-		self.close()
-
 	def changedEntry(self):
 		if self["config"].getCurrent()[0] == self.itemSize:
 			AnalogClock.restartRequired = True
@@ -376,7 +357,7 @@ class AnalogClockSetup(Screen, ConfigListScreen):
 			else:
 				AnalogClock.restartRequired = True
 				AnalogClock.reloadClock()
-		elif self["config"].getCurrent()[0] == self.extended:
+		elif self["config"].getCurrent()[0] in (self.extended, self.random):
 			self.listMenu()
 		else:
 			AnalogClock.itemChanged = True
@@ -389,6 +370,34 @@ class AnalogClockSetup(Screen, ConfigListScreen):
 		for i, x in enumerate(self["config"].list):
 			if x[0] in (self.itemXpos, self.itemYpos):
 				self["config"].invalidate(self["config"].list[i])
+
+	def moveToConfiguredPosition(self):
+		sizes()
+		AnalogClock.dialogAnalogClock.instance.move(ePoint(X_POS, Y_POS))
+
+	def keySave(self):
+		for x in self["config"].list:
+			x[1].save()
+		if self.cfg_random != "0" and cfg.random.value == "0":
+			self.moveToConfiguredPosition()
+		cfg.background.save()
+		needReload = self.cfg_size != cfg.size.value
+		if needReload:
+			AnalogClock.restartRequired = True
+		AnalogClock.cancelClock(needReload)
+		self.close(True)
+
+	def keyCancel(self):
+		needMove = self.cfg_random == "0" and cfg.random.value != "0"
+		needReload = self.cfg_size != cfg.size.value
+		if needReload:
+			AnalogClock.restartRequired = True
+		for x in self["config"].list:
+			x[1].cancel()
+		if needMove:
+			self.moveToConfiguredPosition()
+		AnalogClock.cancelClock(needReload)
+		self.close()
 
 	def keyBlue(self):
 		self.session.openWithCallback(self.callBack, AnalogClockColorsSetup, self.skin_path)
@@ -496,9 +505,9 @@ class AnalogClockScreen(Screen):
 			self.drawHandS(s)
 		self.drawCenterPoint()
 		self["Canvas"].flush()
-		if s == 0:
-			self["Canvas"].clear()
+		if s % int(cfg.randomtime.value) == 0:
 			if cfg.random.value != "0":
+				self["Canvas"].clear()
 				self.random_position()
 				self.instance.move(ePoint(X_POS, Y_POS))
 
@@ -649,10 +658,13 @@ class AnalogClockMain():
 	def cancelClock(self, reload=False):
 		self.inSetup = False
 		self.itemChanged = False
-		if self.dialogAnalogClock and reload:
-			self.dialogAnalogClock.hide()
-			self.deleteDialog()
-			self.AnalogClockReload.start(100, True)
+		if self.dialogAnalogClock:
+			if reload:
+				self.dialogAnalogClock.hide()
+				self.deleteDialog()
+				self.AnalogClockReload.start(100, True)
+			else:
+				self.dialogAnalogClock.initValues()
 
 	def deleteDialog(self):
 		if self.dialogAnalogClock:
