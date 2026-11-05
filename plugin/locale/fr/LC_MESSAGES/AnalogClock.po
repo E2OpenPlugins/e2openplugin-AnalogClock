@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: e 2openplugin-AnalogClock\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-06-27 21:28+0200\n"
-"PO-Revision-Date: 2018-06-07 17:44+0200\n"
+"PO-Revision-Date: 2026-11-05 11:33+0100\n"
 "Last-Translator: Automatically generated\n"
 "Language-Team: none\n"
 "Language: fr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.0.8\n"
+"X-Generator: Poedit 3.4.2\n"
 
 #: ../ui.py:327
 #, python-format
@@ -36,7 +36,7 @@ msgstr "Taille du point central"
 
 #: ../ui.py:300
 msgid "Change interval"
-msgstr ""
+msgstr "Intervalle de changement"
 
 #: ../plugin.py:48
 msgid ""
@@ -46,6 +46,11 @@ msgid ""
 "\n"
 "Restart GUI now?"
 msgstr ""
+"Des modifications ont été apportées, nécessitant un redémarrage de l'interface graphique.\n"
+"\n"
+"Si l'interface graphique n'est pas redémarrée, l'horloge sera masquée sur les services pour lesquels les sous-titres sont activés.\n"
+"\n"
+"Redémarrer l'interface graphique maintenant ?"
 
 #: ../ui.py:314
 msgid "Dim"
@@ -77,7 +82,7 @@ msgstr "Plein"
 
 #: ../ui.py:97
 msgid "Full screen"
-msgstr ""
+msgstr "Plein écran"
 
 #: ../ui.py:86
 msgid "Half"
@@ -104,9 +109,8 @@ msgid "Mid"
 msgstr "Demi"
 
 #: ../ui.py:97
-#, fuzzy
 msgid "No"
-msgstr "Aucun"
+msgstr "Non"
 
 #: ../ui.py:66 ../ui.py:86
 msgid "None"
@@ -117,9 +121,8 @@ msgid "Ok"
 msgstr "Ok"
 
 #: ../ui.py:299
-#, fuzzy
 msgid "Random position"
-msgstr "X Position"
+msgstr "Position aléatoire"
 
 #: ../ui.py:190
 msgid "Seconds color (a,r,g,b)"
@@ -151,6 +154,13 @@ msgid ""
 "\n"
 "Disable subtitles now?"
 msgstr ""
+"Les sous-titres sont activés.\n"
+"\n"
+"Si vous souhaitez afficher l'horloge ou en modifier la taille, désactivez les sous-titres dès maintenant.\n"
+"\n"
+"Dans le cas contraire, l'affichage ou la modification de la taille de l'horloge entraînera sa masquage durant la configuration.\n"
+"\n"
+"Désactiver les sous-titres maintenant ?"
 
 #: ../ui.py:308
 msgid "Thin face"
